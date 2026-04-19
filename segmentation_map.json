@@ -1,0 +1,3349 @@
+{
+  "grid_size": 4,
+  "image_size": [
+    1600,
+    1600
+  ],
+  "cell_size": [
+    400,
+    400
+  ],
+  "max_depth": 2,
+  "tiles": [
+    {
+      "tile_x": 0,
+      "tile_y": 0,
+      "width": 400,
+      "height": 400,
+      "depth": 0,
+      "class": 0,
+      "order": 2,
+      "class_name": "water/flat",
+      "mean_color": [
+        8.72715,
+        67.2575375,
+        69.22530625
+      ],
+      "entropy": 2.912513656766285,
+      "water_frac": 1.0,
+      "pixel_bbox": [
+        0,
+        0,
+        400,
+        400
+      ]
+    },
+    {
+      "tile_x": 400,
+      "tile_y": 0,
+      "width": 400,
+      "height": 400,
+      "depth": 0,
+      "class": 0,
+      "order": 2,
+      "class_name": "water/flat",
+      "mean_color": [
+        14.05388125,
+        96.8512375,
+        98.92796875
+      ],
+      "entropy": 1.223199490304289,
+      "water_frac": 0.9388375,
+      "pixel_bbox": [
+        400,
+        0,
+        800,
+        400
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 0,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        50.68685,
+        82.094625,
+        61.223475
+      ],
+      "entropy": 3.0481954340305597,
+      "water_frac": 0.17245,
+      "pixel_bbox": [
+        800,
+        0,
+        1000,
+        200
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        51.7084,
+        70.7266,
+        47.2664
+      ],
+      "entropy": 3.1634619839779066,
+      "water_frac": 0.0043,
+      "pixel_bbox": [
+        1000,
+        0,
+        1100,
+        100
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        39.2507,
+        57.1102,
+        35.4439
+      ],
+      "entropy": 3.829022435175444,
+      "water_frac": 0.009,
+      "pixel_bbox": [
+        1100,
+        0,
+        1200,
+        100
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        56.2951,
+        74.4314,
+        49.1507
+      ],
+      "entropy": 3.5284772867606042,
+      "water_frac": 0.0071,
+      "pixel_bbox": [
+        1000,
+        100,
+        1100,
+        200
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        65.0797,
+        82.3802,
+        52.6926
+      ],
+      "entropy": 3.3925601842395117,
+      "water_frac": 0.0001,
+      "pixel_bbox": [
+        1100,
+        100,
+        1200,
+        200
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        55.022,
+        77.0662,
+        49.6372
+      ],
+      "entropy": 3.2532255981871994,
+      "water_frac": 0.0084,
+      "pixel_bbox": [
+        800,
+        200,
+        900,
+        300
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        48.559,
+        68.3426,
+        43.6292
+      ],
+      "entropy": 3.0393389231521346,
+      "water_frac": 0.0061,
+      "pixel_bbox": [
+        900,
+        200,
+        1000,
+        300
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        51.3361,
+        75.0557,
+        52.4753
+      ],
+      "entropy": 3.341907275004529,
+      "water_frac": 0.088,
+      "pixel_bbox": [
+        800,
+        300,
+        900,
+        400
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        35.8302,
+        55.6989,
+        33.9539
+      ],
+      "entropy": 3.456361727170342,
+      "water_frac": 0.0196,
+      "pixel_bbox": [
+        900,
+        300,
+        1000,
+        400
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        57.0732,
+        77.4109,
+        49.1561
+      ],
+      "entropy": 3.3952664779528985,
+      "water_frac": 0.0,
+      "pixel_bbox": [
+        1000,
+        200,
+        1100,
+        300
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        54.2265,
+        74.3557,
+        45.1984
+      ],
+      "entropy": 3.530931290689916,
+      "water_frac": 0.0,
+      "pixel_bbox": [
+        1100,
+        200,
+        1200,
+        300
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        53.9842,
+        74.8432,
+        46.4985
+      ],
+      "entropy": 3.3458328230264747,
+      "water_frac": 0.0003,
+      "pixel_bbox": [
+        1000,
+        300,
+        1100,
+        400
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        49.3011,
+        71.326,
+        42.6369
+      ],
+      "entropy": 3.216424430797266,
+      "water_frac": 0.025,
+      "pixel_bbox": [
+        1100,
+        300,
+        1200,
+        400
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        47.9647,
+        65.3873,
+        41.5725
+      ],
+      "entropy": 3.657013201023351,
+      "water_frac": 0.01,
+      "pixel_bbox": [
+        1200,
+        0,
+        1300,
+        100
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        72.3612,
+        87.4286,
+        70.1655
+      ],
+      "entropy": 3.6446386807747118,
+      "water_frac": 0.0703,
+      "pixel_bbox": [
+        1300,
+        0,
+        1400,
+        100
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        51.3495,
+        68.4982,
+        43.2711
+      ],
+      "entropy": 2.9713786129076345,
+      "water_frac": 0.0001,
+      "pixel_bbox": [
+        1200,
+        100,
+        1300,
+        200
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        81.156,
+        95.7127,
+        78.9099
+      ],
+      "entropy": 3.6502408110193274,
+      "water_frac": 0.0968,
+      "pixel_bbox": [
+        1300,
+        100,
+        1400,
+        200
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        66.5781,
+        83.0081,
+        66.79
+      ],
+      "entropy": 3.540857212484979,
+      "water_frac": 0.1285,
+      "pixel_bbox": [
+        1400,
+        0,
+        1500,
+        100
+      ]
+    },
+    {
+      "tile_x": 1500,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        79.8074,
+        95.1848,
+        71.785
+      ],
+      "entropy": 3.406878451445665,
+      "water_frac": 0.0078,
+      "pixel_bbox": [
+        1500,
+        0,
+        1600,
+        100
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        77.2937,
+        92.0903,
+        71.2754
+      ],
+      "entropy": 3.6000547559996554,
+      "water_frac": 0.0235,
+      "pixel_bbox": [
+        1400,
+        100,
+        1500,
+        200
+      ]
+    },
+    {
+      "tile_x": 1500,
+      "tile_y": 100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        61.1393,
+        78.9182,
+        58.6344
+      ],
+      "entropy": 3.1778739227397113,
+      "water_frac": 0.1379,
+      "pixel_bbox": [
+        1500,
+        100,
+        1600,
+        200
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 200,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        49.460675,
+        67.515875,
+        48.412925
+      ],
+      "entropy": 2.8309315457681032,
+      "water_frac": 0.27295,
+      "pixel_bbox": [
+        1200,
+        200,
+        1400,
+        400
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 200,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        67.487675,
+        85.923825,
+        61.897
+      ],
+      "entropy": 3.1617055201156927,
+      "water_frac": 0.166575,
+      "pixel_bbox": [
+        1400,
+        200,
+        1600,
+        400
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 400,
+      "width": 400,
+      "height": 400,
+      "depth": 0,
+      "class": 0,
+      "order": 2,
+      "class_name": "water/flat",
+      "mean_color": [
+        9.0549875,
+        90.90176875,
+        91.5525
+      ],
+      "entropy": 1.905849219977276,
+      "water_frac": 0.99775625,
+      "pixel_bbox": [
+        0,
+        400,
+        400,
+        800
+      ]
+    },
+    {
+      "tile_x": 400,
+      "tile_y": 400,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 0,
+      "order": 2,
+      "class_name": "water/flat",
+      "mean_color": [
+        6.8039,
+        81.490025,
+        85.2385
+      ],
+      "entropy": 2.3031911213768095,
+      "water_frac": 1.0,
+      "pixel_bbox": [
+        400,
+        400,
+        600,
+        600
+      ]
+    },
+    {
+      "tile_x": 600,
+      "tile_y": 400,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        66.711725,
+        120.34205,
+        114.755775
+      ],
+      "entropy": 2.7818942919475713,
+      "water_frac": 0.540475,
+      "pixel_bbox": [
+        600,
+        400,
+        800,
+        600
+      ]
+    },
+    {
+      "tile_x": 400,
+      "tile_y": 600,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        67.07975,
+        122.7798,
+        115.86275
+      ],
+      "entropy": 3.0027001215303804,
+      "water_frac": 0.5781,
+      "pixel_bbox": [
+        400,
+        600,
+        600,
+        800
+      ]
+    },
+    {
+      "tile_x": 600,
+      "tile_y": 600,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        92.426225,
+        106.045825,
+        90.7005
+      ],
+      "entropy": 3.578819818462378,
+      "water_frac": 0.134925,
+      "pixel_bbox": [
+        600,
+        600,
+        800,
+        800
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        65.812,
+        82.1024,
+        62.6131
+      ],
+      "entropy": 3.5444796803631067,
+      "water_frac": 0.1185,
+      "pixel_bbox": [
+        800,
+        400,
+        900,
+        500
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        56.417,
+        78.9553,
+        47.5073
+      ],
+      "entropy": 3.686022948250661,
+      "water_frac": 0.0015,
+      "pixel_bbox": [
+        900,
+        400,
+        1000,
+        500
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        69.9097,
+        85.2674,
+        68.0801
+      ],
+      "entropy": 3.3711952085653687,
+      "water_frac": 0.1053,
+      "pixel_bbox": [
+        800,
+        500,
+        900,
+        600
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        47.2734,
+        67.7307,
+        42.242
+      ],
+      "entropy": 3.644363171786659,
+      "water_frac": 0.0023,
+      "pixel_bbox": [
+        900,
+        500,
+        1000,
+        600
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 400,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        61.885425,
+        79.1478,
+        56.86815
+      ],
+      "entropy": 3.245421964393264,
+      "water_frac": 0.19145,
+      "pixel_bbox": [
+        1000,
+        400,
+        1200,
+        600
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 600,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        79.0784,
+        92.4418,
+        76.2268
+      ],
+      "entropy": 3.5972641640203262,
+      "water_frac": 0.1145,
+      "pixel_bbox": [
+        800,
+        600,
+        900,
+        700
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 600,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        66.6873,
+        83.1538,
+        67.7635
+      ],
+      "entropy": 3.3496493647290184,
+      "water_frac": 0.187,
+      "pixel_bbox": [
+        900,
+        600,
+        1000,
+        700
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 700,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        85.4141,
+        99.5026,
+        80.8643
+      ],
+      "entropy": 3.6964538272537872,
+      "water_frac": 0.0675,
+      "pixel_bbox": [
+        800,
+        700,
+        900,
+        800
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 700,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        97.4114,
+        109.687,
+        87.6684
+      ],
+      "entropy": 3.505809390528093,
+      "water_frac": 0.0176,
+      "pixel_bbox": [
+        900,
+        700,
+        1000,
+        800
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 600,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        127.87,
+        143.4707,
+        126.4567
+      ],
+      "entropy": 3.696960017606277,
+      "water_frac": 0.048,
+      "pixel_bbox": [
+        1000,
+        600,
+        1100,
+        700
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 600,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        96.2362,
+        113.1064,
+        87.2402
+      ],
+      "entropy": 3.401651116232877,
+      "water_frac": 0.0057,
+      "pixel_bbox": [
+        1100,
+        600,
+        1200,
+        700
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 700,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        74.7811,
+        93.9743,
+        70.4194
+      ],
+      "entropy": 3.404616303642037,
+      "water_frac": 0.1053,
+      "pixel_bbox": [
+        1000,
+        700,
+        1100,
+        800
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 700,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        87.9593,
+        103.2776,
+        76.7821
+      ],
+      "entropy": 3.3870551936407134,
+      "water_frac": 0.0042,
+      "pixel_bbox": [
+        1100,
+        700,
+        1200,
+        800
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 400,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        59.75215,
+        78.328675,
+        57.833375
+      ],
+      "entropy": 3.077845795913698,
+      "water_frac": 0.310875,
+      "pixel_bbox": [
+        1200,
+        400,
+        1400,
+        600
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 400,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        71.007125,
+        88.24175,
+        64.067
+      ],
+      "entropy": 2.5883961201755454,
+      "water_frac": 0.179925,
+      "pixel_bbox": [
+        1400,
+        400,
+        1600,
+        600
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 600,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        97.8063,
+        113.3341,
+        87.4887
+      ],
+      "entropy": 3.4632669540935317,
+      "water_frac": 0.0023,
+      "pixel_bbox": [
+        1200,
+        600,
+        1300,
+        700
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 600,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        90.7509,
+        109.3586,
+        83.0507
+      ],
+      "entropy": 3.1168688529446826,
+      "water_frac": 0.0248,
+      "pixel_bbox": [
+        1300,
+        600,
+        1400,
+        700
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 700,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        97.059,
+        111.4695,
+        86.2622
+      ],
+      "entropy": 3.5098174328090876,
+      "water_frac": 0.0103,
+      "pixel_bbox": [
+        1200,
+        700,
+        1300,
+        800
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 700,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        82.8234,
+        102.0327,
+        75.7839
+      ],
+      "entropy": 3.192450086720425,
+      "water_frac": 0.0257,
+      "pixel_bbox": [
+        1300,
+        700,
+        1400,
+        800
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 600,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        85.366,
+        102.6862,
+        72.5542
+      ],
+      "entropy": 3.0245027066024277,
+      "water_frac": 0.0102,
+      "pixel_bbox": [
+        1400,
+        600,
+        1500,
+        700
+      ]
+    },
+    {
+      "tile_x": 1500,
+      "tile_y": 600,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        78.2914,
+        97.608,
+        66.6227
+      ],
+      "entropy": 3.6025038589226064,
+      "water_frac": 0.0022,
+      "pixel_bbox": [
+        1500,
+        600,
+        1600,
+        700
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 700,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        83.7948,
+        105.8009,
+        80.2784
+      ],
+      "entropy": 3.374315722103359,
+      "water_frac": 0.0173,
+      "pixel_bbox": [
+        1400,
+        700,
+        1500,
+        800
+      ]
+    },
+    {
+      "tile_x": 1500,
+      "tile_y": 700,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        89.452,
+        112.1309,
+        89.2224
+      ],
+      "entropy": 3.5010430925773557,
+      "water_frac": 0.0136,
+      "pixel_bbox": [
+        1500,
+        700,
+        1600,
+        800
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 800,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 0,
+      "order": 2,
+      "class_name": "water/flat",
+      "mean_color": [
+        15.992825,
+        140.172625,
+        150.8976
+      ],
+      "entropy": 3.199503291370198,
+      "water_frac": 1.0,
+      "pixel_bbox": [
+        0,
+        800,
+        200,
+        1000
+      ]
+    },
+    {
+      "tile_x": 200,
+      "tile_y": 800,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        64.0615,
+        136.151825,
+        130.82105
+      ],
+      "entropy": 2.792518677421765,
+      "water_frac": 0.641175,
+      "pixel_bbox": [
+        200,
+        800,
+        400,
+        1000
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 1000,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 0,
+      "order": 2,
+      "class_name": "water/flat",
+      "mean_color": [
+        8.873475,
+        115.853875,
+        125.88925
+      ],
+      "entropy": 1.9524735077785442,
+      "water_frac": 1.0,
+      "pixel_bbox": [
+        0,
+        1000,
+        200,
+        1200
+      ]
+    },
+    {
+      "tile_x": 200,
+      "tile_y": 1000,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        66.185325,
+        134.8353,
+        127.114325
+      ],
+      "entropy": 2.7962615155966533,
+      "water_frac": 0.49805,
+      "pixel_bbox": [
+        200,
+        1000,
+        400,
+        1200
+      ]
+    },
+    {
+      "tile_x": 400,
+      "tile_y": 800,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        60.320425,
+        88.51415,
+        60.032825
+      ],
+      "entropy": 2.7413727611237233,
+      "water_frac": 0.205175,
+      "pixel_bbox": [
+        400,
+        800,
+        600,
+        1000
+      ]
+    },
+    {
+      "tile_x": 600,
+      "tile_y": 800,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        64.3635,
+        79.1628,
+        55.7758
+      ],
+      "entropy": 3.79726304697231,
+      "water_frac": 0.0344,
+      "pixel_bbox": [
+        600,
+        800,
+        700,
+        900
+      ]
+    },
+    {
+      "tile_x": 700,
+      "tile_y": 800,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        60.4871,
+        77.3006,
+        56.9235
+      ],
+      "entropy": 3.120060562367451,
+      "water_frac": 0.1552,
+      "pixel_bbox": [
+        700,
+        800,
+        800,
+        900
+      ]
+    },
+    {
+      "tile_x": 600,
+      "tile_y": 900,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        78.8017,
+        92.7846,
+        67.1387
+      ],
+      "entropy": 2.9365973880726193,
+      "water_frac": 0.0058,
+      "pixel_bbox": [
+        600,
+        900,
+        700,
+        1000
+      ]
+    },
+    {
+      "tile_x": 700,
+      "tile_y": 900,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        86.9583,
+        100.7031,
+        77.6067
+      ],
+      "entropy": 3.316720867519932,
+      "water_frac": 0.0323,
+      "pixel_bbox": [
+        700,
+        900,
+        800,
+        1000
+      ]
+    },
+    {
+      "tile_x": 400,
+      "tile_y": 1000,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        69.08245,
+        104.94155,
+        67.2873
+      ],
+      "entropy": 2.3492101255333004,
+      "water_frac": 0.130325,
+      "pixel_bbox": [
+        400,
+        1000,
+        600,
+        1200
+      ]
+    },
+    {
+      "tile_x": 600,
+      "tile_y": 1000,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        83.4114,
+        100.5118,
+        72.5616
+      ],
+      "entropy": 3.137739378253802,
+      "water_frac": 0.0001,
+      "pixel_bbox": [
+        600,
+        1000,
+        700,
+        1100
+      ]
+    },
+    {
+      "tile_x": 700,
+      "tile_y": 1000,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        73.9183,
+        90.9966,
+        64.4104
+      ],
+      "entropy": 3.4961618958655984,
+      "water_frac": 0.0001,
+      "pixel_bbox": [
+        700,
+        1000,
+        800,
+        1100
+      ]
+    },
+    {
+      "tile_x": 600,
+      "tile_y": 1100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        79.5555,
+        97.5905,
+        65.5125
+      ],
+      "entropy": 3.3907348816541716,
+      "water_frac": 0.0,
+      "pixel_bbox": [
+        600,
+        1100,
+        700,
+        1200
+      ]
+    },
+    {
+      "tile_x": 700,
+      "tile_y": 1100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        79.4925,
+        96.13,
+        68.8771
+      ],
+      "entropy": 3.1600539769535843,
+      "water_frac": 0.0042,
+      "pixel_bbox": [
+        700,
+        1100,
+        800,
+        1200
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 800,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        70.1275,
+        86.1721,
+        66.6278
+      ],
+      "entropy": 3.5960848817473594,
+      "water_frac": 0.109,
+      "pixel_bbox": [
+        800,
+        800,
+        900,
+        900
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 800,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        87.6512,
+        99.7551,
+        75.7609
+      ],
+      "entropy": 3.491135359767333,
+      "water_frac": 0.0269,
+      "pixel_bbox": [
+        900,
+        800,
+        1000,
+        900
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 900,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        87.9405,
+        103.5561,
+        84.152
+      ],
+      "entropy": 3.6905849860514612,
+      "water_frac": 0.0635,
+      "pixel_bbox": [
+        800,
+        900,
+        900,
+        1000
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 900,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        98.2595,
+        113.3964,
+        93.8226
+      ],
+      "entropy": 3.6644163353629393,
+      "water_frac": 0.0341,
+      "pixel_bbox": [
+        900,
+        900,
+        1000,
+        1000
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 800,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        84.249,
+        99.5717,
+        73.3413
+      ],
+      "entropy": 3.4359870168288205,
+      "water_frac": 0.0146,
+      "pixel_bbox": [
+        1000,
+        800,
+        1100,
+        900
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 800,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        81.842,
+        97.6785,
+        70.6198
+      ],
+      "entropy": 3.4427782056098386,
+      "water_frac": 0.0037,
+      "pixel_bbox": [
+        1100,
+        800,
+        1200,
+        900
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 900,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        85.9676,
+        100.6855,
+        77.4786
+      ],
+      "entropy": 3.41498482906301,
+      "water_frac": 0.0169,
+      "pixel_bbox": [
+        1000,
+        900,
+        1100,
+        1000
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 900,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        93.281,
+        107.1792,
+        82.8563
+      ],
+      "entropy": 3.388099151245827,
+      "water_frac": 0.0002,
+      "pixel_bbox": [
+        1100,
+        900,
+        1200,
+        1000
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 1000,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        71.9174,
+        88.6356,
+        66.452
+      ],
+      "entropy": 2.9850976067740316,
+      "water_frac": 0.0485,
+      "pixel_bbox": [
+        800,
+        1000,
+        900,
+        1100
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 1000,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        91.4813,
+        106.4777,
+        84.2391
+      ],
+      "entropy": 3.5817799096326794,
+      "water_frac": 0.0213,
+      "pixel_bbox": [
+        900,
+        1000,
+        1000,
+        1100
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 1100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        83.2366,
+        97.7858,
+        75.0205
+      ],
+      "entropy": 3.009358142901003,
+      "water_frac": 0.0114,
+      "pixel_bbox": [
+        800,
+        1100,
+        900,
+        1200
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 1100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        99.9833,
+        114.2235,
+        94.3948
+      ],
+      "entropy": 3.5809247139430895,
+      "water_frac": 0.0162,
+      "pixel_bbox": [
+        900,
+        1100,
+        1000,
+        1200
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 1000,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        100.0476,
+        112.824,
+        91.422
+      ],
+      "entropy": 3.6638866934570924,
+      "water_frac": 0.0331,
+      "pixel_bbox": [
+        1000,
+        1000,
+        1100,
+        1100
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 1000,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        96.0806,
+        111.1231,
+        87.1638
+      ],
+      "entropy": 3.1560722201827787,
+      "water_frac": 0.0156,
+      "pixel_bbox": [
+        1100,
+        1000,
+        1200,
+        1100
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 1100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        104.776,
+        118.442,
+        98.9512
+      ],
+      "entropy": 3.3926782134090225,
+      "water_frac": 0.0249,
+      "pixel_bbox": [
+        1000,
+        1100,
+        1100,
+        1200
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 1100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        99.2634,
+        113.781,
+        90.8172
+      ],
+      "entropy": 3.504732715736444,
+      "water_frac": 0.0044,
+      "pixel_bbox": [
+        1100,
+        1100,
+        1200,
+        1200
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 800,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        107.2622,
+        121.5306,
+        97.822
+      ],
+      "entropy": 3.44799357170609,
+      "water_frac": 0.0072,
+      "pixel_bbox": [
+        1200,
+        800,
+        1300,
+        900
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 800,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        89.2691,
+        107.3719,
+        81.2861
+      ],
+      "entropy": 3.551604356029453,
+      "water_frac": 0.0115,
+      "pixel_bbox": [
+        1300,
+        800,
+        1400,
+        900
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 900,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        127.3411,
+        143.5039,
+        130.3585
+      ],
+      "entropy": 2.3169718474514025,
+      "water_frac": 0.0003,
+      "pixel_bbox": [
+        1200,
+        900,
+        1300,
+        1000
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 900,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        98.2138,
+        116.1241,
+        92.727
+      ],
+      "entropy": 2.9453566210029933,
+      "water_frac": 0.0007,
+      "pixel_bbox": [
+        1300,
+        900,
+        1400,
+        1000
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 800,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        108.0692,
+        129.3761,
+        112.9522
+      ],
+      "entropy": 3.0770575016851334,
+      "water_frac": 0.0018,
+      "pixel_bbox": [
+        1400,
+        800,
+        1500,
+        900
+      ]
+    },
+    {
+      "tile_x": 1500,
+      "tile_y": 800,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        94.3167,
+        117.3953,
+        95.9575
+      ],
+      "entropy": 3.4240742026251385,
+      "water_frac": 0.0069,
+      "pixel_bbox": [
+        1500,
+        800,
+        1600,
+        900
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 900,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        116.0044,
+        137.0947,
+        123.5395
+      ],
+      "entropy": 2.907804719685711,
+      "water_frac": 0.09,
+      "pixel_bbox": [
+        1400,
+        900,
+        1500,
+        1000
+      ]
+    },
+    {
+      "tile_x": 1500,
+      "tile_y": 900,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        102.051,
+        125.5115,
+        106.2249
+      ],
+      "entropy": 2.8695800801957834,
+      "water_frac": 0.0214,
+      "pixel_bbox": [
+        1500,
+        900,
+        1600,
+        1000
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 1000,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        112.5918,
+        127.1361,
+        105.9433
+      ],
+      "entropy": 3.4605466336286494,
+      "water_frac": 0.0,
+      "pixel_bbox": [
+        1200,
+        1000,
+        1300,
+        1100
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 1000,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        79.8178,
+        100.6048,
+        71.6391
+      ],
+      "entropy": 3.2045286777017914,
+      "water_frac": 0.0,
+      "pixel_bbox": [
+        1300,
+        1000,
+        1400,
+        1100
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 1100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        91.8359,
+        107.1615,
+        81.5701
+      ],
+      "entropy": 3.370569971802372,
+      "water_frac": 0.0039,
+      "pixel_bbox": [
+        1200,
+        1100,
+        1300,
+        1200
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 1100,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        56.257,
+        79.5735,
+        47.5385
+      ],
+      "entropy": 3.221380675584263,
+      "water_frac": 0.0022,
+      "pixel_bbox": [
+        1300,
+        1100,
+        1400,
+        1200
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 1000,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        85.227125,
+        107.272475,
+        87.16355
+      ],
+      "entropy": 2.692476556100106,
+      "water_frac": 0.051775,
+      "pixel_bbox": [
+        1400,
+        1000,
+        1600,
+        1200
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 1200,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        28.88085,
+        125.8339,
+        134.28575
+      ],
+      "entropy": 1.5654416274349416,
+      "water_frac": 0.8772,
+      "pixel_bbox": [
+        0,
+        1200,
+        200,
+        1400
+      ]
+    },
+    {
+      "tile_x": 200,
+      "tile_y": 1200,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        67.233775,
+        99.36575,
+        72.1228
+      ],
+      "entropy": 2.2428176347495152,
+      "water_frac": 0.363725,
+      "pixel_bbox": [
+        200,
+        1200,
+        400,
+        1400
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 1400,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        88.707775,
+        136.995625,
+        127.5643
+      ],
+      "entropy": 2.4673115204504388,
+      "water_frac": 0.3961,
+      "pixel_bbox": [
+        0,
+        1400,
+        200,
+        1600
+      ]
+    },
+    {
+      "tile_x": 200,
+      "tile_y": 1400,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        65.9815,
+        97.71435,
+        67.006025
+      ],
+      "entropy": 2.3985160795941267,
+      "water_frac": 0.30185,
+      "pixel_bbox": [
+        200,
+        1400,
+        400,
+        1600
+      ]
+    },
+    {
+      "tile_x": 400,
+      "tile_y": 1200,
+      "width": 200,
+      "height": 200,
+      "depth": 1,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        54.807575,
+        84.60605,
+        51.6383
+      ],
+      "entropy": 1.9652802706685386,
+      "water_frac": 0.281325,
+      "pixel_bbox": [
+        400,
+        1200,
+        600,
+        1400
+      ]
+    },
+    {
+      "tile_x": 600,
+      "tile_y": 1200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        85.823,
+        102.0719,
+        71.0507
+      ],
+      "entropy": 2.7555229278691376,
+      "water_frac": 0.0055,
+      "pixel_bbox": [
+        600,
+        1200,
+        700,
+        1300
+      ]
+    },
+    {
+      "tile_x": 700,
+      "tile_y": 1200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        84.8485,
+        99.9285,
+        77.7813
+      ],
+      "entropy": 3.202065325602899,
+      "water_frac": 0.0202,
+      "pixel_bbox": [
+        700,
+        1200,
+        800,
+        1300
+      ]
+    },
+    {
+      "tile_x": 600,
+      "tile_y": 1300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        111.6434,
+        120.1602,
+        92.6787
+      ],
+      "entropy": 3.178528559331113,
+      "water_frac": 0.0,
+      "pixel_bbox": [
+        600,
+        1300,
+        700,
+        1400
+      ]
+    },
+    {
+      "tile_x": 700,
+      "tile_y": 1300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        98.2555,
+        114.7735,
+        92.7903
+      ],
+      "entropy": 3.1685921101838925,
+      "water_frac": 0.0499,
+      "pixel_bbox": [
+        700,
+        1300,
+        800,
+        1400
+      ]
+    },
+    {
+      "tile_x": 400,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition/coastline",
+      "mean_color": [
+        56.8057,
+        83.6054,
+        56.2436
+      ],
+      "entropy": 2.7369096737616134,
+      "water_frac": 0.3916,
+      "pixel_bbox": [
+        400,
+        1400,
+        500,
+        1500
+      ]
+    },
+    {
+      "tile_x": 500,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        70.8354,
+        97.752,
+        59.6686
+      ],
+      "entropy": 2.3797957052317793,
+      "water_frac": 0.0125,
+      "pixel_bbox": [
+        500,
+        1400,
+        600,
+        1500
+      ]
+    },
+    {
+      "tile_x": 400,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        112.0851,
+        125.7907,
+        104.6324
+      ],
+      "entropy": 3.5671145953162977,
+      "water_frac": 0.0081,
+      "pixel_bbox": [
+        400,
+        1500,
+        500,
+        1600
+      ]
+    },
+    {
+      "tile_x": 500,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        122.0495,
+        134.4326,
+        116.7493
+      ],
+      "entropy": 3.7065977419429093,
+      "water_frac": 0.03,
+      "pixel_bbox": [
+        500,
+        1500,
+        600,
+        1600
+      ]
+    },
+    {
+      "tile_x": 600,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        111.6316,
+        123.7658,
+        98.4419
+      ],
+      "entropy": 3.1223717631000336,
+      "water_frac": 0.0053,
+      "pixel_bbox": [
+        600,
+        1400,
+        700,
+        1500
+      ]
+    },
+    {
+      "tile_x": 700,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        102.5572,
+        116.8985,
+        91.7727
+      ],
+      "entropy": 3.2399235563046314,
+      "water_frac": 0.0097,
+      "pixel_bbox": [
+        700,
+        1400,
+        800,
+        1500
+      ]
+    },
+    {
+      "tile_x": 600,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        103.6771,
+        120.6201,
+        96.904
+      ],
+      "entropy": 3.459699997467862,
+      "water_frac": 0.0073,
+      "pixel_bbox": [
+        600,
+        1500,
+        700,
+        1600
+      ]
+    },
+    {
+      "tile_x": 700,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        106.1317,
+        122.4971,
+        104.6351
+      ],
+      "entropy": 3.3715788864478466,
+      "water_frac": 0.011,
+      "pixel_bbox": [
+        700,
+        1500,
+        800,
+        1600
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 1200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        85.2523,
+        99.3706,
+        76.2065
+      ],
+      "entropy": 3.14482926316334,
+      "water_frac": 0.0078,
+      "pixel_bbox": [
+        800,
+        1200,
+        900,
+        1300
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 1200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        88.3942,
+        102.7627,
+        82.2105
+      ],
+      "entropy": 3.607624999878403,
+      "water_frac": 0.0313,
+      "pixel_bbox": [
+        900,
+        1200,
+        1000,
+        1300
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 1300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        94.9706,
+        112.977,
+        92.9546
+      ],
+      "entropy": 3.2922355594214063,
+      "water_frac": 0.0072,
+      "pixel_bbox": [
+        800,
+        1300,
+        900,
+        1400
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 1300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        95.0727,
+        110.6352,
+        89.7309
+      ],
+      "entropy": 3.502395211908963,
+      "water_frac": 0.0403,
+      "pixel_bbox": [
+        900,
+        1300,
+        1000,
+        1400
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 1200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        93.4604,
+        103.891,
+        82.7308
+      ],
+      "entropy": 3.339184247832233,
+      "water_frac": 0.0085,
+      "pixel_bbox": [
+        1000,
+        1200,
+        1100,
+        1300
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 1200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        104.8971,
+        121.3359,
+        102.2791
+      ],
+      "entropy": 2.8079175676934547,
+      "water_frac": 0.0075,
+      "pixel_bbox": [
+        1100,
+        1200,
+        1200,
+        1300
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 1300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        86.2083,
+        101.2616,
+        77.6735
+      ],
+      "entropy": 3.3080252095231115,
+      "water_frac": 0.0227,
+      "pixel_bbox": [
+        1000,
+        1300,
+        1100,
+        1400
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 1300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        98.9401,
+        113.1475,
+        92.4382
+      ],
+      "entropy": 3.342779978854621,
+      "water_frac": 0.0392,
+      "pixel_bbox": [
+        1100,
+        1300,
+        1200,
+        1400
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        91.4966,
+        109.99,
+        82.4303
+      ],
+      "entropy": 3.321447803508417,
+      "water_frac": 0.0004,
+      "pixel_bbox": [
+        800,
+        1400,
+        900,
+        1500
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        100.475,
+        115.7756,
+        93.7674
+      ],
+      "entropy": 3.3754423543936243,
+      "water_frac": 0.0146,
+      "pixel_bbox": [
+        900,
+        1400,
+        1000,
+        1500
+      ]
+    },
+    {
+      "tile_x": 800,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        130.0988,
+        145.1337,
+        129.1281
+      ],
+      "entropy": 3.130132760114097,
+      "water_frac": 0.0514,
+      "pixel_bbox": [
+        800,
+        1500,
+        900,
+        1600
+      ]
+    },
+    {
+      "tile_x": 900,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        83.7358,
+        100.1902,
+        76.771
+      ],
+      "entropy": 3.485391816649696,
+      "water_frac": 0.0307,
+      "pixel_bbox": [
+        900,
+        1500,
+        1000,
+        1600
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        106.1004,
+        118.056,
+        92.8974
+      ],
+      "entropy": 3.0721918359727645,
+      "water_frac": 0.0027,
+      "pixel_bbox": [
+        1000,
+        1400,
+        1100,
+        1500
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        103.1161,
+        111.8791,
+        86.2932
+      ],
+      "entropy": 3.173494964326319,
+      "water_frac": 0.0158,
+      "pixel_bbox": [
+        1100,
+        1400,
+        1200,
+        1500
+      ]
+    },
+    {
+      "tile_x": 1000,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        102.4424,
+        112.5451,
+        89.0633
+      ],
+      "entropy": 2.9994262103658142,
+      "water_frac": 0.0276,
+      "pixel_bbox": [
+        1000,
+        1500,
+        1100,
+        1600
+      ]
+    },
+    {
+      "tile_x": 1100,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        120.6021,
+        127.9466,
+        106.8241
+      ],
+      "entropy": 3.230063089977669,
+      "water_frac": 0.0309,
+      "pixel_bbox": [
+        1100,
+        1500,
+        1200,
+        1600
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 1200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        114.9524,
+        128.1085,
+        107.1473
+      ],
+      "entropy": 3.0743310882724777,
+      "water_frac": 0.0448,
+      "pixel_bbox": [
+        1200,
+        1200,
+        1300,
+        1300
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 1200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        77.3299,
+        92.72,
+        66.6103
+      ],
+      "entropy": 3.361061873501911,
+      "water_frac": 0.0125,
+      "pixel_bbox": [
+        1300,
+        1200,
+        1400,
+        1300
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 1300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        90.753,
+        107.0931,
+        86.1756
+      ],
+      "entropy": 3.231622080920635,
+      "water_frac": 0.0797,
+      "pixel_bbox": [
+        1200,
+        1300,
+        1300,
+        1400
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 1300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        75.0953,
+        93.5141,
+        61.799
+      ],
+      "entropy": 3.0444146265194925,
+      "water_frac": 0.0,
+      "pixel_bbox": [
+        1300,
+        1300,
+        1400,
+        1400
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 1200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        93.5846,
+        109.4621,
+        85.1982
+      ],
+      "entropy": 3.331181440089596,
+      "water_frac": 0.0194,
+      "pixel_bbox": [
+        1400,
+        1200,
+        1500,
+        1300
+      ]
+    },
+    {
+      "tile_x": 1500,
+      "tile_y": 1200,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        86.9582,
+        105.7482,
+        77.4093
+      ],
+      "entropy": 3.3254319572743323,
+      "water_frac": 0.0,
+      "pixel_bbox": [
+        1500,
+        1200,
+        1600,
+        1300
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 1300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        69.2428,
+        88.7354,
+        58.0906
+      ],
+      "entropy": 2.96897858736262,
+      "water_frac": 0.0,
+      "pixel_bbox": [
+        1400,
+        1300,
+        1500,
+        1400
+      ]
+    },
+    {
+      "tile_x": 1500,
+      "tile_y": 1300,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        104.6437,
+        118.5473,
+        95.6272
+      ],
+      "entropy": 3.636152897320436,
+      "water_frac": 0.0068,
+      "pixel_bbox": [
+        1500,
+        1300,
+        1600,
+        1400
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        111.6639,
+        119.7762,
+        90.5332
+      ],
+      "entropy": 2.7410651221130755,
+      "water_frac": 0.0006,
+      "pixel_bbox": [
+        1200,
+        1400,
+        1300,
+        1500
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        89.7101,
+        105.7608,
+        79.5158
+      ],
+      "entropy": 3.4558985575133594,
+      "water_frac": 0.0057,
+      "pixel_bbox": [
+        1300,
+        1400,
+        1400,
+        1500
+      ]
+    },
+    {
+      "tile_x": 1200,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        128.0906,
+        139.6094,
+        119.7224
+      ],
+      "entropy": 2.9561357114771583,
+      "water_frac": 0.0141,
+      "pixel_bbox": [
+        1200,
+        1500,
+        1300,
+        1600
+      ]
+    },
+    {
+      "tile_x": 1300,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        113.6045,
+        127.0824,
+        107.7158
+      ],
+      "entropy": 3.0742217273437493,
+      "water_frac": 0.0224,
+      "pixel_bbox": [
+        1300,
+        1500,
+        1400,
+        1600
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        82.0378,
+        97.5352,
+        72.0127
+      ],
+      "entropy": 3.3342611771379747,
+      "water_frac": 0.0095,
+      "pixel_bbox": [
+        1400,
+        1400,
+        1500,
+        1500
+      ]
+    },
+    {
+      "tile_x": 1500,
+      "tile_y": 1400,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        76.4973,
+        91.7131,
+        68.0303
+      ],
+      "entropy": 3.437308562787927,
+      "water_frac": 0.0261,
+      "pixel_bbox": [
+        1500,
+        1400,
+        1600,
+        1500
+      ]
+    },
+    {
+      "tile_x": 1400,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        94.6693,
+        109.9089,
+        86.76
+      ],
+      "entropy": 3.0666751296201817,
+      "water_frac": 0.0504,
+      "pixel_bbox": [
+        1400,
+        1500,
+        1500,
+        1600
+      ]
+    },
+    {
+      "tile_x": 1500,
+      "tile_y": 1500,
+      "width": 100,
+      "height": 100,
+      "depth": 2,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban/detail",
+      "mean_color": [
+        86.6567,
+        99.6626,
+        73.3999
+      ],
+      "entropy": 3.350115167058432,
+      "water_frac": 0.0025,
+      "pixel_bbox": [
+        1500,
+        1500,
+        1600,
+        1600
+      ]
+    }
+  ]
+}
