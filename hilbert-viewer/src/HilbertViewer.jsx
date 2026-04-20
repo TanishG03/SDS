@@ -590,6 +590,26 @@ function drawHilbertPath(ctx, codes, x0, y0, tw, th, color, depth) {
   }
 }
 
+// ── draw vector features ──────────────────────────────────────────
+function drawVectorFeatures(ctx, features, scale, offX, offY, color) {
+  if (!features) return;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  for (const f of features) {
+    if (f.type === "LineString" && f.coordinates) {
+      ctx.beginPath();
+      for (let i = 0; i < f.coordinates.length; i++) {
+        const [x, y] = f.coordinates[i];
+        const cx = offX + x * scale;
+        const cy = offY + y * scale;
+        if (i === 0) ctx.moveTo(cx, cy);
+        else ctx.lineTo(cx, cy);
+      }
+      ctx.stroke();
+    }
+  }
+}
+
 // ── SpeedupBar ────────────────────────────────────────────────────
 function SpeedupBar({ hms, nms, speedup }) {
   const frac = Math.min(hms / (nms || 1), 1);
@@ -659,24 +679,55 @@ export default function HilbertViewer() {
   const [depth,    setDepth]    = useState(0);
   const [viewport, setViewport] = useState(null);      // current pixel bbox
   const [loading,  setLoading]  = useState(false);
+  const [mode,     setMode]     = useState("raster");
+  const [rasterDataset, setRasterDataset] = useState("test1");
   const [error,    setError]    = useState(null);
   const [hovered,  setHovered]  = useState(null);
   const canvasRef = useRef(null);
+  const minimapCanvasRef = useRef(null);
 
   // ── load metadata ──────────────────────────────────────────────
+  const activeDataset = mode === "vector" ? "vector" : rasterDataset;
+
+  // reset state on dataset change
   useEffect(() => {
-    fetch(`${API}/segmentation`).then(r=>r.json()).then(setSegData)
+    setDepth(0);
+    setViewport(null);
+    setHistory([]);
+    setHovered(null);
+    setZoomData(null);
+    setQuery(null);
+  }, [activeDataset]);
+
+  useEffect(() => {
+    fetch(`${API}/segmentation?dataset=${activeDataset}`).then(r=>r.json()).then(setSegData)
       .catch(()=>setError("Cannot reach server on :5000"));
-    fetch(`${API}/index_stats`).then(r=>r.json()).then(setStats).catch(()=>{});
-    fetch(`${API}/lod?zoom=0`).then(r=>r.json()).then(setLodData).catch(()=>{});
-  }, []);
+  }, [activeDataset]);
+
+  useEffect(() => {
+    fetch(`${API}/index_stats?dataset=${activeDataset}`).then(r=>r.json()).then(setStats).catch(()=>{});
+    fetch(`${API}/lod?zoom=0&dataset=${activeDataset}`).then(r=>r.json()).then(setLodData).catch(()=>{});
+    
+    // reset zoom/history state on mode switch
+    setZoomData(null); setHistory([]); setDepth(0); setViewport(null);
+    
+    // fetch baseline query so vector features render at depth 0
+    if (segData) {
+      const cx = segData.image_size[0] / 2;
+      const cy = segData.image_size[1] / 2;
+      fetch(`${API}/query?cx=${cx}&cy=${cy}&zoom=0&dataset=${activeDataset}`)
+        .then(r=>r.json()).then(setQuery).catch(()=>{});
+    } else {
+      setQuery(null);
+    }
+  }, [activeDataset, segData]);
 
   useEffect(() => {
     const img = new window.Image();
     img.crossOrigin = "anonymous";
     img.onload = () => setBgImage(img);
-    img.src = `${API}/image`;
-  }, []);
+    img.src = `${API}/image?dataset=${activeDataset}&t=${new Date().getTime()}`;
+  }, [activeDataset]);
 
   // ── coord helpers ──────────────────────────────────────────────
   const getScaleOffset = useCallback(() => {
@@ -697,81 +748,96 @@ export default function HilbertViewer() {
     const ctx = canvas.getContext("2d");
     const so  = getScaleOffset();
     if (!so) return;
-    const { scale, offX, offY } = so;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#0a0f1a";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    if (bgImage) ctx.drawImage(bgImage, offX, offY, so.imgW*scale, so.imgH*scale);
-
-    // Which tiles to draw?
     const tiles = zoomData ? zoomData.tiles : (lodData?.tiles ?? []);
     const inZoom = !!zoomData;
 
-    for (const tile of tiles) {
-      const cfg   = CLASS_CFG[tile.region_class] ?? CLASS_CFG[2];
-      const bb    = inZoom ? tile.clip_bbox : tile.pixel_bbox;
-      if (!bb) continue;
+    const drawMap = (targetCtx, width, height, scale, offX, offY, isMinimap=false) => {
+      targetCtx.clearRect(0, 0, width, height);
+      targetCtx.fillStyle = "#0a0f1a";
+      targetCtx.fillRect(0, 0, width, height);
 
-      const [px0,py0,px1,py1] = bb;
-      const x0 = offX + px0*scale, y0 = offY + py0*scale;
-      const tw  = (px1-px0)*scale,  th  = (py1-py0)*scale;
+      if (bgImage && mode === "raster") {
+        targetCtx.drawImage(bgImage, offX, offY, so.imgW*scale, so.imgH*scale);
+      }
 
-      if (tile.status === "collapsed") {
-        const [r,g,b] = tile.mean_color;
-        ctx.fillStyle = `rgba(${Math.round(r)},${Math.round(g)},${Math.round(b)},0.82)`;
-        ctx.fillRect(x0,y0,tw,th);
-      } else {
-        // base tint
-        ctx.fillStyle = `${cfg.border}22`;
-        ctx.fillRect(x0,y0,tw,th);
+      for (const tile of tiles) {
+        const cfg   = CLASS_CFG[tile.region_class] ?? CLASS_CFG[2];
+        const bb    = inZoom ? tile.clip_bbox : tile.pixel_bbox;
+        if (!bb) continue;
 
-        // sub-tile grid
-        const vg = inZoom ? tile.vis_grid : Math.pow(2, tile.hilbert_order ?? 2);
-        if (vg > 1) {
-          ctx.strokeStyle = `${cfg.border}30`;
-          ctx.lineWidth   = 0.25;
-          for (let s = 1; s < vg; s++) {
-            const lx = x0 + s*(tw/vg), ly = y0 + s*(th/vg);
-            ctx.beginPath(); ctx.moveTo(lx, y0); ctx.lineTo(lx, y0+th); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(x0, ly); ctx.lineTo(x0+tw, ly); ctx.stroke();
+        const [px0,py0,px1,py1] = bb;
+        const x0 = offX + px0*scale, y0 = offY + py0*scale;
+        const tw  = (px1-px0)*scale,  th  = (py1-py0)*scale;
+
+        // Skip drawing if completely out of bounds (useful for minimap)
+        if (x0 > width || y0 > height || x0+tw < 0 || y0+th < 0) continue;
+
+        if (tile.status === "collapsed") {
+          if (mode === "raster") {
+            const [r,g,b] = tile.mean_color;
+            targetCtx.fillStyle = `rgba(${Math.round(r)},${Math.round(g)},${Math.round(b)},0.82)`;
+            targetCtx.fillRect(x0,y0,tw,th);
+          }
+        } else {
+          if (mode === "raster") {
+            targetCtx.fillStyle = `${cfg.border}22`;
+            targetCtx.fillRect(x0,y0,tw,th);
+          }
+
+          const vg = inZoom ? tile.vis_grid : Math.pow(2, tile.hilbert_order ?? 2);
+          if (vg > 1) {
+            targetCtx.strokeStyle = `${cfg.border}30`;
+            targetCtx.lineWidth   = isMinimap ? 0.5 : 0.25;
+            for (let s = 1; s < vg; s++) {
+              const lx = x0 + s*(tw/vg), ly = y0 + s*(th/vg);
+              targetCtx.beginPath(); targetCtx.moveTo(lx, y0); targetCtx.lineTo(lx, y0+th); targetCtx.stroke();
+              targetCtx.beginPath(); targetCtx.moveTo(x0, ly); targetCtx.lineTo(x0+tw, ly); targetCtx.stroke();
+            }
+          }
+
+          if (inZoom && tile.visible_codes?.length >= 2) {
+            const scaled = tile.visible_codes.map(c => ({
+              ...c,
+              bbox: c.bbox.map((v,i) => i%2===0 ? offX+v*scale : offY+v*scale)
+            }));
+            drawHilbertPath(targetCtx, scaled, x0, y0, tw, th, cfg.hilbert, depth);
           }
         }
 
-        // Hilbert curve path (only in zoomed mode)
-        if (inZoom && tile.visible_codes?.length >= 2) {
-          const scaled = tile.visible_codes.map(c => ({
-            ...c,
-            bbox: c.bbox.map((v,i) => i%2===0 ? offX+v*scale : offY+v*scale)
-          }));
-          drawHilbertPath(ctx, scaled, x0, y0, tw, th, cfg.hilbert, depth);
+        targetCtx.strokeStyle = cfg.border;
+        targetCtx.lineWidth   = tile.status==="collapsed" ? 1.5 : (isMinimap ? 1.5 : 0.7);
+        targetCtx.strokeRect(x0+0.5, y0+0.5, tw-1, th-1);
+
+        if (tw > 20 && mode === "raster") {
+          targetCtx.fillStyle = "rgba(255,255,255,0.75)";
+          targetCtx.font = `bold ${Math.min(9,tw/5)}px monospace`;
+          const ord = inZoom ? tile.visible_order : tile.hilbert_order;
+          targetCtx.fillText(`o${ord}`, x0+3, y0+11);
         }
       }
 
-      ctx.strokeStyle = cfg.border;
-      ctx.lineWidth   = tile.status==="collapsed" ? 1.5 : 0.7;
-      ctx.strokeRect(x0+0.5, y0+0.5, tw-1, th-1);
-
-      if (tw > 20) {
-        ctx.fillStyle = "rgba(255,255,255,0.75)";
-        ctx.font = `bold ${Math.min(9,tw/5)}px monospace`;
-        const ord = inZoom ? tile.visible_order : tile.hilbert_order;
-        ctx.fillText(`o${ord}`, x0+3, y0+11);
+      if (mode === "vector" && query?.hilbert_result?.tiles) {
+        for (const t of query.hilbert_result.tiles) {
+          const cfg = CLASS_CFG[t.region_class] ?? CLASS_CFG[2];
+          drawVectorFeatures(targetCtx, t.features, scale, offX, offY, cfg.hilbert);
+        }
       }
-    }
+    };
 
-    // Viewport rect
+    // 1. Draw main map
+    drawMap(ctx, canvas.width, canvas.height, so.scale, so.offX, so.offY, false);
+
+    // 2. Viewport overlay on main map
     if (viewport) {
       const [vx0,vy0,vx1,vy1] = viewport;
-      const qx = offX+vx0*scale, qy = offY+vy0*scale;
-      const qw = (vx1-vx0)*scale, qh = (vy1-vy0)*scale;
-      // dim outside
+      const qx = so.offX+vx0*so.scale, qy = so.offY+vy0*so.scale;
+      const qw = (vx1-vx0)*so.scale, qh = (vy1-vy0)*so.scale;
       ctx.fillStyle = "rgba(0,0,0,0.42)";
-      ctx.fillRect(offX, offY, qx-offX, so.imgH*scale);
-      ctx.fillRect(qx+qw, offY, so.imgW*scale-(qx-offX)-qw, so.imgH*scale);
-      ctx.fillRect(qx, offY, qw, qy-offY);
-      ctx.fillRect(qx, qy+qh, qw, so.imgH*scale-(qy-offY)-qh);
+      ctx.fillRect(so.offX, so.offY, qx-so.offX, so.imgH*so.scale);
+      ctx.fillRect(qx+qw, so.offY, so.imgW*so.scale-(qx-so.offX)-qw, so.imgH*so.scale);
+      ctx.fillRect(qx, so.offY, qw, qy-so.offY);
+      ctx.fillRect(qx, qy+qh, qw, so.imgH*so.scale-(qy-so.offY)-qh);
       ctx.strokeStyle = "#fbbf24";
       ctx.lineWidth   = 2;
       ctx.setLineDash([5,3]);
@@ -779,15 +845,36 @@ export default function HilbertViewer() {
       ctx.setLineDash([]);
     }
 
-    // Hover
+    // 3. Hover on main map
     if (hovered?.pixel_bbox) {
       const [px0,py0,px1,py1] = hovered.pixel_bbox;
       ctx.strokeStyle = "#fff";
       ctx.lineWidth = 2;
-      ctx.strokeRect(offX+px0*scale, offY+py0*scale, (px1-px0)*scale, (py1-py0)*scale);
+      ctx.strokeRect(so.offX+px0*so.scale, so.offY+py0*so.scale, (px1-px0)*so.scale, (py1-py0)*so.scale);
     }
 
-  }, [lodData, zoomData, segData, bgImage, hovered, viewport, depth, getScaleOffset]);
+    // 4. Draw minimap
+    if (minimapCanvasRef.current) {
+      const mCanvas = minimapCanvasRef.current;
+      const mCtx = mCanvas.getContext("2d");
+      if (viewport) {
+        const [vx0,vy0,vx1,vy1] = viewport;
+        const vw = vx1 - vx0;
+        const vh = vy1 - vy0;
+        // Map the viewport to fill the 250x250 minimap
+        const mScale = Math.min(mCanvas.width / vw, mCanvas.height / vh) * 0.95; 
+        const mOffX = (mCanvas.width - vw * mScale) / 2 - vx0 * mScale;
+        const mOffY = (mCanvas.height - vh * mScale) / 2 - vy0 * mScale;
+        drawMap(mCtx, mCanvas.width, mCanvas.height, mScale, mOffX, mOffY, true);
+      } else {
+        // Clear minimap when not zoomed
+        mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+        mCtx.fillStyle = "#0a0f1a";
+        mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
+      }
+    }
+
+  }, [lodData, zoomData, segData, bgImage, hovered, viewport, depth, getScaleOffset, query, mode]);
 
   // ── click → zoom in ───────────────────────────────────────────
   const handleClick = useCallback((e) => {
@@ -808,8 +895,8 @@ export default function HilbertViewer() {
 
     // Fire /zoom_lod and /query in parallel
     Promise.all([
-      fetch(`${API}/zoom_lod?cx=${ix.toFixed(1)}&cy=${iy.toFixed(1)}&depth=${newDepth}`).then(r=>r.json()),
-      fetch(`${API}/query?cx=${ix.toFixed(1)}&cy=${iy.toFixed(1)}&zoom=${newDepth}`).then(r=>r.json()),
+      fetch(`${API}/zoom_lod?cx=${ix.toFixed(1)}&cy=${iy.toFixed(1)}&depth=${newDepth}&dataset=${activeDataset}`).then(r=>r.json()),
+      fetch(`${API}/query?cx=${ix.toFixed(1)}&cy=${iy.toFixed(1)}&zoom=${newDepth}&dataset=${activeDataset}`).then(r=>r.json()),
     ]).then(([zd, qd]) => {
       setZoomData(zd);
       setViewport(zd.viewport);
@@ -819,7 +906,7 @@ export default function HilbertViewer() {
       setLoading(false);
       setError(null);
     }).catch(() => { setError("Request failed"); setLoading(false); });
-  }, [depth, history, getScaleOffset]);
+  }, [depth, history, getScaleOffset, activeDataset]);
 
   // ── jump to history point ─────────────────────────────────────
   const handleJump = useCallback((idx) => {
@@ -833,13 +920,13 @@ export default function HilbertViewer() {
     const newHistory = history.slice(0, idx + 1);
     setLoading(true);
     Promise.all([
-      fetch(`${API}/zoom_lod?cx=${h.cx.toFixed(1)}&cy=${h.cy.toFixed(1)}&depth=${h.depth}`).then(r=>r.json()),
-      fetch(`${API}/query?cx=${h.cx.toFixed(1)}&cy=${h.cy.toFixed(1)}&zoom=${h.depth}`).then(r=>r.json()),
+      fetch(`${API}/zoom_lod?cx=${h.cx.toFixed(1)}&cy=${h.cy.toFixed(1)}&depth=${h.depth}&dataset=${activeDataset}`).then(r=>r.json()),
+      fetch(`${API}/query?cx=${h.cx.toFixed(1)}&cy=${h.cy.toFixed(1)}&zoom=${h.depth}&dataset=${activeDataset}`).then(r=>r.json()),
     ]).then(([zd, qd]) => {
       setZoomData(zd); setViewport(zd.viewport); setQuery(qd);
       setDepth(h.depth); setHistory(newHistory); setLoading(false);
     }).catch(()=>setLoading(false));
-  }, [history]);
+  }, [history, activeDataset]);
 
   const handleMouseMove = useCallback((e) => {
     if (!lodData || !segData || !canvasRef.current) return;
@@ -859,7 +946,7 @@ export default function HilbertViewer() {
   const collCount = (zoomData ?? lodData)?.tiles?.filter(t=>t.status==="collapsed").length ?? 0;
 
   return (
-    <div style={{background:"#0a0f1a",minHeight:"100vh",color:"#e2e8f0",
+    <div style={{background:"#0a0f1a", height:"100vh", overflow:"hidden", color:"#e2e8f0",
                  fontFamily:"'JetBrains Mono','Fira Code',monospace"}}>
 
       {/* header */}
@@ -901,15 +988,16 @@ export default function HilbertViewer() {
       <div style={{display:"grid",gridTemplateColumns:"1fr 280px",
                    height:"calc(100vh - 50px)"}}>
 
-        {/* canvas */}
-        <div style={{position:"relative",padding:12}}>
-          <canvas ref={canvasRef} width={820} height={740}
+        {/* canvas wrapper */}
+        <div style={{position:"relative", padding:12, overflow:"auto", display:"flex", justifyContent:"center", alignItems:"flex-start"}}>
+          <canvas ref={canvasRef} width={1000} height={1000}
             onClick={handleClick}
             onMouseMove={handleMouseMove}
             onMouseLeave={()=>setHovered(null)}
-            style={{width:"100%",height:"100%",display:"block",
+            style={{display:"block",
                     cursor: depth>=MAX_DEPTH ? "default" : loading ? "wait" : "zoom-in",
-                    borderRadius:6,border:"1px solid #1e293b"}} />
+                    borderRadius:6, border:"1px solid #1e293b",
+                    boxShadow:"0 4px 6px -1px rgba(0, 0, 0, 0.5)"}} />
           {viewport && (
             <div style={{position:"absolute",bottom:20,left:20,
                          background:"rgba(10,15,26,0.9)",padding:"4px 10px",
@@ -924,6 +1012,15 @@ export default function HilbertViewer() {
         <div style={{borderLeft:"1px solid #1e293b",padding:"14px 13px",
                      display:"flex",flexDirection:"column",gap:0,overflowY:"auto"}}>
 
+          {/* minimap viewport */}
+          <div style={{marginBottom: 16, border: "1px solid #334155", borderRadius: 4, 
+                       background: "#0f172a", overflow: "hidden", display: viewport ? "block" : "none"}}>
+            <div style={{fontSize:9, padding:"4px 8px", background:"#1e293b", color:"#94a3b8", borderBottom:"1px solid #334155"}}>
+              ZOOM VIEWPORT
+            </div>
+            <canvas ref={minimapCanvasRef} width={252} height={252} style={{display:"block"}} />
+          </div>
+
           {/* breadcrumb */}
           {history.length > 0 && (
             <>
@@ -934,9 +1031,45 @@ export default function HilbertViewer() {
             </>
           )}
 
-          {/* depth indicator */}
+          {/* mode toggle */}
           <div style={{fontSize:10,color:"#475569",letterSpacing:"0.1em",marginBottom:6,
                        marginTop: history.length ? 10 : 0}}>
+            DATA MODE
+          </div>
+          <div style={{display:"flex",gap:4,marginBottom: mode === "raster" ? 6 : 12}}>
+            <button onClick={() => setMode("raster")}
+              style={{flex:1,padding:"6px 0",background:mode==="raster"?"#1e3a8a":"#1e293b",
+                      border:mode==="raster"?"1px solid #3b82f6":"1px solid #334155",
+                      color:mode==="raster"?"#93c5fd":"#64748b",borderRadius:4,fontSize:11,cursor:"pointer",
+                      fontWeight:mode==="raster"?600:400}}>
+              Raster
+            </button>
+            <button onClick={() => setMode("vector")}
+              style={{flex:1,padding:"6px 0",background:mode==="vector"?"#1e3a8a":"#1e293b",
+                      border:mode==="vector"?"1px solid #3b82f6":"1px solid #334155",
+                      color:mode==="vector"?"#93c5fd":"#64748b",borderRadius:4,fontSize:11,cursor:"pointer",
+                      fontWeight:mode==="vector"?600:400}}>
+              Vector
+            </button>
+          </div>
+
+          {mode === "raster" && (
+            <div style={{marginBottom:12}}>
+              <select 
+                value={rasterDataset} 
+                onChange={(e) => setRasterDataset(e.target.value)}
+                style={{width:"100%", padding:"6px", background:"#1e293b", border:"1px solid #334155",
+                        color:"#e2e8f0", borderRadius:4, fontSize:11, cursor:"pointer",
+                        outline:"none"}}
+              >
+                <option value="test1">Test 1 (Small Town)</option>
+                <option value="test2">Test 2 (Coastal Strip)</option>
+              </select>
+            </div>
+          )}
+
+          {/* depth indicator */}
+          <div style={{fontSize:10,color:"#475569",letterSpacing:"0.1em",marginBottom:6}}>
             DEPTH
           </div>
           <div style={{display:"flex",gap:4,marginBottom:10}}>

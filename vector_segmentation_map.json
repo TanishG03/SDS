@@ -1,0 +1,6763 @@
+{
+  "grid_size": 32,
+  "image_size": [
+    1600,
+    1600
+  ],
+  "cell_size": [
+    50,
+    50
+  ],
+  "max_depth": 5,
+  "tiles": [
+    {
+      "tile_x": 0,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 84,
+      "pixel_bbox": [
+        0,
+        0,
+        100,
+        100
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 0,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 52,
+      "pixel_bbox": [
+        100,
+        0,
+        150,
+        50
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 0,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 34,
+      "pixel_bbox": [
+        150,
+        0,
+        200,
+        50
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 1,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 150,
+      "pixel_bbox": [
+        100,
+        50,
+        150,
+        100
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 1,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 254,
+      "pixel_bbox": [
+        150,
+        50,
+        200,
+        100
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 1,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 107,
+      "pixel_bbox": [
+        0,
+        100,
+        100,
+        200
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 2,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 57,
+      "pixel_bbox": [
+        100,
+        100,
+        150,
+        150
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 2,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 62,
+      "pixel_bbox": [
+        150,
+        100,
+        200,
+        150
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 3,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 67,
+      "pixel_bbox": [
+        100,
+        150,
+        150,
+        200
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 3,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 57,
+      "pixel_bbox": [
+        150,
+        150,
+        200,
+        200
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 0,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 20,
+      "pixel_bbox": [
+        200,
+        0,
+        250,
+        50
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 0,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 33,
+      "pixel_bbox": [
+        250,
+        0,
+        300,
+        50
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 1,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 92,
+      "pixel_bbox": [
+        200,
+        50,
+        250,
+        100
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 1,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 93,
+      "pixel_bbox": [
+        250,
+        50,
+        300,
+        100
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 146,
+      "pixel_bbox": [
+        300,
+        0,
+        400,
+        100
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 2,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 64,
+      "pixel_bbox": [
+        200,
+        100,
+        250,
+        150
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 2,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 149,
+      "pixel_bbox": [
+        250,
+        100,
+        300,
+        150
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 3,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 122,
+      "pixel_bbox": [
+        200,
+        150,
+        250,
+        200
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 3,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 77,
+      "pixel_bbox": [
+        250,
+        150,
+        300,
+        200
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 1,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 122,
+      "pixel_bbox": [
+        300,
+        100,
+        400,
+        200
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 1,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 170,
+      "pixel_bbox": [
+        0,
+        200,
+        200,
+        400
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 2,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 150,
+      "pixel_bbox": [
+        200,
+        200,
+        300,
+        300
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 4,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 186,
+      "pixel_bbox": [
+        300,
+        200,
+        350,
+        250
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 4,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 120,
+      "pixel_bbox": [
+        350,
+        200,
+        400,
+        250
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 5,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 99,
+      "pixel_bbox": [
+        300,
+        250,
+        350,
+        300
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 5,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 199,
+      "pixel_bbox": [
+        350,
+        250,
+        400,
+        300
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 3,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 24,
+      "pixel_bbox": [
+        200,
+        300,
+        300,
+        400
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 3,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 67,
+      "pixel_bbox": [
+        300,
+        300,
+        400,
+        400
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 160,
+      "pixel_bbox": [
+        400,
+        0,
+        500,
+        100
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 129,
+      "pixel_bbox": [
+        500,
+        0,
+        600,
+        100
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 1,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 25,
+      "pixel_bbox": [
+        400,
+        100,
+        500,
+        200
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 1,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 92,
+      "pixel_bbox": [
+        500,
+        100,
+        600,
+        200
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 52,
+      "pixel_bbox": [
+        600,
+        0,
+        700,
+        100
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 0,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 14,
+      "pixel_bbox": [
+        700,
+        0,
+        800,
+        100
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 1,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 199,
+      "pixel_bbox": [
+        600,
+        100,
+        700,
+        200
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 1,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 113,
+      "pixel_bbox": [
+        700,
+        100,
+        800,
+        200
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 2,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 175,
+      "pixel_bbox": [
+        400,
+        200,
+        500,
+        300
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 2,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 14,
+      "pixel_bbox": [
+        500,
+        200,
+        600,
+        300
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 6,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 143,
+      "pixel_bbox": [
+        400,
+        300,
+        450,
+        350
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 6,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 237,
+      "pixel_bbox": [
+        450,
+        300,
+        500,
+        350
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 7,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 38,
+      "pixel_bbox": [
+        400,
+        350,
+        450,
+        400
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 7,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 75,
+      "pixel_bbox": [
+        450,
+        350,
+        500,
+        400
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 6,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 118,
+      "pixel_bbox": [
+        500,
+        300,
+        550,
+        350
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 6,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 1,
+      "pixel_bbox": [
+        550,
+        300,
+        600,
+        350
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 7,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 149,
+      "pixel_bbox": [
+        500,
+        350,
+        550,
+        400
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 7,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 2,
+      "pixel_bbox": [
+        550,
+        350,
+        600,
+        400
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 4,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 54,
+      "pixel_bbox": [
+        600,
+        200,
+        650,
+        250
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 4,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 166,
+      "pixel_bbox": [
+        650,
+        200,
+        700,
+        250
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 5,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 24,
+      "pixel_bbox": [
+        600,
+        250,
+        650,
+        300
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 5,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 19,
+      "pixel_bbox": [
+        650,
+        250,
+        700,
+        300
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 2,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 111,
+      "pixel_bbox": [
+        700,
+        200,
+        800,
+        300
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 3,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 4,
+      "pixel_bbox": [
+        600,
+        300,
+        700,
+        400
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 3,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 6,
+      "pixel_bbox": [
+        700,
+        300,
+        800,
+        400
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 2,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 137,
+      "pixel_bbox": [
+        0,
+        400,
+        200,
+        600
+      ]
+    },
+    {
+      "tile_x": 1,
+      "tile_y": 2,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 173,
+      "pixel_bbox": [
+        200,
+        400,
+        400,
+        600
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 3,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 61,
+      "pixel_bbox": [
+        0,
+        600,
+        200,
+        800
+      ]
+    },
+    {
+      "tile_x": 1,
+      "tile_y": 3,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 14,
+      "pixel_bbox": [
+        200,
+        600,
+        400,
+        800
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 4,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 66,
+      "pixel_bbox": [
+        400,
+        400,
+        500,
+        500
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 4,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 126,
+      "pixel_bbox": [
+        500,
+        400,
+        600,
+        500
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 5,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 71,
+      "pixel_bbox": [
+        400,
+        500,
+        500,
+        600
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 10,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 129,
+      "pixel_bbox": [
+        500,
+        500,
+        550,
+        550
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 10,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 79,
+      "pixel_bbox": [
+        550,
+        500,
+        600,
+        550
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 11,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 41,
+      "pixel_bbox": [
+        500,
+        550,
+        550,
+        600
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 11,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 3,
+      "pixel_bbox": [
+        550,
+        550,
+        600,
+        600
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 2,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        600,
+        400,
+        800,
+        600
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 6,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        400,
+        600,
+        500,
+        700
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 6,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 15,
+      "pixel_bbox": [
+        500,
+        600,
+        600,
+        700
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 7,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        400,
+        700,
+        500,
+        800
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 7,
+      "pixel_bbox": [
+        500,
+        700,
+        550,
+        750
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 395,
+      "pixel_bbox": [
+        550,
+        700,
+        600,
+        750
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 56,
+      "pixel_bbox": [
+        500,
+        750,
+        550,
+        800
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 225,
+      "pixel_bbox": [
+        550,
+        750,
+        600,
+        800
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 6,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        600,
+        600,
+        700,
+        700
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 6,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        700,
+        600,
+        800,
+        700
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 144,
+      "pixel_bbox": [
+        600,
+        700,
+        650,
+        750
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 60,
+      "pixel_bbox": [
+        650,
+        700,
+        700,
+        750
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 187,
+      "pixel_bbox": [
+        600,
+        750,
+        650,
+        800
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 393,
+      "pixel_bbox": [
+        650,
+        750,
+        700,
+        800
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 183,
+      "pixel_bbox": [
+        700,
+        700,
+        750,
+        750
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 222,
+      "pixel_bbox": [
+        750,
+        700,
+        800,
+        750
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 467,
+      "pixel_bbox": [
+        700,
+        750,
+        750,
+        800
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 479,
+      "pixel_bbox": [
+        750,
+        750,
+        800,
+        800
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 0,
+      "width": 400,
+      "height": 400,
+      "depth": 2,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 179,
+      "pixel_bbox": [
+        800,
+        0,
+        1200,
+        400
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 0,
+      "width": 400,
+      "height": 400,
+      "depth": 2,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 6,
+      "pixel_bbox": [
+        1200,
+        0,
+        1600,
+        400
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 2,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 70,
+      "pixel_bbox": [
+        800,
+        400,
+        1000,
+        600
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 2,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        1000,
+        400,
+        1200,
+        600
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 6,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        800,
+        600,
+        900,
+        700
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 6,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 6,
+      "pixel_bbox": [
+        900,
+        600,
+        1000,
+        700
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 171,
+      "pixel_bbox": [
+        800,
+        700,
+        850,
+        750
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 261,
+      "pixel_bbox": [
+        850,
+        700,
+        900,
+        750
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 224,
+      "pixel_bbox": [
+        800,
+        750,
+        850,
+        800
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 188,
+      "pixel_bbox": [
+        850,
+        750,
+        900,
+        800
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 462,
+      "pixel_bbox": [
+        900,
+        700,
+        950,
+        750
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 510,
+      "pixel_bbox": [
+        950,
+        700,
+        1000,
+        750
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 319,
+      "pixel_bbox": [
+        900,
+        750,
+        950,
+        800
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 411,
+      "pixel_bbox": [
+        950,
+        750,
+        1000,
+        800
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 6,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 57,
+      "pixel_bbox": [
+        1000,
+        600,
+        1100,
+        700
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 6,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        1100,
+        600,
+        1200,
+        700
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 441,
+      "pixel_bbox": [
+        1000,
+        700,
+        1050,
+        750
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 204,
+      "pixel_bbox": [
+        1050,
+        700,
+        1100,
+        750
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 492,
+      "pixel_bbox": [
+        1000,
+        750,
+        1050,
+        800
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 600,
+      "pixel_bbox": [
+        1050,
+        750,
+        1100,
+        800
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 1,
+      "pixel_bbox": [
+        1100,
+        700,
+        1150,
+        750
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 14,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 2,
+      "pixel_bbox": [
+        1150,
+        700,
+        1200,
+        750
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 268,
+      "pixel_bbox": [
+        1100,
+        750,
+        1150,
+        800
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 15,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 2,
+      "pixel_bbox": [
+        1150,
+        750,
+        1200,
+        800
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 2,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 156,
+      "pixel_bbox": [
+        1200,
+        400,
+        1400,
+        600
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 2,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        1400,
+        400,
+        1600,
+        600
+      ]
+    },
+    {
+      "tile_x": 24,
+      "tile_y": 12,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 2,
+      "pixel_bbox": [
+        1200,
+        600,
+        1250,
+        650
+      ]
+    },
+    {
+      "tile_x": 25,
+      "tile_y": 12,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 180,
+      "pixel_bbox": [
+        1250,
+        600,
+        1300,
+        650
+      ]
+    },
+    {
+      "tile_x": 24,
+      "tile_y": 13,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        1200,
+        650,
+        1250,
+        700
+      ]
+    },
+    {
+      "tile_x": 25,
+      "tile_y": 13,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 63,
+      "pixel_bbox": [
+        1250,
+        650,
+        1300,
+        700
+      ]
+    },
+    {
+      "tile_x": 26,
+      "tile_y": 12,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 90,
+      "pixel_bbox": [
+        1300,
+        600,
+        1350,
+        650
+      ]
+    },
+    {
+      "tile_x": 27,
+      "tile_y": 12,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 6,
+      "pixel_bbox": [
+        1350,
+        600,
+        1400,
+        650
+      ]
+    },
+    {
+      "tile_x": 26,
+      "tile_y": 13,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 162,
+      "pixel_bbox": [
+        1300,
+        650,
+        1350,
+        700
+      ]
+    },
+    {
+      "tile_x": 27,
+      "tile_y": 13,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 90,
+      "pixel_bbox": [
+        1350,
+        650,
+        1400,
+        700
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 7,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 4,
+      "pixel_bbox": [
+        1200,
+        700,
+        1300,
+        800
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 7,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 81,
+      "pixel_bbox": [
+        1300,
+        700,
+        1400,
+        800
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 3,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 3,
+      "pixel_bbox": [
+        1400,
+        600,
+        1600,
+        800
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 4,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        0,
+        800,
+        200,
+        1000
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 8,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        200,
+        800,
+        300,
+        900
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 8,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 164,
+      "pixel_bbox": [
+        300,
+        800,
+        400,
+        900
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 9,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 30,
+      "pixel_bbox": [
+        200,
+        900,
+        300,
+        1000
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 263,
+      "pixel_bbox": [
+        300,
+        900,
+        350,
+        950
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 289,
+      "pixel_bbox": [
+        350,
+        900,
+        400,
+        950
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 344,
+      "pixel_bbox": [
+        300,
+        950,
+        350,
+        1000
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 123,
+      "pixel_bbox": [
+        350,
+        950,
+        400,
+        1000
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 5,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        0,
+        1000,
+        200,
+        1200
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 10,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        200,
+        1000,
+        300,
+        1100
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 223,
+      "pixel_bbox": [
+        300,
+        1000,
+        350,
+        1050
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 165,
+      "pixel_bbox": [
+        350,
+        1000,
+        400,
+        1050
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 135,
+      "pixel_bbox": [
+        300,
+        1050,
+        350,
+        1100
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 144,
+      "pixel_bbox": [
+        350,
+        1050,
+        400,
+        1100
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 11,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        200,
+        1100,
+        300,
+        1200
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 11,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 154,
+      "pixel_bbox": [
+        300,
+        1100,
+        400,
+        1200
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        400,
+        800,
+        450,
+        850
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 7,
+      "pixel_bbox": [
+        450,
+        800,
+        500,
+        850
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 63,
+      "pixel_bbox": [
+        400,
+        850,
+        450,
+        900
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 174,
+      "pixel_bbox": [
+        450,
+        850,
+        500,
+        900
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 158,
+      "pixel_bbox": [
+        500,
+        800,
+        550,
+        850
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 95,
+      "pixel_bbox": [
+        550,
+        800,
+        600,
+        850
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 109,
+      "pixel_bbox": [
+        500,
+        850,
+        550,
+        900
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 262,
+      "pixel_bbox": [
+        550,
+        850,
+        600,
+        900
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 168,
+      "pixel_bbox": [
+        400,
+        900,
+        450,
+        950
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 183,
+      "pixel_bbox": [
+        450,
+        900,
+        500,
+        950
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 175,
+      "pixel_bbox": [
+        400,
+        950,
+        450,
+        1000
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 107,
+      "pixel_bbox": [
+        450,
+        950,
+        500,
+        1000
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 240,
+      "pixel_bbox": [
+        500,
+        900,
+        550,
+        950
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 296,
+      "pixel_bbox": [
+        550,
+        900,
+        600,
+        950
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 250,
+      "pixel_bbox": [
+        500,
+        950,
+        550,
+        1000
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 234,
+      "pixel_bbox": [
+        550,
+        950,
+        600,
+        1000
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 91,
+      "pixel_bbox": [
+        600,
+        800,
+        650,
+        850
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 101,
+      "pixel_bbox": [
+        650,
+        800,
+        700,
+        850
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 185,
+      "pixel_bbox": [
+        600,
+        850,
+        650,
+        900
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 221,
+      "pixel_bbox": [
+        650,
+        850,
+        700,
+        900
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 109,
+      "pixel_bbox": [
+        700,
+        800,
+        750,
+        850
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 93,
+      "pixel_bbox": [
+        750,
+        800,
+        800,
+        850
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 296,
+      "pixel_bbox": [
+        700,
+        850,
+        750,
+        900
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 289,
+      "pixel_bbox": [
+        750,
+        850,
+        800,
+        900
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 247,
+      "pixel_bbox": [
+        600,
+        900,
+        650,
+        950
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 279,
+      "pixel_bbox": [
+        650,
+        900,
+        700,
+        950
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 471,
+      "pixel_bbox": [
+        600,
+        950,
+        650,
+        1000
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 284,
+      "pixel_bbox": [
+        650,
+        950,
+        700,
+        1000
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 464,
+      "pixel_bbox": [
+        700,
+        900,
+        750,
+        950
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 366,
+      "pixel_bbox": [
+        750,
+        900,
+        800,
+        950
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 514,
+      "pixel_bbox": [
+        700,
+        950,
+        750,
+        1000
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 478,
+      "pixel_bbox": [
+        750,
+        950,
+        800,
+        1000
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 246,
+      "pixel_bbox": [
+        400,
+        1000,
+        450,
+        1050
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 141,
+      "pixel_bbox": [
+        450,
+        1000,
+        500,
+        1050
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 190,
+      "pixel_bbox": [
+        400,
+        1050,
+        450,
+        1100
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 262,
+      "pixel_bbox": [
+        450,
+        1050,
+        500,
+        1100
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 218,
+      "pixel_bbox": [
+        500,
+        1000,
+        550,
+        1050
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 352,
+      "pixel_bbox": [
+        550,
+        1000,
+        600,
+        1050
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 317,
+      "pixel_bbox": [
+        500,
+        1050,
+        550,
+        1100
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 282,
+      "pixel_bbox": [
+        550,
+        1050,
+        600,
+        1100
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 153,
+      "pixel_bbox": [
+        400,
+        1100,
+        450,
+        1150
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 145,
+      "pixel_bbox": [
+        450,
+        1100,
+        500,
+        1150
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 235,
+      "pixel_bbox": [
+        400,
+        1150,
+        450,
+        1200
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 198,
+      "pixel_bbox": [
+        450,
+        1150,
+        500,
+        1200
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 131,
+      "pixel_bbox": [
+        500,
+        1100,
+        550,
+        1150
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 173,
+      "pixel_bbox": [
+        550,
+        1100,
+        600,
+        1150
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 222,
+      "pixel_bbox": [
+        500,
+        1150,
+        550,
+        1200
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 261,
+      "pixel_bbox": [
+        550,
+        1150,
+        600,
+        1200
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 497,
+      "pixel_bbox": [
+        600,
+        1000,
+        650,
+        1050
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 578,
+      "pixel_bbox": [
+        650,
+        1000,
+        700,
+        1050
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 243,
+      "pixel_bbox": [
+        600,
+        1050,
+        650,
+        1100
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 186,
+      "pixel_bbox": [
+        650,
+        1050,
+        700,
+        1100
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 519,
+      "pixel_bbox": [
+        700,
+        1000,
+        750,
+        1050
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 361,
+      "pixel_bbox": [
+        750,
+        1000,
+        800,
+        1050
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 185,
+      "pixel_bbox": [
+        700,
+        1050,
+        750,
+        1100
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 288,
+      "pixel_bbox": [
+        750,
+        1050,
+        800,
+        1100
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 96,
+      "pixel_bbox": [
+        600,
+        1100,
+        650,
+        1150
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 168,
+      "pixel_bbox": [
+        650,
+        1100,
+        700,
+        1150
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 310,
+      "pixel_bbox": [
+        600,
+        1150,
+        650,
+        1200
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 364,
+      "pixel_bbox": [
+        650,
+        1150,
+        700,
+        1200
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 138,
+      "pixel_bbox": [
+        700,
+        1100,
+        750,
+        1150
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 162,
+      "pixel_bbox": [
+        750,
+        1100,
+        800,
+        1150
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 343,
+      "pixel_bbox": [
+        700,
+        1150,
+        750,
+        1200
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 185,
+      "pixel_bbox": [
+        750,
+        1150,
+        800,
+        1200
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 6,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        0,
+        1200,
+        200,
+        1400
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 12,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        200,
+        1200,
+        300,
+        1300
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 83,
+      "pixel_bbox": [
+        300,
+        1200,
+        350,
+        1250
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 223,
+      "pixel_bbox": [
+        350,
+        1200,
+        400,
+        1250
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 25,
+      "pixel_bbox": [
+        300,
+        1250,
+        350,
+        1300
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 166,
+      "pixel_bbox": [
+        350,
+        1250,
+        400,
+        1300
+      ]
+    },
+    {
+      "tile_x": 2,
+      "tile_y": 13,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        200,
+        1300,
+        300,
+        1400
+      ]
+    },
+    {
+      "tile_x": 3,
+      "tile_y": 13,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 136,
+      "pixel_bbox": [
+        300,
+        1300,
+        400,
+        1400
+      ]
+    },
+    {
+      "tile_x": 0,
+      "tile_y": 7,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        0,
+        1400,
+        200,
+        1600
+      ]
+    },
+    {
+      "tile_x": 1,
+      "tile_y": 7,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 41,
+      "pixel_bbox": [
+        200,
+        1400,
+        400,
+        1600
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 127,
+      "pixel_bbox": [
+        400,
+        1200,
+        450,
+        1250
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 132,
+      "pixel_bbox": [
+        450,
+        1200,
+        500,
+        1250
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 284,
+      "pixel_bbox": [
+        400,
+        1250,
+        450,
+        1300
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 334,
+      "pixel_bbox": [
+        450,
+        1250,
+        500,
+        1300
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 159,
+      "pixel_bbox": [
+        500,
+        1200,
+        550,
+        1250
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 309,
+      "pixel_bbox": [
+        550,
+        1200,
+        600,
+        1250
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 392,
+      "pixel_bbox": [
+        500,
+        1250,
+        550,
+        1300
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 582,
+      "pixel_bbox": [
+        550,
+        1250,
+        600,
+        1300
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 78,
+      "pixel_bbox": [
+        400,
+        1300,
+        450,
+        1350
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 63,
+      "pixel_bbox": [
+        450,
+        1300,
+        500,
+        1350
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 31,
+      "pixel_bbox": [
+        400,
+        1350,
+        450,
+        1400
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 57,
+      "pixel_bbox": [
+        450,
+        1350,
+        500,
+        1400
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 507,
+      "pixel_bbox": [
+        500,
+        1300,
+        550,
+        1350
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 370,
+      "pixel_bbox": [
+        550,
+        1300,
+        600,
+        1350
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 439,
+      "pixel_bbox": [
+        500,
+        1350,
+        550,
+        1400
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 604,
+      "pixel_bbox": [
+        550,
+        1350,
+        600,
+        1400
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 374,
+      "pixel_bbox": [
+        600,
+        1200,
+        650,
+        1250
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 197,
+      "pixel_bbox": [
+        650,
+        1200,
+        700,
+        1250
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 315,
+      "pixel_bbox": [
+        600,
+        1250,
+        650,
+        1300
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 129,
+      "pixel_bbox": [
+        650,
+        1250,
+        700,
+        1300
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 141,
+      "pixel_bbox": [
+        700,
+        1200,
+        750,
+        1250
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 137,
+      "pixel_bbox": [
+        750,
+        1200,
+        800,
+        1250
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 148,
+      "pixel_bbox": [
+        700,
+        1250,
+        750,
+        1300
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 258,
+      "pixel_bbox": [
+        750,
+        1250,
+        800,
+        1300
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 152,
+      "pixel_bbox": [
+        600,
+        1300,
+        650,
+        1350
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 141,
+      "pixel_bbox": [
+        650,
+        1300,
+        700,
+        1350
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 58,
+      "pixel_bbox": [
+        600,
+        1350,
+        650,
+        1400
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 47,
+      "pixel_bbox": [
+        650,
+        1350,
+        700,
+        1400
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 512,
+      "pixel_bbox": [
+        700,
+        1300,
+        750,
+        1350
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 301,
+      "pixel_bbox": [
+        750,
+        1300,
+        800,
+        1350
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 161,
+      "pixel_bbox": [
+        700,
+        1350,
+        750,
+        1400
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 282,
+      "pixel_bbox": [
+        750,
+        1350,
+        800,
+        1400
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 66,
+      "pixel_bbox": [
+        400,
+        1400,
+        450,
+        1450
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 84,
+      "pixel_bbox": [
+        450,
+        1400,
+        500,
+        1450
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 50,
+      "pixel_bbox": [
+        400,
+        1450,
+        450,
+        1500
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 125,
+      "pixel_bbox": [
+        450,
+        1450,
+        500,
+        1500
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 62,
+      "pixel_bbox": [
+        500,
+        1400,
+        550,
+        1450
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 171,
+      "pixel_bbox": [
+        550,
+        1400,
+        600,
+        1450
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 172,
+      "pixel_bbox": [
+        500,
+        1450,
+        550,
+        1500
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 147,
+      "pixel_bbox": [
+        550,
+        1450,
+        600,
+        1500
+      ]
+    },
+    {
+      "tile_x": 4,
+      "tile_y": 15,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 86,
+      "pixel_bbox": [
+        400,
+        1500,
+        500,
+        1600
+      ]
+    },
+    {
+      "tile_x": 5,
+      "tile_y": 15,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 100,
+      "pixel_bbox": [
+        500,
+        1500,
+        600,
+        1600
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 269,
+      "pixel_bbox": [
+        600,
+        1400,
+        650,
+        1450
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 242,
+      "pixel_bbox": [
+        650,
+        1400,
+        700,
+        1450
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 293,
+      "pixel_bbox": [
+        600,
+        1450,
+        650,
+        1500
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 322,
+      "pixel_bbox": [
+        650,
+        1450,
+        700,
+        1500
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 344,
+      "pixel_bbox": [
+        700,
+        1400,
+        750,
+        1450
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 81,
+      "pixel_bbox": [
+        750,
+        1400,
+        800,
+        1450
+      ]
+    },
+    {
+      "tile_x": 14,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 99,
+      "pixel_bbox": [
+        700,
+        1450,
+        750,
+        1500
+      ]
+    },
+    {
+      "tile_x": 15,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 63,
+      "pixel_bbox": [
+        750,
+        1450,
+        800,
+        1500
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 15,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 79,
+      "pixel_bbox": [
+        600,
+        1500,
+        700,
+        1600
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 15,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 17,
+      "pixel_bbox": [
+        700,
+        1500,
+        800,
+        1600
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 108,
+      "pixel_bbox": [
+        800,
+        800,
+        850,
+        850
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 182,
+      "pixel_bbox": [
+        850,
+        800,
+        900,
+        850
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 211,
+      "pixel_bbox": [
+        800,
+        850,
+        850,
+        900
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 549,
+      "pixel_bbox": [
+        850,
+        850,
+        900,
+        900
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 356,
+      "pixel_bbox": [
+        900,
+        800,
+        950,
+        850
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 328,
+      "pixel_bbox": [
+        950,
+        800,
+        1000,
+        850
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 492,
+      "pixel_bbox": [
+        900,
+        850,
+        950,
+        900
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 224,
+      "pixel_bbox": [
+        950,
+        850,
+        1000,
+        900
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 336,
+      "pixel_bbox": [
+        800,
+        900,
+        850,
+        950
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 407,
+      "pixel_bbox": [
+        850,
+        900,
+        900,
+        950
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 614,
+      "pixel_bbox": [
+        800,
+        950,
+        850,
+        1000
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 530,
+      "pixel_bbox": [
+        850,
+        950,
+        900,
+        1000
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 413,
+      "pixel_bbox": [
+        900,
+        900,
+        950,
+        950
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 656,
+      "pixel_bbox": [
+        950,
+        900,
+        1000,
+        950
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 714,
+      "pixel_bbox": [
+        900,
+        950,
+        950,
+        1000
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 659,
+      "pixel_bbox": [
+        950,
+        950,
+        1000,
+        1000
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 585,
+      "pixel_bbox": [
+        1000,
+        800,
+        1050,
+        850
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 664,
+      "pixel_bbox": [
+        1050,
+        800,
+        1100,
+        850
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 642,
+      "pixel_bbox": [
+        1000,
+        850,
+        1050,
+        900
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 706,
+      "pixel_bbox": [
+        1050,
+        850,
+        1100,
+        900
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 956,
+      "pixel_bbox": [
+        1100,
+        800,
+        1150,
+        850
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 16,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 195,
+      "pixel_bbox": [
+        1150,
+        800,
+        1200,
+        850
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 693,
+      "pixel_bbox": [
+        1100,
+        850,
+        1150,
+        900
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 17,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 356,
+      "pixel_bbox": [
+        1150,
+        850,
+        1200,
+        900
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 507,
+      "pixel_bbox": [
+        1000,
+        900,
+        1050,
+        950
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 491,
+      "pixel_bbox": [
+        1050,
+        900,
+        1100,
+        950
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 444,
+      "pixel_bbox": [
+        1000,
+        950,
+        1050,
+        1000
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 455,
+      "pixel_bbox": [
+        1050,
+        950,
+        1100,
+        1000
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 588,
+      "pixel_bbox": [
+        1100,
+        900,
+        1150,
+        950
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 18,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 324,
+      "pixel_bbox": [
+        1150,
+        900,
+        1200,
+        950
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 449,
+      "pixel_bbox": [
+        1100,
+        950,
+        1150,
+        1000
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 19,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 525,
+      "pixel_bbox": [
+        1150,
+        950,
+        1200,
+        1000
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 489,
+      "pixel_bbox": [
+        800,
+        1000,
+        850,
+        1050
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 512,
+      "pixel_bbox": [
+        850,
+        1000,
+        900,
+        1050
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 388,
+      "pixel_bbox": [
+        800,
+        1050,
+        850,
+        1100
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 224,
+      "pixel_bbox": [
+        850,
+        1050,
+        900,
+        1100
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 349,
+      "pixel_bbox": [
+        900,
+        1000,
+        950,
+        1050
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 513,
+      "pixel_bbox": [
+        950,
+        1000,
+        1000,
+        1050
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 239,
+      "pixel_bbox": [
+        900,
+        1050,
+        950,
+        1100
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 399,
+      "pixel_bbox": [
+        950,
+        1050,
+        1000,
+        1100
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 94,
+      "pixel_bbox": [
+        800,
+        1100,
+        850,
+        1150
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 83,
+      "pixel_bbox": [
+        850,
+        1100,
+        900,
+        1150
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 118,
+      "pixel_bbox": [
+        800,
+        1150,
+        850,
+        1200
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 75,
+      "pixel_bbox": [
+        850,
+        1150,
+        900,
+        1200
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 196,
+      "pixel_bbox": [
+        900,
+        1100,
+        950,
+        1150
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 377,
+      "pixel_bbox": [
+        950,
+        1100,
+        1000,
+        1150
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 309,
+      "pixel_bbox": [
+        900,
+        1150,
+        950,
+        1200
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 326,
+      "pixel_bbox": [
+        950,
+        1150,
+        1000,
+        1200
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 375,
+      "pixel_bbox": [
+        1000,
+        1000,
+        1050,
+        1050
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 254,
+      "pixel_bbox": [
+        1050,
+        1000,
+        1100,
+        1050
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 163,
+      "pixel_bbox": [
+        1000,
+        1050,
+        1050,
+        1100
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 139,
+      "pixel_bbox": [
+        1050,
+        1050,
+        1100,
+        1100
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 329,
+      "pixel_bbox": [
+        1100,
+        1000,
+        1150,
+        1050
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 20,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 456,
+      "pixel_bbox": [
+        1150,
+        1000,
+        1200,
+        1050
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 142,
+      "pixel_bbox": [
+        1100,
+        1050,
+        1150,
+        1100
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 21,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 280,
+      "pixel_bbox": [
+        1150,
+        1050,
+        1200,
+        1100
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 184,
+      "pixel_bbox": [
+        1000,
+        1100,
+        1050,
+        1150
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 321,
+      "pixel_bbox": [
+        1050,
+        1100,
+        1100,
+        1150
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 214,
+      "pixel_bbox": [
+        1000,
+        1150,
+        1050,
+        1200
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 268,
+      "pixel_bbox": [
+        1050,
+        1150,
+        1100,
+        1200
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 197,
+      "pixel_bbox": [
+        1100,
+        1100,
+        1150,
+        1150
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 329,
+      "pixel_bbox": [
+        1150,
+        1100,
+        1200,
+        1150
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 159,
+      "pixel_bbox": [
+        1100,
+        1150,
+        1150,
+        1200
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 299,
+      "pixel_bbox": [
+        1150,
+        1150,
+        1200,
+        1200
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 4,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 41,
+      "pixel_bbox": [
+        1200,
+        800,
+        1400,
+        1000
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 4,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        1400,
+        800,
+        1600,
+        1000
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 10,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 100,
+      "pixel_bbox": [
+        1200,
+        1000,
+        1300,
+        1100
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 10,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        1300,
+        1000,
+        1400,
+        1100
+      ]
+    },
+    {
+      "tile_x": 24,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 90,
+      "pixel_bbox": [
+        1200,
+        1100,
+        1250,
+        1150
+      ]
+    },
+    {
+      "tile_x": 25,
+      "tile_y": 22,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 8,
+      "pixel_bbox": [
+        1250,
+        1100,
+        1300,
+        1150
+      ]
+    },
+    {
+      "tile_x": 24,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 119,
+      "pixel_bbox": [
+        1200,
+        1150,
+        1250,
+        1200
+      ]
+    },
+    {
+      "tile_x": 25,
+      "tile_y": 23,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 13,
+      "pixel_bbox": [
+        1250,
+        1150,
+        1300,
+        1200
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 11,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 1,
+      "pixel_bbox": [
+        1300,
+        1100,
+        1400,
+        1200
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 5,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        1400,
+        1000,
+        1600,
+        1200
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 171,
+      "pixel_bbox": [
+        800,
+        1200,
+        850,
+        1250
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 130,
+      "pixel_bbox": [
+        850,
+        1200,
+        900,
+        1250
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 381,
+      "pixel_bbox": [
+        800,
+        1250,
+        850,
+        1300
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 397,
+      "pixel_bbox": [
+        850,
+        1250,
+        900,
+        1300
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 266,
+      "pixel_bbox": [
+        900,
+        1200,
+        950,
+        1250
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 84,
+      "pixel_bbox": [
+        950,
+        1200,
+        1000,
+        1250
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 157,
+      "pixel_bbox": [
+        900,
+        1250,
+        950,
+        1300
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 103,
+      "pixel_bbox": [
+        950,
+        1250,
+        1000,
+        1300
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 336,
+      "pixel_bbox": [
+        800,
+        1300,
+        850,
+        1350
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 183,
+      "pixel_bbox": [
+        850,
+        1300,
+        900,
+        1350
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 228,
+      "pixel_bbox": [
+        800,
+        1350,
+        850,
+        1400
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 109,
+      "pixel_bbox": [
+        850,
+        1350,
+        900,
+        1400
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 97,
+      "pixel_bbox": [
+        900,
+        1300,
+        950,
+        1350
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 108,
+      "pixel_bbox": [
+        950,
+        1300,
+        1000,
+        1350
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 182,
+      "pixel_bbox": [
+        900,
+        1350,
+        950,
+        1400
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 124,
+      "pixel_bbox": [
+        950,
+        1350,
+        1000,
+        1400
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 335,
+      "pixel_bbox": [
+        1000,
+        1200,
+        1050,
+        1250
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 260,
+      "pixel_bbox": [
+        1050,
+        1200,
+        1100,
+        1250
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 175,
+      "pixel_bbox": [
+        1000,
+        1250,
+        1050,
+        1300
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 206,
+      "pixel_bbox": [
+        1050,
+        1250,
+        1100,
+        1300
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 162,
+      "pixel_bbox": [
+        1100,
+        1200,
+        1150,
+        1250
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 320,
+      "pixel_bbox": [
+        1150,
+        1200,
+        1200,
+        1250
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 180,
+      "pixel_bbox": [
+        1100,
+        1250,
+        1150,
+        1300
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 186,
+      "pixel_bbox": [
+        1150,
+        1250,
+        1200,
+        1300
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 73,
+      "pixel_bbox": [
+        1000,
+        1300,
+        1050,
+        1350
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 103,
+      "pixel_bbox": [
+        1050,
+        1300,
+        1100,
+        1350
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 145,
+      "pixel_bbox": [
+        1000,
+        1350,
+        1050,
+        1400
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 109,
+      "pixel_bbox": [
+        1050,
+        1350,
+        1100,
+        1400
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 274,
+      "pixel_bbox": [
+        1100,
+        1300,
+        1150,
+        1350
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 26,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 75,
+      "pixel_bbox": [
+        1150,
+        1300,
+        1200,
+        1350
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 176,
+      "pixel_bbox": [
+        1100,
+        1350,
+        1150,
+        1400
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 27,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 125,
+      "pixel_bbox": [
+        1150,
+        1350,
+        1200,
+        1400
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 94,
+      "pixel_bbox": [
+        800,
+        1400,
+        850,
+        1450
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 141,
+      "pixel_bbox": [
+        850,
+        1400,
+        900,
+        1450
+      ]
+    },
+    {
+      "tile_x": 16,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 38,
+      "pixel_bbox": [
+        800,
+        1450,
+        850,
+        1500
+      ]
+    },
+    {
+      "tile_x": 17,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 33,
+      "pixel_bbox": [
+        850,
+        1450,
+        900,
+        1500
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 136,
+      "pixel_bbox": [
+        900,
+        1400,
+        950,
+        1450
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 261,
+      "pixel_bbox": [
+        950,
+        1400,
+        1000,
+        1450
+      ]
+    },
+    {
+      "tile_x": 18,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 94,
+      "pixel_bbox": [
+        900,
+        1450,
+        950,
+        1500
+      ]
+    },
+    {
+      "tile_x": 19,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 147,
+      "pixel_bbox": [
+        950,
+        1450,
+        1000,
+        1500
+      ]
+    },
+    {
+      "tile_x": 8,
+      "tile_y": 15,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 9,
+      "pixel_bbox": [
+        800,
+        1500,
+        900,
+        1600
+      ]
+    },
+    {
+      "tile_x": 9,
+      "tile_y": 15,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 22,
+      "pixel_bbox": [
+        900,
+        1500,
+        1000,
+        1600
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 111,
+      "pixel_bbox": [
+        1000,
+        1400,
+        1050,
+        1450
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 239,
+      "pixel_bbox": [
+        1050,
+        1400,
+        1100,
+        1450
+      ]
+    },
+    {
+      "tile_x": 20,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 121,
+      "pixel_bbox": [
+        1000,
+        1450,
+        1050,
+        1500
+      ]
+    },
+    {
+      "tile_x": 21,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 63,
+      "pixel_bbox": [
+        1050,
+        1450,
+        1100,
+        1500
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 193,
+      "pixel_bbox": [
+        1100,
+        1400,
+        1150,
+        1450
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 28,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 110,
+      "pixel_bbox": [
+        1150,
+        1400,
+        1200,
+        1450
+      ]
+    },
+    {
+      "tile_x": 22,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 55,
+      "pixel_bbox": [
+        1100,
+        1450,
+        1150,
+        1500
+      ]
+    },
+    {
+      "tile_x": 23,
+      "tile_y": 29,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 2,
+      "pixel_bbox": [
+        1150,
+        1450,
+        1200,
+        1500
+      ]
+    },
+    {
+      "tile_x": 10,
+      "tile_y": 15,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 53,
+      "pixel_bbox": [
+        1000,
+        1500,
+        1100,
+        1600
+      ]
+    },
+    {
+      "tile_x": 11,
+      "tile_y": 15,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 7,
+      "pixel_bbox": [
+        1100,
+        1500,
+        1200,
+        1600
+      ]
+    },
+    {
+      "tile_x": 24,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 2,
+      "order": 4,
+      "class_name": "urban",
+      "entropy": 264,
+      "pixel_bbox": [
+        1200,
+        1200,
+        1250,
+        1250
+      ]
+    },
+    {
+      "tile_x": 25,
+      "tile_y": 24,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 92,
+      "pixel_bbox": [
+        1250,
+        1200,
+        1300,
+        1250
+      ]
+    },
+    {
+      "tile_x": 24,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 177,
+      "pixel_bbox": [
+        1200,
+        1250,
+        1250,
+        1300
+      ]
+    },
+    {
+      "tile_x": 25,
+      "tile_y": 25,
+      "width": 50,
+      "height": 50,
+      "depth": 5,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 105,
+      "pixel_bbox": [
+        1250,
+        1250,
+        1300,
+        1300
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 12,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 49,
+      "pixel_bbox": [
+        1300,
+        1200,
+        1400,
+        1300
+      ]
+    },
+    {
+      "tile_x": 12,
+      "tile_y": 13,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 148,
+      "pixel_bbox": [
+        1200,
+        1300,
+        1300,
+        1400
+      ]
+    },
+    {
+      "tile_x": 13,
+      "tile_y": 13,
+      "width": 100,
+      "height": 100,
+      "depth": 4,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 68,
+      "pixel_bbox": [
+        1300,
+        1300,
+        1400,
+        1400
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 6,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        1400,
+        1200,
+        1600,
+        1400
+      ]
+    },
+    {
+      "tile_x": 6,
+      "tile_y": 7,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 1,
+      "order": 3,
+      "class_name": "transition",
+      "entropy": 62,
+      "pixel_bbox": [
+        1200,
+        1400,
+        1400,
+        1600
+      ]
+    },
+    {
+      "tile_x": 7,
+      "tile_y": 7,
+      "width": 200,
+      "height": 200,
+      "depth": 3,
+      "class": 0,
+      "order": 2,
+      "class_name": "water",
+      "entropy": 0,
+      "pixel_bbox": [
+        1400,
+        1400,
+        1600,
+        1600
+      ]
+    }
+  ]
+}

@@ -254,7 +254,7 @@ log = logging.getLogger("QuadtreeSegmenter")
 
 BASE_GRID            = 4       # starting coarse grid
 WATER_THRESH         = 0.04    # pixel-level water gate: (B-R)/(R+G+B)
-MIXED_THRESH         = 0.12    # fraction of tile that must be water to call it "mixed"
+MIXED_THRESH         = 0.12    # fraction of tile that must be water/veg to call it "mixed"
 ENTROPY_URBAN_THRESH = 2.80    # depth-1 land tile: above this → urban (split again)
 
 ORDER_MAP    = {0: 2, 1: 3, 2: 4}
@@ -264,12 +264,10 @@ CLASS_COLORS = {
     1: (60,  170, 80),
     2: (210, 55,  55),
 }
-OUTPUT_JSON  = "segmentation_map.json"
-OUTPUT_VIS   = "segmentation_vis.png"
-OUTPUT_MASK  = "water_mask.png"
+# Output names are dynamically generated based on input image name
 
 
-# ── Step A: build pixel-level water mask ──────────────────────────
+# ── Step A: build pixel-level masks ──────────────────────────────
 def build_water_mask(arr: np.ndarray) -> np.ndarray:
     """Returns boolean array (H, W): True = water pixel."""
     r = arr[:,:,0].astype(np.float32)
@@ -296,10 +294,9 @@ def compute_entropy(patch: np.ndarray) -> float:
 def subdivide(arr, wmask, x0, y0, w, h, depth, tiles):
     """
     wmask : full-image boolean water mask (H, W)
-    Tile mask region: wmask[y0:y0+h, x0:x0+w]
     """
-    tile_mask  = wmask[y0:y0+h, x0:x0+w]
-    water_frac = tile_mask.mean()          # fraction of water pixels
+    tile_wmask = wmask[y0:y0+h, x0:x0+w]
+    water_frac = tile_wmask.mean()
 
     # ── Classify tile by mask composition ────────────────────────
     if water_frac >= (1.0 - MIXED_THRESH):
@@ -307,18 +304,15 @@ def subdivide(arr, wmask, x0, y0, w, h, depth, tiles):
         _leaf(tiles, 0, 2, depth, arr, wmask, x0, y0, w, h)
 
     elif water_frac >= MIXED_THRESH:
-        # Mixed tile → coastline/transition
+        # Mixed tile (coastline) → transition
         if depth < 1 and w >= 16 and h >= 16:
-            # Split once to localise the boundary more precisely
             _split(arr, wmask, x0, y0, w, h, depth+1, tiles)
         else:
-            # At depth≥1 a mixed tile is the transition leaf
             _leaf(tiles, 1, 3, depth, arr, wmask, x0, y0, w, h)
 
     else:
-        # Predominantly land → decide by entropy and depth
+        # Predominantly land → decide by entropy
         if depth == 0:
-            # Always split base land tiles
             _split(arr, wmask, x0, y0, w, h, depth+1, tiles)
         elif depth == 1:
             ent = compute_entropy(arr[y0:y0+h, x0:x0+w])
@@ -362,6 +356,12 @@ def _leaf(tiles, cls, order, depth, arr, wmask, x0, y0, w, h):
 
 # ── Main ──────────────────────────────────────────────────────────
 def segment_image(image_path: str) -> list:
+    import os
+    base_name = os.path.splitext(os.path.basename(image_path))[0]
+    out_json = f"segmentation_map_{base_name}.json"
+    out_vis  = f"segmentation_vis_{base_name}.png"
+    out_mask = f"water_mask_{base_name}.png"
+
     log.info(f"Loading: {image_path}")
     img  = Image.open(image_path).convert("RGB")
     w, h = img.size
@@ -375,7 +375,7 @@ def segment_image(image_path: str) -> list:
     # Step A: pixel-level mask
     wmask = build_water_mask(arr)
     log.info(f"Water mask: {wmask.mean()*100:.1f}% of pixels are water")
-    _save_mask(wmask)
+    _save_mask(wmask, out_mask)
 
     # Step B+C: quadtree
     cell_w = cw // BASE_GRID
@@ -395,7 +395,7 @@ def segment_image(image_path: str) -> list:
         log.info(f"  Class {c} ({CLASS_NAMES[c]}, order={ORDER_MAP[c]}): {by_cls[c]} tiles")
     log.info(f"  By depth: {dict(sorted(by_depth.items()))}")
 
-    with open(OUTPUT_JSON, "w") as f:
+    with open(out_json, "w") as f:
         json.dump({
             "grid_size":  BASE_GRID,
             "image_size": [cw, ch],
@@ -403,19 +403,19 @@ def segment_image(image_path: str) -> list:
             "max_depth":  2,
             "tiles":      tiles,
         }, f, indent=2)
-    log.info(f"Saved: {OUTPUT_JSON}")
+    log.info(f"Saved: {out_json}")
 
-    _visualize(img, tiles, wmask)
+    _visualize(img, tiles, wmask, out_vis)
     return tiles
 
 
-def _save_mask(wmask: np.ndarray):
+def _save_mask(wmask: np.ndarray, out_mask: str):
     vis = (wmask.astype(np.uint8) * 255)
-    Image.fromarray(vis).save(OUTPUT_MASK)
-    log.info(f"Saved: {OUTPUT_MASK}")
+    Image.fromarray(vis).save(out_mask)
+    log.info(f"Saved: {out_mask}")
 
 
-def _visualize(img: Image.Image, tiles: list, wmask: np.ndarray):
+def _visualize(img: Image.Image, tiles: list, wmask: np.ndarray, out_vis: str):
     # Blend a subtle blue tint over water pixels for context
     canvas  = img.copy().convert("RGBA")
 
@@ -465,8 +465,8 @@ def _visualize(img: Image.Image, tiles: list, wmask: np.ndarray):
                   fill=(255,255,255,255), font=font_sm)
         ly += 18
 
-    Image.alpha_composite(canvas, overlay).convert("RGB").save(OUTPUT_VIS)
-    log.info(f"Saved: {OUTPUT_VIS}")
+    Image.alpha_composite(canvas, overlay).convert("RGB").save(out_vis)
+    log.info(f"Saved: {out_vis}")
 
 
 if __name__ == "__main__":

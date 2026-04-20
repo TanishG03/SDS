@@ -28,10 +28,7 @@ from PIL import Image, ImageDraw, ImageFont
 logging.basicConfig(level=logging.INFO, format="%(asctime)s  %(message)s")
 log = logging.getLogger("AdaptiveHilbert")
 
-SEG_MAP   = "segmentation_map.json"
-TILE_DIR  = "tile_store"
-INDEX_OUT = "tile_index.json"
-VIS_OUT   = "adaptive_hilbert_index_vis.png"
+# Paths are derived from input image name
 
 # ── Hilbert curve (Butz algorithm) ────────────────────────────────
 def xy_to_hilbert(x: int, y: int, order: int) -> int:
@@ -85,22 +82,31 @@ def encode_key(region_class: int, order: int,
 
 # ── Main indexing routine ─────────────────────────────────────────
 def build_adaptive_index(image_path: str):
-    # Load segmentation map
-    with open(SEG_MAP) as f:
+    base_name = os.path.splitext(os.path.basename(image_path))[0]
+    seg_map = f"segmentation_map_{base_name}.json"
+    tile_dir = f"tile_store_{base_name}"
+    index_out = f"tile_index_{base_name}.json"
+    vis_out = f"adaptive_hilbert_index_vis_{base_name}.png"
+
+    log.info(f"Loading image: {image_path}")
+    img = Image.open(image_path).convert("RGB")
+    
+    if not os.path.exists(seg_map):
+        raise FileNotFoundError(f"Missing {seg_map}. Run region_segmenter.py first.")
+        
+    with open(seg_map) as f:
         seg = json.load(f)
 
     grid_size      = seg["grid_size"]
     img_w, img_h   = seg["image_size"]
     cell_w, cell_h = seg["cell_size"]
 
-    log.info(f"Loading image: {image_path}")
-    img = Image.open(image_path).convert("RGB")
     # Apply same crop as segmenter
     w, h = img.size
     img  = img.crop(((w - img_w) // 2, (h - img_h) // 2,
                      (w - img_w) // 2 + img_w, (h - img_h) // 2 + img_h))
 
-    os.makedirs(TILE_DIR, exist_ok=True)
+    os.makedirs(tile_dir, exist_ok=True)
 
     index_records = []
     arr = np.array(img)
@@ -119,11 +125,6 @@ def build_adaptive_index(image_path: str):
         sub_w      = (x1 - x0) // sub_grid
         sub_h      = (y1 - y0) // sub_grid
 
-        # Ensure the sub-tile directory exists
-        sub_dir = os.path.join(TILE_DIR, f"c{cls}_o{order}",
-                               f"{base_tx:02d}_{base_ty:02d}")
-        os.makedirs(sub_dir, exist_ok=True)
-
         for sy in range(sub_grid):
             for sx in range(sub_grid):
                 h_code = xy_to_hilbert(sx, sy, order)
@@ -140,7 +141,7 @@ def build_adaptive_index(image_path: str):
 
                 # Save PNG
                 tile_img  = Image.fromarray(sub_patch.astype(np.uint8))
-                tile_path = os.path.join(sub_dir, f"{h_code:08x}.png")
+                tile_path = os.path.join(tile_dir, f"{row_key}.png")
                 tile_img.save(tile_path)
 
                 # Absolute pixel bbox in the full image
@@ -169,21 +170,24 @@ def build_adaptive_index(image_path: str):
     # Sort by composite key → locality-preserving order
     index_records.sort(key=lambda r: r["key"])
 
-    with open(INDEX_OUT, "w") as f:
+    index_records.sort(key=lambda r: r["key"])
+
+    with open(index_out, "w") as f:
         json.dump(index_records, f, indent=2)
 
-    log.info(f"Indexed {len(index_records)} sub-tiles → {INDEX_OUT}")
+    log.info(f"Indexed {len(index_records)} sub-tiles → {index_out}")
     for c, n in class_stats.items():
         log.info(f"  Class {c}: {n} sub-tiles")
 
-    _visualize_index(img, index_records, img_w, img_h)
+    _visualize_index(img, index_records, img_w, img_h, vis_out)
     return index_records
 
 
 # ── Visualization ─────────────────────────────────────────────────
 def _visualize_index(img: Image.Image,
                      records: list[dict],
-                     img_w: int, img_h: int):
+                     img_w: int, img_h: int,
+                     vis_out: str):
     log.info("Rendering adaptive Hilbert index visualization...")
 
     CLASS_COLORS = {
@@ -243,8 +247,8 @@ def _visualize_index(img: Image.Image,
             draw2.line([centers[i], centers[i+1]],
                        fill=(r, g, b, 200), width=1)
 
-    composite.save(VIS_OUT)
-    log.info(f"Saved: {VIS_OUT}")
+    composite.save(vis_out)
+    log.info(f"Saved: {vis_out}")
 
 
 if __name__ == "__main__":

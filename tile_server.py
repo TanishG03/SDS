@@ -395,23 +395,27 @@ from PIL import Image
 logging.basicConfig(level=logging.INFO, format="%(asctime)s  %(message)s")
 log = logging.getLogger("TileServer")
 
-SEG_MAP    = "segmentation_map.json"
-INDEX_FILE = "tile_index.json"
-IMAGE_FILE = "test1.jpg"   # or whatever your source image is called
+VECTOR_SEG_MAP = "vector_segmentation_map.json"
+VECTOR_INDEX_FILE = "vector_index.json"
 
 app = Flask(__name__)
 CORS(app)  # allow React dev server
 
 # ── Startup: load all data into memory ───────────────────────────
-def _load():
-    if not os.path.exists(SEG_MAP):
-        raise FileNotFoundError(f"Run region_segmenter.py first — {SEG_MAP} missing")
+def _load_seg(filename):
+    if not os.path.exists(filename):
+        log.warning(f"{filename} missing")
+        return None
+    with open(filename) as f:
+        return json.load(f)
 
-    with open(SEG_MAP) as f:  seg   = json.load(f)
-
+def _load_index(filename, seg):
+    if not seg: return {}
     index = []
-    if os.path.exists(INDEX_FILE):
-        with open(INDEX_FILE) as f: index = json.load(f)
+    if os.path.exists(filename):
+        with open(filename) as f: index = json.load(f)
+    else:
+        log.warning(f"Index file {filename} not found.")
 
     base_lookup = defaultdict(list)
     for rec in index:
@@ -431,18 +435,34 @@ def _load():
     sorted_index = sorted(index, key=lambda r: (
         r["region_class"], r["hilbert_order"], r["hilbert_code"]
     ))
-    log.info(f"Loaded {len(index)} sub-tiles across {len(base_lookup)} base tiles")
-    return seg, index, base_lookup, tile_meta, sorted_index, dict(coi), cok
+    log.info(f"Loaded {len(index)} features across {len(base_lookup)} base tiles from {filename}")
+    return {
+        "index": index,
+        "base_lookup": base_lookup,
+        "tile_meta": tile_meta,
+        "sorted_index": sorted_index,
+        "class_order_index": dict(coi),
+        "class_order_keys": cok
+    }
 
 try:
-    SEG, INDEX, BASE_LOOKUP, TILE_META, SORTED_INDEX, CLASS_ORDER_INDEX, CLASS_ORDER_KEYS = _load()
-    IMG_W, IMG_H = SEG["image_size"]
+    SEG_DATA = {
+        "test1": _load_seg("segmentation_map_test1.json"),
+        "test2": _load_seg("segmentation_map_test2.json"),
+        "vector": _load_seg(VECTOR_SEG_MAP)
+    }
+    
+    INDEX_DATA = {
+        "test1": _load_index("tile_index_test1.json", SEG_DATA["test1"]),
+        "test2": _load_index("tile_index_test2.json", SEG_DATA["test2"]),
+        "vector": _load_index(VECTOR_INDEX_FILE, SEG_DATA["vector"])
+    }
     DATA_OK = True
 except Exception as e:
     log.warning(f"Data not ready: {e}")
     DATA_OK = False
-    SEG = INDEX = BASE_LOOKUP = TILE_META = SORTED_INDEX = CLASS_ORDER_INDEX = CLASS_ORDER_KEYS = None
-    IMG_W = IMG_H = 0
+    SEG_DATA = {"test1": None, "test2": None, "vector": None}
+    INDEX_DATA = {"test1": {}, "test2": {}, "vector": {}}
 
 # ── LOD collapse logic ────────────────────────────────────────────
 def _collapsed(order: int, zoom: int) -> bool:
@@ -473,21 +493,15 @@ def _tile_in_viewport(tile_bbox, vp):
     return tx0 < vx1 and tx1 > vx0 and ty0 < vy1 and ty1 > vy0
 
 # ── Hilbert range scan ────────────────────────────────────────────
-def _hilbert_range_scan(vp, zoom):
+def _hilbert_range_scan(index_data, vp, zoom):
     """
     Correct O(log N + K) Hilbert range scan using bisect.
-
-    Algorithm:
-      1. For each base tile overlapping the viewport, record
-         (class, order, h_min, h_max) of the sub-tiles inside the viewport.
-      2. Merge overlapping ranges per (class, order) key so we never
-         scan the same segment twice.
-      3. For each merged range, use bisect_left/bisect_right to jump
-         directly to the start position in the per-(class,order) sorted
-         array — O(log N) per range, O(K) to collect results.
-
-    Total entries examined = sum of range widths, NOT O(N).
     """
+    CLASS_ORDER_INDEX = index_data.get("class_order_index", {})
+    BASE_LOOKUP = index_data.get("base_lookup", {})
+    TILE_META = index_data.get("tile_meta", {})
+    CLASS_ORDER_KEYS = index_data.get("class_order_keys", {})
+
     if not CLASS_ORDER_INDEX:
         return [], 0
 
@@ -560,11 +574,11 @@ def _hilbert_range_scan(vp, zoom):
     return results, examined
 
 
-def _naive_scan(vp):
+def _naive_scan(index_data, vp):
     """
     Simulate naive full-table scan: iterate ALL records, check bbox.
-    Returns (matching_records, n_examined = len(INDEX)).
     """
+    INDEX = index_data.get("index", [])
     results = []
     for r in INDEX:
         bb = r.get("abs_bbox", r.get("pixel_bbox", []))
@@ -590,39 +604,59 @@ def index_page():
 @app.route("/segmentation")
 def segmentation():
     if not DATA_OK: abort(503)
-    return jsonify(SEG)
+    dataset = request.args.get("dataset", request.args.get("mode", "test1"))
+    if dataset == "raster": dataset = "test1"
+    seg = SEG_DATA.get(dataset)
+    if not seg: abort(404, f"Segmentation for {dataset} not found")
+    return jsonify(seg)
 
 @app.route("/image")
 def serve_image():
     """Serve the source satellite image for the React canvas background."""
-    for fname in [IMAGE_FILE, "test1.jpg", "test1.png"]:
-        if os.path.exists(fname):
-            return send_file(fname, mimetype="image/jpeg")
-    abort(404, "Source image not found — set IMAGE_FILE in tile_server.py")
+    dataset = request.args.get("dataset", request.args.get("mode", "test1"))
+    if dataset == "raster": dataset = "test1"
+    
+    # Simple mapping
+    img_map = {"test1": "test1.jpg", "test2": "test2.jpg"}
+    fname = img_map.get(dataset, "test1.jpg")
+    
+    if os.path.exists(fname):
+        return send_file(fname, mimetype="image/jpeg")
+    abort(404, "Source image not found")
 
 @app.route("/index_stats")
 def index_stats():
     if not DATA_OK: abort(503)
+    dataset = request.args.get("dataset", request.args.get("mode", "test1"))
+    if dataset == "raster": dataset = "test1"
+    idx = INDEX_DATA.get(dataset, {}).get("index", [])
+    base = INDEX_DATA.get(dataset, {}).get("base_lookup", {})
     from collections import Counter
     return jsonify({
-        "total_sub_tiles": len(INDEX),
-        "base_tiles":      len(BASE_LOOKUP),
-        "by_class":        dict(Counter(r["region_class"]   for r in INDEX)),
-        "by_order":        dict(Counter(r["hilbert_order"]  for r in INDEX)),
+        "total_sub_tiles": len(idx),
+        "base_tiles":      len(base),
+        "by_class":        dict(Counter(r["region_class"]   for r in idx)),
+        "by_order":        dict(Counter(r["hilbert_order"]  for r in idx)),
     })
 
 @app.route("/lod")
 def get_lod():
     if not DATA_OK: abort(503)
     zoom = int(request.args.get("zoom", 2))
+    dataset = request.args.get("dataset", request.args.get("mode", "test1"))
+    if dataset == "raster": dataset = "test1"
+    base = INDEX_DATA.get(dataset, {}).get("base_lookup", {})
 
     result = []
-    for tile in SEG["tiles"]:
+    seg = SEG_DATA.get(dataset)
+    if not seg: return jsonify({"lod_stats": {}, "tiles": []})
+
+    for tile in seg["tiles"]:
         tx, ty  = tile["tile_x"], tile["tile_y"]
         order   = tile["order"]
         cls     = tile["class"]
-        recs    = BASE_LOOKUP.get((tx, ty), [])
-        mean_c  = (np.array([r["mean_color"] for r in recs]).mean(axis=0).tolist()
+        recs    = base.get((tx, ty), [])
+        mean_c  = (np.array([r.get("mean_color", [128,128,128]) for r in recs]).mean(axis=0).tolist()
                    if recs else [128, 128, 128])
         collapsed = _collapsed(order, zoom)
 
@@ -651,17 +685,16 @@ def get_lod():
 @app.route("/query")
 def query():
     """
-    GET /query?cx=<float>&cy=<float>&zoom=<int>
-
-    cx, cy: click point in image pixel coordinates
-    zoom:   current zoom level (0–4)
-
-    Returns timing comparison between Hilbert range scan and naive scan.
+    GET /query?cx=<float>&cy=<float>&zoom=<int>&mode=<string>
     """
     if not DATA_OK:
         abort(503, "Run the pipeline first.")
-    if not INDEX:
-        abort(503, "tile_index.json is empty — run hilbert_spatial_indexer.py first.")
+
+    dataset = request.args.get("dataset", request.args.get("mode", "test1"))
+    if dataset == "raster": dataset = "test1"
+    index_data = INDEX_DATA.get(dataset, {})
+    if not index_data.get("index"):
+        abort(503, f"{dataset} index is empty. Run indexer first.")
 
     try:
         cx   = float(request.args["cx"])
@@ -670,16 +703,17 @@ def query():
     except (KeyError, ValueError):
         abort(400, "Required: cx, cy (floats), zoom (int)")
 
-    vp = _viewport(cx, cy, zoom, IMG_W, IMG_H)
+    img_w, img_h = SEG_DATA[dataset]["image_size"] if SEG_DATA.get(dataset) else (1600, 1600)
+    vp = _viewport(cx, cy, zoom, img_w, img_h)
 
     # ── Hilbert range scan ─────────────────────────────────────────
     t0 = time.perf_counter()
-    h_recs, h_examined = _hilbert_range_scan(vp, zoom)
+    h_recs, h_examined = _hilbert_range_scan(index_data, vp, zoom)
     hilbert_ms = (time.perf_counter() - t0) * 1000
 
     # ── Naive full scan ────────────────────────────────────────────
     t0 = time.perf_counter()
-    n_recs, n_examined = _naive_scan(vp)
+    n_recs, n_examined = _naive_scan(index_data, vp)
     naive_ms = (time.perf_counter() - t0) * 1000
 
     speedup = naive_ms / hilbert_ms if hilbert_ms > 0 else 0
@@ -692,6 +726,7 @@ def query():
             "hilbert_code":  r["hilbert_code"],
             "abs_bbox":      r.get("abs_bbox", r.get("pixel_bbox", [])),
             "mean_color":    [round(v) for v in r.get("mean_color", [128,128,128])],
+            "features":      r.get("features", [])
         } for r in recs]
 
     log.info(f"Query ({cx:.0f},{cy:.0f}) zoom={zoom}: "
@@ -749,7 +784,12 @@ def zoom_lod():
     except (KeyError, ValueError):
         abort(400, "Required: cx, cy; optional: depth")
 
-    vp = _viewport(cx, cy, depth, IMG_W, IMG_H)
+    dataset = request.args.get("dataset", request.args.get("mode", "test1"))
+    if dataset == "raster": dataset = "test1"
+    base = INDEX_DATA.get(dataset, {}).get("base_lookup", {})
+
+    img_w, img_h = SEG_DATA[dataset]["image_size"] if SEG_DATA.get(dataset) else (1600, 1600)
+    vp = _viewport(cx, cy, depth, img_w, img_h)
 
     # Hilbert order shown at each depth per class
     # depth 0: show base order; each depth adds 1 to the visible sub-grid
@@ -757,7 +797,11 @@ def zoom_lod():
         return min(base_order + depth, 6)   # cap at 64x64
 
     result = []
-    for tile in SEG["tiles"]:
+    seg = SEG_DATA.get(dataset)
+    if not seg: return jsonify({"depth": depth, "viewport": vp, "tiles": [], "tile_count": 0})
+
+    index_data = INDEX_DATA.get(dataset, {})
+    for tile in seg["tiles"]:
         tx, ty = tile["tile_x"], tile["tile_y"]
         bb     = tile["pixel_bbox"]
         if not _tile_in_viewport(bb, vp):
@@ -765,8 +809,8 @@ def zoom_lod():
 
         cls     = tile["class"]
         order   = tile["order"]
-        recs    = BASE_LOOKUP.get((tx, ty), [])
-        mean_c  = (np.array([r["mean_color"] for r in recs]).mean(axis=0).tolist()
+        recs    = base.get((tx, ty), [])
+        mean_c  = (np.array([r.get("mean_color", [128,128,128]) for r in recs]).mean(axis=0).tolist()
                    if recs else [128, 128, 128])
 
         # At this depth, what Hilbert sub-grid do we show?
