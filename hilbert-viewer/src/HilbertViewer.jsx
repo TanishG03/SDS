@@ -1,292 +1,548 @@
+
 // import { useState, useEffect, useRef, useCallback } from "react";
 
 // const API = "http://localhost:5000";
 
-// const CLASS_COLORS = {
-//   0: { live: "rgba(30,120,210,0.55)",   collapsed: "rgba(30,120,210,0.92)",  border: "#1e78d2", label: "water",      order: 2 },
-//   1: { live: "rgba(60,180,80,0.55)",    collapsed: "rgba(60,180,80,0.92)",   border: "#3cb450", label: "transition", order: 3 },
-//   2: { live: "rgba(220,60,60,0.55)",    collapsed: "rgba(220,60,60,0.92)",   border: "#dc3c3c", label: "urban",      order: 4 },
+// const CLASS_CFG = {
+//   0: { live: "rgba(30,120,210,0.15)",  collapsed: "rgba(30,120,210,0.80)",  border: "#1e78d2", label: "water",      order: 2 },
+//   1: { live: "rgba(60,180,80,0.15)",   collapsed: "rgba(60,180,80,0.80)",   border: "#3cb450", label: "transition", order: 3 },
+//   2: { live: "rgba(220,60,60,0.15)",   collapsed: "rgba(220,60,60,0.80)",   border: "#dc3c3c", label: "urban",      order: 4 },
 // };
 
-// const STATUS_DOT = { live: "#4ade80", collapsed: "#f87171" };
+// // ── tiny reusable components ─────────────────────────────────────
+// const Mono = ({ children, color = "#94a3b8" }) => (
+//   <span style={{ fontFamily: "monospace", color, fontSize: 12 }}>{children}</span>
+// );
 
+// const Row = ({ label, value, color = "#e2e8f0" }) => (
+//   <div style={{ display:"flex", justifyContent:"space-between", padding:"3px 0",
+//                 borderBottom:"1px solid #1e293b", fontSize:12 }}>
+//     <span style={{ color:"#475569" }}>{label}</span>
+//     <span style={{ color }}>{value}</span>
+//   </div>
+// );
+
+// const SectionLabel = ({ children }) => (
+//   <div style={{ fontSize:10, color:"#475569", letterSpacing:"0.1em",
+//                 marginBottom:8, marginTop:16, textTransform:"uppercase" }}>
+//     {children}
+//   </div>
+// );
+
+// // ── animated counter ──────────────────────────────────────────────
+// function useCountUp(target, duration = 600) {
+//   const [val, setVal] = useState(0);
+//   useEffect(() => {
+//     if (target === 0) { setVal(0); return; }
+//     let start = null;
+//     const from = 0;
+//     const step = ts => {
+//       if (!start) start = ts;
+//       const p = Math.min((ts - start) / duration, 1);
+//       setVal(Math.round(from + (target - from) * p));
+//       if (p < 1) requestAnimationFrame(step);
+//     };
+//     requestAnimationFrame(step);
+//   }, [target, duration]);
+//   return val;
+// }
+
+// // ── SpeedupBar ────────────────────────────────────────────────────
+// function SpeedupBar({ hilbert_ms, naive_ms, speedup }) {
+//   const frac = hilbert_ms / naive_ms;
+//   return (
+//     <div style={{ marginTop:4 }}>
+//       <div style={{ fontSize:11, color:"#475569", marginBottom:6 }}>
+//         scan time comparison
+//       </div>
+//       <div style={{ marginBottom:6 }}>
+//         <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:4 }}>
+//           <div style={{ width:80, fontSize:11, color:"#4ade80", textAlign:"right" }}>hilbert</div>
+//           <div style={{ flex:1, background:"#1e293b", borderRadius:3, height:14, overflow:"hidden" }}>
+//             <div style={{ width:`${frac*100}%`, height:"100%", background:"#4ade80",
+//                           borderRadius:3, transition:"width 0.6s ease",
+//                           display:"flex", alignItems:"center", justifyContent:"flex-end", paddingRight:4 }}>
+//               <span style={{ fontSize:9, color:"#052e16", fontWeight:700 }}>
+//                 {hilbert_ms < 0.5 ? `${(hilbert_ms*1000).toFixed(0)}µs` : `${hilbert_ms.toFixed(1)}ms`}
+//               </span>
+//             </div>
+//           </div>
+//         </div>
+//         <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+//           <div style={{ width:80, fontSize:11, color:"#f87171", textAlign:"right" }}>naive</div>
+//           <div style={{ flex:1, background:"#1e293b", borderRadius:3, height:14, overflow:"hidden" }}>
+//             <div style={{ width:"100%", height:"100%", background:"#f87171",
+//                           borderRadius:3, display:"flex", alignItems:"center",
+//                           justifyContent:"flex-end", paddingRight:4 }}>
+//               <span style={{ fontSize:9, color:"#450a0a", fontWeight:700 }}>
+//                 {naive_ms.toFixed(1)}ms
+//               </span>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//       <div style={{ textAlign:"center", padding:"8px 0", background:"#0f172a",
+//                     borderRadius:6, border:"1px solid #1e293b", marginTop:8 }}>
+//         <span style={{ fontSize:22, fontWeight:700, color:"#fbbf24" }}>{speedup.toFixed(1)}×</span>
+//         <span style={{ fontSize:11, color:"#475569", marginLeft:6 }}>faster</span>
+//       </div>
+//     </div>
+//   );
+// }
+
+// // ── QueryPanel ────────────────────────────────────────────────────
+// function QueryPanel({ query, onClose }) {
+//   const hExamined = useCountUp(query?.hilbert_result?.examined ?? 0);
+//   const nExamined = useCountUp(query?.naive_result?.examined ?? 0);
+
+//   if (!query) return null;
+//   const { hilbert_result: hr, naive_result: nr, speedup,
+//           tiles_saved, pct_skipped, viewport_bbox, click_point, zoom } = query;
+
+//   return (
+//     <div style={{ background:"#0f172a", border:"1px solid #1e293b",
+//                   borderRadius:8, padding:"14px 14px 10px" }}>
+//       <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:8 }}>
+//         <span style={{ fontSize:11, color:"#475569", letterSpacing:"0.08em" }}>QUERY RESULT</span>
+//         <button onClick={onClose}
+//           style={{ background:"none", border:"none", color:"#475569",
+//                    cursor:"pointer", fontSize:16, lineHeight:1, padding:0 }}>×</button>
+//       </div>
+
+//       <Row label="click" value={`(${click_point.map(v=>Math.round(v)).join(", ")})`} />
+//       <Row label="zoom"  value={zoom} />
+//       <Row label="viewport"
+//            value={`${Math.round(viewport_bbox[2]-viewport_bbox[0])}×${Math.round(viewport_bbox[3]-viewport_bbox[1])}px`} />
+
+//       <SectionLabel>hilbert range scan</SectionLabel>
+//       <Row label="tiles found"    value={hr.count}                    color="#4ade80" />
+//       <Row label="entries scanned" value={hExamined.toLocaleString()} color="#4ade80" />
+//       <Row label="time"
+//            value={hr.time_ms < 0.5 ? `${(hr.time_ms*1000).toFixed(0)} µs` : `${hr.time_ms.toFixed(2)} ms`}
+//            color="#4ade80" />
+
+//       <SectionLabel>naive linear scan</SectionLabel>
+//       <Row label="tiles found"    value={nr.count}                    color="#f87171" />
+//       <Row label="entries scanned" value={nExamined.toLocaleString()} color="#f87171" />
+//       <Row label="time"           value={`${nr.time_ms.toFixed(2)} ms`} color="#f87171" />
+
+//       <div style={{ marginTop:12 }}>
+//         <SpeedupBar hilbert_ms={hr.time_ms} naive_ms={nr.time_ms} speedup={speedup} />
+//       </div>
+
+//       <div style={{ marginTop:10, display:"grid", gridTemplateColumns:"1fr 1fr", gap:6 }}>
+//         <div style={{ background:"#0a0f1a", border:"1px solid #1e293b",
+//                       borderRadius:6, padding:"8px 10px", textAlign:"center" }}>
+//           <div style={{ fontSize:18, fontWeight:700, color:"#fbbf24" }}>
+//             {tiles_saved.toLocaleString()}
+//           </div>
+//           <div style={{ fontSize:10, color:"#475569", marginTop:2 }}>entries skipped</div>
+//         </div>
+//         <div style={{ background:"#0a0f1a", border:"1px solid #1e293b",
+//                       borderRadius:6, padding:"8px 10px", textAlign:"center" }}>
+//           <div style={{ fontSize:18, fontWeight:700, color:"#fbbf24" }}>
+//             {pct_skipped}%
+//           </div>
+//           <div style={{ fontSize:10, color:"#475569", marginTop:2 }}>of index skipped</div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// // ── Main component ────────────────────────────────────────────────
 // export default function HilbertViewer() {
-//   const [zoom, setZoom] = useState(2);
-//   const [lodData, setLodData] = useState(null);
-//   const [segData, setSegData] = useState(null);
-//   const [stats, setStats] = useState(null);
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState(null);
-//   const [hoveredTile, setHoveredTile] = useState(null);
+//   const [zoom, setZoom]             = useState(2);
+//   const [lodData, setLodData]       = useState(null);
+//   const [segData, setSegData]       = useState(null);
+//   const [stats, setStats]           = useState(null);
+//   const [bgImage, setBgImage]       = useState(null);
+//   const [loading, setLoading]       = useState(false);
+//   const [querying, setQuerying]     = useState(false);
+//   const [queryResult, setQueryResult] = useState(null);
+//   const [queryViewport, setQueryVP]   = useState(null);   // pixel bbox to highlight
+//   const [queryTiles, setQueryTiles]   = useState([]);     // hilbert-matched tiles
+//   const [error, setError]           = useState(null);
+//   const [hoveredTile, setHovered]   = useState(null);
 //   const canvasRef = useRef(null);
-//   const animRef = useRef({});
 
+//   // load metadata once
 //   useEffect(() => {
 //     fetch(`${API}/segmentation`)
-//       .then(r => r.json())
-//       .then(setSegData)
-//       .catch(() => setError("Cannot reach tile server. Is it running on :5000?"));
+//       .then(r => r.json()).then(setSegData)
+//       .catch(() => setError("Cannot reach tile server on :5000"));
 //     fetch(`${API}/index_stats`)
-//       .then(r => r.json())
-//       .then(setStats)
+//       .then(r => r.json()).then(setStats)
 //       .catch(() => {});
 //   }, []);
 
+//   // background image
+//   useEffect(() => {
+//     const img = new window.Image();
+//     img.crossOrigin = "anonymous";
+//     img.onload  = () => setBgImage(img);
+//     img.onerror = () => console.warn("No /image endpoint — canvas will be dark");
+//     img.src = `${API}/image`;
+//   }, []);
+
+//   // LOD data on zoom change
 //   const fetchLod = useCallback((z) => {
 //     setLoading(true);
 //     fetch(`${API}/lod?zoom=${z}`)
 //       .then(r => r.json())
 //       .then(d => { setLodData(d); setLoading(false); setError(null); })
-//       .catch(() => { setError("LOD fetch failed — is tile_server.py running?"); setLoading(false); });
+//       .catch(() => { setError("LOD fetch failed"); setLoading(false); });
 //   }, []);
-
 //   useEffect(() => { fetchLod(zoom); }, [zoom, fetchLod]);
-//     useEffect(() => {
+
+//   // canvas coords helper
+//   const getScaleOffset = useCallback(() => {
+//     if (!segData || !canvasRef.current) return null;
+//     const canvas = canvasRef.current;
+//     const [imgW, imgH] = segData.image_size;
+//     const scale = Math.min(canvas.width / imgW, canvas.height / imgH);
+//     const offX  = (canvas.width  - imgW * scale) / 2;
+//     const offY  = (canvas.height - imgH * scale) / 2;
+//     return { scale, offX, offY, imgW, imgH };
+//   }, [segData]);
+
+//   // ── draw ──────────────────────────────────────────────────────
+//   useEffect(() => {
 //     if (!lodData || !segData || !canvasRef.current) return;
 //     const canvas = canvasRef.current;
-//     const ctx = canvas.getContext("2d");
-//     const [imgW, imgH] = segData.image_size;
-
-//     const scale = Math.min(canvas.width / imgW, canvas.height / imgH);
-//     const offX = (canvas.width - imgW * scale) / 2;
-//     const offY = (canvas.height - imgH * scale) / 2;
+//     const ctx    = canvas.getContext("2d");
+//     const so     = getScaleOffset();
+//     if (!so) return;
+//     const { scale, offX, offY } = so;
 
 //     ctx.clearRect(0, 0, canvas.width, canvas.height);
 //     ctx.fillStyle = "#0a0f1a";
 //     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+//     if (bgImage) ctx.drawImage(bgImage, offX, offY, so.imgW * scale, so.imgH * scale);
+
+//     // LOD tile overlays
 //     for (const tile of lodData.tiles) {
-//         const { region_class, status, mean_color, hilbert_order, pixel_bbox } = tile;
-//         if (!pixel_bbox) continue;
+//       const { region_class, status, mean_color, hilbert_order, pixel_bbox } = tile;
+//       if (!pixel_bbox) continue;
+//       const [px0, py0, px1, py1] = pixel_bbox;
+//       const x0 = offX + px0 * scale;
+//       const y0 = offY + py0 * scale;
+//       const tw  = (px1 - px0) * scale;
+//       const th  = (py1 - py0) * scale;
+//       const cfg = CLASS_CFG[region_class] ?? CLASS_CFG[2];
 
-//         const [px0, py0, px1, py1] = pixel_bbox;
-//         const x0 = offX + px0 * scale;
-//         const y0 = offY + py0 * scale;
-//         const tw = (px1 - px0) * scale;
-//         const th = (py1 - py0) * scale;
-
-//         const cfg = CLASS_COLORS[region_class] || CLASS_COLORS[2];
-
-//         if (status === "collapsed") {
-//         const [r, g, b] = mean_color;
-//         ctx.fillStyle = `rgb(${Math.round(r)},${Math.round(g)},${Math.round(b)})`;
+//       if (status === "collapsed") {
+//         const [r,g,b] = mean_color;
+//         ctx.fillStyle = `rgba(${Math.round(r)},${Math.round(g)},${Math.round(b)},0.82)`;
 //         ctx.fillRect(x0, y0, tw, th);
-//         ctx.fillStyle = "rgba(0,0,0,0.35)";
-//         ctx.fillRect(x0, y0, tw, th);
-//         } else {
+//       } else {
 //         ctx.fillStyle = cfg.live;
 //         ctx.fillRect(x0, y0, tw, th);
-
 //         if (hilbert_order >= 3) {
-//             const subGrid = Math.pow(2, hilbert_order);
-//             const sw = tw / subGrid;
-//             const sh = th / subGrid;
-//             ctx.strokeStyle = `${cfg.border}55`;
-//             ctx.lineWidth = 0.4;
-//             for (let sy = 0; sy <= subGrid; sy++) {
-//             ctx.beginPath(); ctx.moveTo(x0, y0 + sy * sh); ctx.lineTo(x0 + tw, y0 + sy * sh); ctx.stroke();
-//             }
-//             for (let sx = 0; sx <= subGrid; sx++) {
-//             ctx.beginPath(); ctx.moveTo(x0 + sx * sw, y0); ctx.lineTo(x0 + sx * sw, y0 + th); ctx.stroke();
-//             }
+//           const sg = Math.pow(2, hilbert_order);
+//           ctx.strokeStyle = `${cfg.border}35`;
+//           ctx.lineWidth   = 0.25;
+//           for (let s = 0; s <= sg; s++) {
+//             ctx.beginPath(); ctx.moveTo(x0, y0 + s * th/sg); ctx.lineTo(x0+tw, y0 + s * th/sg); ctx.stroke();
+//             ctx.beginPath(); ctx.moveTo(x0 + s * tw/sg, y0); ctx.lineTo(x0 + s * tw/sg, y0+th); ctx.stroke();
+//           }
 //         }
-//         }
-
-//         ctx.strokeStyle = cfg.border;
-//         ctx.lineWidth = status === "collapsed" ? 1.5 : 0.8;
-//         ctx.strokeRect(x0 + 0.5, y0 + 0.5, tw - 1, th - 1);
-
-//         if (tw > 22) {
-//         ctx.fillStyle = "rgba(255,255,255,0.7)";
-//         ctx.font = `${Math.min(9, tw / 5)}px monospace`;
-//         ctx.fillText(`o${hilbert_order}`, x0 + 3, y0 + 11);
-//         }
+//       }
+//       ctx.strokeStyle = cfg.border;
+//       ctx.lineWidth   = status === "collapsed" ? 1.8 : 0.7;
+//       ctx.strokeRect(x0 + 0.5, y0 + 0.5, tw - 1, th - 1);
+//       if (tw > 22) {
+//         ctx.fillStyle = "rgba(255,255,255,0.8)";
+//         ctx.font      = `bold ${Math.min(9, tw/6)}px monospace`;
+//         ctx.fillText(`o${hilbert_order}`, x0 + 3, y0 + 12);
+//       }
 //     }
 
+//     // Query viewport highlight
+//     if (queryViewport) {
+//       const [vx0, vy0, vx1, vy1] = queryViewport;
+//       const qx = offX + vx0 * scale;
+//       const qy = offY + vy0 * scale;
+//       const qw = (vx1 - vx0) * scale;
+//       const qh = (vy1 - vy0) * scale;
+
+//       // dim outside viewport
+//       ctx.fillStyle = "rgba(0,0,0,0.45)";
+//       ctx.fillRect(offX, offY, qx - offX, so.imgH * scale);           // left
+//       ctx.fillRect(qx + qw, offY, so.imgW * scale - qx - qw + offX, so.imgH * scale); // right
+//       ctx.fillRect(qx, offY, qw, qy - offY);                           // top
+//       ctx.fillRect(qx, qy + qh, qw, so.imgH * scale - qy - qh + offY); // bottom
+
+//       // viewport border
+//       ctx.strokeStyle = "#fbbf24";
+//       ctx.lineWidth   = 2;
+//       ctx.setLineDash([6, 3]);
+//       ctx.strokeRect(qx, qy, qw, qh);
+//       ctx.setLineDash([]);
+//     }
+
+//     // Highlight hilbert-matched tiles
+//     for (const t of queryTiles) {
+//       const bb = t.abs_bbox;
+//       if (!bb || bb.length < 4) continue;
+//       const [bx0, by0, bx1, by1] = bb;
+//       ctx.fillStyle = "rgba(251,191,36,0.35)";
+//       ctx.fillRect(offX + bx0 * scale, offY + by0 * scale,
+//                    (bx1-bx0)*scale, (by1-by0)*scale);
+//       ctx.strokeStyle = "#fbbf24";
+//       ctx.lineWidth   = 1.5;
+//       ctx.strokeRect(offX + bx0 * scale + 0.5, offY + by0 * scale + 0.5,
+//                      (bx1-bx0)*scale - 1, (by1-by0)*scale - 1);
+//     }
+
+//     // Hover
 //     if (hoveredTile?.pixel_bbox) {
-//         const [px0, py0, px1, py1] = hoveredTile.pixel_bbox;
-//         ctx.strokeStyle = "#ffffff";
-//         ctx.lineWidth = 2;
-//         ctx.strokeRect(offX + px0 * scale, offY + py0 * scale, (px1 - px0) * scale, (py1 - py0) * scale);
+//       const [px0, py0, px1, py1] = hoveredTile.pixel_bbox;
+//       ctx.strokeStyle = "#ffffff";
+//       ctx.lineWidth   = 2.5;
+//       ctx.strokeRect(offX + px0*scale, offY + py0*scale,
+//                      (px1-px0)*scale, (py1-py0)*scale);
 //     }
-//     }, [lodData, segData, hoveredTile]);
+//   }, [lodData, segData, bgImage, hoveredTile, queryViewport, queryTiles, getScaleOffset]);
 
+//   // ── click → query ─────────────────────────────────────────────
+//   const handleCanvasClick = useCallback((e) => {
+//     const so = getScaleOffset();
+//     if (!so) return;
+//     const canvas = canvasRef.current;
+//     const rect   = canvas.getBoundingClientRect();
+//     const mx = (e.clientX - rect.left) * (canvas.width  / rect.width);
+//     const my = (e.clientY - rect.top)  * (canvas.height / rect.height);
+//     const ix = (mx - so.offX) / so.scale;
+//     const iy = (my - so.offY) / so.scale;
+//     if (ix < 0 || ix > so.imgW || iy < 0 || iy > so.imgH) return;
 
-// const [bgImage, setBgImage] = useState(null);
+//     setQuerying(true);
+//     fetch(`${API}/query?cx=${ix.toFixed(1)}&cy=${iy.toFixed(1)}&zoom=${zoom}`)
+//       .then(r => r.json())
+//       .then(d => {
+//         setQueryResult(d);
+//         setQueryVP(d.viewport_bbox);
+//         setQueryTiles(d.hilbert_result.tiles);
+//         setQuerying(false);
+//       })
+//       .catch(() => { setError("Query failed"); setQuerying(false); });
+//   }, [getScaleOffset, zoom]);
 
-// useEffect(() => {
-//   const img = new Image();
-//   img.crossOrigin = "anonymous";
-//   img.onload = () => setBgImage(img);
-//   img.src = `${API}/image`;
-// }, []);
+//   const handleMouseMove = useCallback((e) => {
+//     if (!lodData || !segData || !canvasRef.current) return;
+//     const so   = getScaleOffset();
+//     if (!so) return;
+//     const canvas = canvasRef.current;
+//     const rect   = canvas.getBoundingClientRect();
+//     const mx = (e.clientX - rect.left) * (canvas.width  / rect.width);
+//     const my = (e.clientY - rect.top)  * (canvas.height / rect.height);
+//     const ix = (mx - so.offX) / so.scale;
+//     const iy = (my - so.offY) / so.scale;
+//     const found = lodData.tiles.find(t => {
+//       if (!t.pixel_bbox) return false;
+//       const [x0,y0,x1,y1] = t.pixel_bbox;
+//       return ix >= x0 && ix < x1 && iy >= y0 && iy < y1;
+//     });
+//     setHovered(found || null);
+//   }, [lodData, segData, getScaleOffset]);
 
-// const handleCanvasMouseMove = useCallback((e) => {
-//   if (!lodData || !segData || !canvasRef.current) return;
-//   const canvas = canvasRef.current;
-//   const rect = canvas.getBoundingClientRect();
-//   const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
-//   const my = (e.clientY - rect.top) * (canvas.height / rect.height);
-//   const [imgW, imgH] = segData.image_size;
-//   const scale = Math.min(canvas.width / imgW, canvas.height / imgH);
-//   const offX = (canvas.width - imgW * scale) / 2;
-//   const offY = (canvas.height - imgH * scale) / 2;
-
-//   // convert mouse to image pixel space
-//   const ix = (mx - offX) / scale;
-//   const iy = (my - offY) / scale;
-
-//   const found = lodData.tiles.find(t => {
-//     if (!t.pixel_bbox) return false;
-//     const [x0, y0, x1, y1] = t.pixel_bbox;
-//     return ix >= x0 && ix < x1 && iy >= y0 && iy < y1;
-//   });
-//   setHoveredTile(found || null);
-// }, [lodData, segData]);
-
-//   const liveCount = lodData?.lod_stats?.live ?? 0;
+//   // lod stats
+//   const liveCount = lodData?.lod_stats?.live      ?? 0;
 //   const collCount = lodData?.lod_stats?.collapsed ?? 0;
-//   const total = lodData?.lod_stats?.total ?? 1;
-//   const classCounts = lodData ? { 0: { live: 0, collapsed: 0 }, 1: { live: 0, collapsed: 0 }, 2: { live: 0, collapsed: 0 } } : null;
-//   if (lodData) for (const t of lodData.tiles) classCounts[t.region_class][t.status]++;
+//   const total     = lodData?.lod_stats?.total     ?? 1;
 
 //   return (
-//     <div style={{ background: "#0a0f1a", minHeight: "100vh", color: "#e2e8f0", fontFamily: "'JetBrains Mono', 'Fira Code', monospace", padding: "0" }}>
-//       <div style={{ borderBottom: "1px solid #1e293b", padding: "12px 24px", display: "flex", alignItems: "center", gap: "16px" }}>
-//         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-//           <div style={{ width: 8, height: 8, borderRadius: "50%", background: error ? "#f87171" : "#4ade80", boxShadow: `0 0 6px ${error ? "#f87171" : "#4ade80"}` }} />
-//           <span style={{ fontSize: 13, color: "#94a3b8", letterSpacing: "0.05em" }}>ADAPTIVE HILBERT LOD VIEWER</span>
-//         </div>
-//         <div style={{ marginLeft: "auto", display: "flex", gap: "16px", fontSize: 12, color: "#475569" }}>
-//           {stats && <>
-//             <span>{stats.total_sub_tiles?.toLocaleString()} sub-tiles</span>
+//     <div style={{ background:"#0a0f1a", minHeight:"100vh", color:"#e2e8f0",
+//                   fontFamily:"'JetBrains Mono','Fira Code',monospace" }}>
+
+//       {/* header */}
+//       <div style={{ borderBottom:"1px solid #1e293b", padding:"10px 20px",
+//                     display:"flex", alignItems:"center", gap:12 }}>
+//         <div style={{ width:8, height:8, borderRadius:"50%",
+//                       background: error ? "#f87171" : "#4ade80",
+//                       boxShadow:`0 0 6px ${error ? "#f87171" : "#4ade80"}` }} />
+//         <span style={{ fontSize:12, color:"#94a3b8", letterSpacing:"0.08em" }}>
+//           ADAPTIVE HILBERT LOD VIEWER
+//         </span>
+//         <span style={{ fontSize:11, color:"#334155", marginLeft:4 }}>
+//           click on map to benchmark a spatial query
+//         </span>
+//         {querying && (
+//           <span style={{ marginLeft:"auto", fontSize:11, color:"#fbbf24" }}>
+//             ⟳ querying…
+//           </span>
+//         )}
+//         {stats && !querying && (
+//           <div style={{ marginLeft:"auto", display:"flex", gap:14, fontSize:11, color:"#475569" }}>
+//             <span>{stats.total_sub_tiles?.toLocaleString()} indexed tiles</span>
 //             <span>{stats.base_tiles} base tiles</span>
-//           </>}
-//         </div>
+//           </div>
+//         )}
 //       </div>
 
 //       {error && (
-//         <div style={{ margin: "12px 24px", padding: "10px 16px", background: "#1e0a0a", border: "1px solid #7f1d1d", borderRadius: 6, fontSize: 13, color: "#fca5a5" }}>
-//           {error}
+//         <div style={{ margin:"10px 20px", padding:"8px 14px", background:"#1e0a0a",
+//                       border:"1px solid #7f1d1d", borderRadius:6, fontSize:12, color:"#fca5a5" }}>
+//           {error} — make sure tile_server.py is running on :5000
 //         </div>
 //       )}
 
-//       <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", gap: 0, height: "calc(100vh - 57px)" }}>
-//         <div style={{ position: "relative", padding: "16px" }}>
-//           <canvas
-//             ref={canvasRef}
-//             width={800}
-//             height={720}
-//             onMouseMove={handleCanvasMouseMove}
-//             onMouseLeave={() => setHoveredTile(null)}
-//             style={{ width: "100%", height: "100%", display: "block", cursor: "crosshair", borderRadius: 6, border: "1px solid #1e293b" }}
-//           />
+//       <div style={{ display:"grid", gridTemplateColumns:"1fr 290px",
+//                     height:"calc(100vh - 53px)" }}>
+
+//         {/* canvas */}
+//         <div style={{ position:"relative", padding:14 }}>
+//           <canvas ref={canvasRef} width={820} height={740}
+//             onClick={handleCanvasClick}
+//             onMouseMove={handleMouseMove}
+//             onMouseLeave={() => setHovered(null)}
+//             style={{ width:"100%", height:"100%", display:"block",
+//                      cursor: querying ? "wait" : "crosshair",
+//                      borderRadius:6, border:"1px solid #1e293b" }} />
 //           {loading && (
-//             <div style={{ position: "absolute", top: 24, left: 24, background: "rgba(10,15,26,0.85)", padding: "6px 12px", borderRadius: 4, fontSize: 12, color: "#94a3b8", border: "1px solid #1e293b" }}>
+//             <div style={{ position:"absolute", top:22, left:22,
+//                           background:"rgba(10,15,26,0.85)", padding:"5px 10px",
+//                           borderRadius:4, fontSize:11, color:"#94a3b8",
+//                           border:"1px solid #1e293b" }}>
 //               fetching LOD…
+//             </div>
+//           )}
+//           {queryViewport && (
+//             <div style={{ position:"absolute", bottom:22, left:22,
+//                           background:"rgba(10,15,26,0.9)", padding:"5px 10px",
+//                           borderRadius:4, fontSize:11, color:"#fbbf24",
+//                           border:"1px solid #fbbf2440" }}>
+//               {queryTiles.length} hilbert-matched tiles highlighted
 //             </div>
 //           )}
 //         </div>
 
-//         <div style={{ borderLeft: "1px solid #1e293b", padding: "20px 16px", display: "flex", flexDirection: "column", gap: "20px", overflowY: "auto" }}>
-//           <div>
-//             <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.1em", marginBottom: 10 }}>ZOOM LEVEL</div>
-//             <input
-//               type="range" min={0} max={4} step={1} value={zoom}
-//               onChange={e => setZoom(Number(e.target.value))}
-//               style={{ width: "100%", accentColor: "#378add" }}
-//             />
-//             <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#475569", marginTop: 4 }}>
-//               {[0,1,2,3,4].map(z => (
-//                 <span key={z} style={{ color: z === zoom ? "#93c5fd" : "#475569", fontWeight: z === zoom ? 500 : 400 }}>{z}</span>
-//               ))}
-//             </div>
-//             <div style={{ marginTop: 10, padding: "8px 12px", background: "#0f172a", borderRadius: 6, border: "1px solid #1e293b", fontSize: 13 }}>
-//               <span style={{ color: "#475569" }}>zoom = </span>
-//               <span style={{ color: "#93c5fd", fontWeight: 500 }}>{zoom}</span>
-//               <span style={{ color: "#475569", marginLeft: 12 }}>
-//                 {zoom === 0 ? "most collapsed" : zoom === 4 ? "finest detail" : ""}
-//               </span>
-//             </div>
+//         {/* sidebar */}
+//         <div style={{ borderLeft:"1px solid #1e293b", padding:"16px 14px",
+//                       display:"flex", flexDirection:"column", gap:0, overflowY:"auto" }}>
+
+//           {/* zoom */}
+//           <SectionLabel>zoom level</SectionLabel>
+//           <input type="range" min={0} max={4} step={1} value={zoom}
+//             onChange={e => { setZoom(Number(e.target.value)); setQueryResult(null); setQueryVP(null); setQueryTiles([]); }}
+//             style={{ width:"100%", accentColor:"#378add", marginBottom:6 }} />
+//           <div style={{ display:"flex", justifyContent:"space-between",
+//                         fontSize:10, color:"#475569", marginBottom:4 }}>
+//             {[0,1,2,3,4].map(z => (
+//               <span key={z} style={{ color: z===zoom ? "#93c5fd" : "#334155",
+//                                      fontWeight: z===zoom ? 600 : 400 }}>{z}</span>
+//             ))}
+//           </div>
+//           <div style={{ padding:"6px 10px", background:"#0f172a", borderRadius:5,
+//                         border:"1px solid #1e293b", fontSize:12, marginBottom:2 }}>
+//             <span style={{ color:"#475569" }}>zoom </span>
+//             <span style={{ color:"#93c5fd", fontWeight:600 }}>{zoom}</span>
+//             <span style={{ color:"#334155", marginLeft:10, fontSize:11 }}>
+//               {["full image","÷2 viewport","÷4 viewport","÷8 viewport","÷16 viewport"][zoom]}
+//             </span>
 //           </div>
 
-//           <div>
-//             <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.1em", marginBottom: 10 }}>LOD STATUS</div>
-//             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-//               {[
-//                 { label: "live", count: liveCount, color: "#4ade80", bg: "#052e16" },
-//                 { label: "collapsed", count: collCount, color: "#f87171", bg: "#2d0707" },
-//               ].map(s => (
-//                 <div key={s.label} style={{ background: s.bg, border: `1px solid ${s.color}33`, borderRadius: 6, padding: "10px", textAlign: "center" }}>
-//                   <div style={{ fontSize: 22, fontWeight: 500, color: s.color }}>{s.count}</div>
-//                   <div style={{ fontSize: 11, color: "#475569", marginTop: 2 }}>{s.label}</div>
+//           {/* LOD stats */}
+//           <SectionLabel>lod status</SectionLabel>
+//           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:6, marginBottom:8 }}>
+//             {[
+//               { label:"live",      count:liveCount, color:"#4ade80", bg:"#052e16" },
+//               { label:"collapsed", count:collCount, color:"#f87171", bg:"#2d0707" },
+//             ].map(s => (
+//               <div key={s.label} style={{ background:s.bg, border:`1px solid ${s.color}33`,
+//                                           borderRadius:6, padding:"8px 6px", textAlign:"center" }}>
+//                 <div style={{ fontSize:20, fontWeight:600, color:s.color }}>{s.count}</div>
+//                 <div style={{ fontSize:10, color:"#475569", marginTop:1 }}>{s.label}</div>
+//               </div>
+//             ))}
+//           </div>
+//           <div style={{ height:5, borderRadius:3, background:"#1e293b", overflow:"hidden", marginBottom:4 }}>
+//             <div style={{ height:"100%", background:"#4ade80", borderRadius:3,
+//                           width:`${(liveCount/total)*100}%`, transition:"width 0.4s" }} />
+//           </div>
+//           <div style={{ fontSize:10, color:"#475569", marginBottom:4 }}>
+//             {Math.round((liveCount/total)*100)}% live at zoom {zoom}
+//           </div>
+
+//           {/* by class */}
+//           <SectionLabel>by region class</SectionLabel>
+//           {lodData && (() => {
+//             const cc = { 0:{live:0,coll:0}, 1:{live:0,coll:0}, 2:{live:0,coll:0} };
+//             for (const t of lodData.tiles) {
+//               const b = cc[t.region_class];
+//               if (t.status==="live") b.live++; else b.coll++;
+//             }
+//             return Object.entries(CLASS_CFG).map(([cls, cfg]) => (
+//               <div key={cls} style={{ marginBottom:6, padding:"8px 10px", background:"#0f172a",
+//                                       borderRadius:5, borderLeft:`3px solid ${cfg.border}` }}>
+//                 <div style={{ display:"flex", justifyContent:"space-between", marginBottom:4 }}>
+//                   <span style={{ fontSize:11, color:cfg.border, fontWeight:600 }}>{cfg.label}</span>
+//                   <span style={{ fontSize:10, color:"#334155" }}>order {cfg.order}</span>
 //                 </div>
-//               ))}
-//             </div>
-//             <div style={{ marginTop: 8, height: 6, borderRadius: 3, background: "#1e293b", overflow: "hidden" }}>
-//               <div style={{ height: "100%", width: `${total ? (liveCount / total) * 100 : 0}%`, background: "#4ade80", transition: "width 0.4s ease", borderRadius: 3 }} />
-//             </div>
-//             <div style={{ fontSize: 11, color: "#475569", marginTop: 4 }}>{total ? Math.round((liveCount / total) * 100) : 0}% live</div>
-//           </div>
-
-//           <div>
-//             <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.1em", marginBottom: 10 }}>BY REGION CLASS</div>
-//             {classCounts && Object.entries(CLASS_COLORS).map(([cls, cfg]) => {
-//               const c = classCounts[cls];
-//               return (
-//                 <div key={cls} style={{ marginBottom: 10, padding: "10px 12px", background: "#0f172a", borderRadius: 6, borderLeft: `3px solid ${cfg.border}` }}>
-//                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-//                     <span style={{ fontSize: 12, color: cfg.border, fontWeight: 500 }}>{cfg.label}</span>
-//                     <span style={{ fontSize: 11, color: "#475569" }}>order {cfg.order} · {Math.pow(2, cfg.order)}×{Math.pow(2, cfg.order)} grid</span>
-//                   </div>
-//                   <div style={{ display: "flex", gap: 8, fontSize: 12 }}>
-//                     <span style={{ color: "#4ade80" }}>{c.live} live</span>
-//                     <span style={{ color: "#475569" }}>/</span>
-//                     <span style={{ color: "#f87171" }}>{c.collapsed} collapsed</span>
-//                   </div>
-//                 </div>
-//               );
-//             })}
-//           </div>
-
-//           {hoveredTile && (
-//             <div>
-//               <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.1em", marginBottom: 10 }}>HOVERED TILE</div>
-//               <div style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 6, padding: "12px", fontSize: 12 }}>
-//                 {[
-//                   ["pos", `(${hoveredTile.base_tx}, ${hoveredTile.base_ty})`],
-//                   ["class", hoveredTile.class_name],
-//                   ["hilbert order", hoveredTile.hilbert_order],
-//                   ["sub-tiles", hoveredTile.sub_tile_count],
-//                   ["entropy", hoveredTile.entropy?.toFixed(3)],
-//                   ["status", hoveredTile.status],
-//                 ].map(([k, v]) => (
-//                   <div key={k} style={{ display: "flex", justifyContent: "space-between", padding: "3px 0", borderBottom: "1px solid #0f172a" }}>
-//                     <span style={{ color: "#475569" }}>{k}</span>
-//                     <span style={{ color: hoveredTile.status === "live" ? "#4ade80" : "#f87171" }}>{v}</span>
-//                   </div>
-//                 ))}
-//                 <div style={{ marginTop: 8, display: "flex", gap: 4, alignItems: "center" }}>
-//                   <span style={{ fontSize: 11, color: "#475569" }}>mean color</span>
-//                   <div style={{
-//                     marginLeft: "auto", width: 24, height: 16, borderRadius: 3,
-//                     background: hoveredTile.mean_color ? `rgb(${hoveredTile.mean_color.map(Math.round).join(",")})` : "#333"
-//                   }} />
+//                 <div style={{ display:"flex", gap:8, fontSize:11 }}>
+//                   <span style={{ color:"#4ade80" }}>{cc[cls].live} live</span>
+//                   <span style={{ color:"#334155" }}>/</span>
+//                   <span style={{ color:"#f87171" }}>{cc[cls].coll} collapsed</span>
 //                 </div>
 //               </div>
+//             ));
+//           })()}
+
+//           {/* query result */}
+//           {queryResult && (
+//             <>
+//               <SectionLabel>benchmark</SectionLabel>
+//               <QueryPanel query={queryResult}
+//                           onClose={() => { setQueryResult(null); setQueryVP(null); setQueryTiles([]); }} />
+//             </>
+//           )}
+
+//           {!queryResult && (
+//             <div style={{ marginTop:12, padding:"10px 12px", background:"#0f172a",
+//                           border:"1px dashed #1e293b", borderRadius:6,
+//                           fontSize:11, color:"#334155", textAlign:"center" }}>
+//               click anywhere on the map<br/>to run a spatial query benchmark
 //             </div>
 //           )}
 
-//           <div style={{ marginTop: "auto" }}>
-//             <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.1em", marginBottom: 8 }}>LEGEND</div>
-//             {Object.entries(CLASS_COLORS).map(([cls, cfg]) => (
-//               <div key={cls} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-//                 <div style={{ width: 12, height: 12, borderRadius: 2, background: cfg.live, border: `1px solid ${cfg.border}` }} />
-//                 <span style={{ fontSize: 12, color: "#64748b" }}>{cfg.label} · live</span>
-//                 <div style={{ width: 12, height: 12, borderRadius: 2, background: cfg.collapsed, border: `1px solid ${cfg.border}`, marginLeft: 8 }} />
-//                 <span style={{ fontSize: 12, color: "#64748b" }}>collapsed</span>
+//           {/* hovered tile */}
+//           {hoveredTile && (
+//             <>
+//               <SectionLabel>hovered tile</SectionLabel>
+//               <div style={{ background:"#0f172a", border:"1px solid #1e293b",
+//                             borderRadius:6, padding:"10px 12px", fontSize:11 }}>
+//                 {[
+//                   ["pos",    `(${hoveredTile.base_tx ?? hoveredTile.tile_x}, ${hoveredTile.base_ty ?? hoveredTile.tile_y})`],
+//                   ["class",  hoveredTile.class_name],
+//                   ["order",  hoveredTile.hilbert_order],
+//                   ["status", hoveredTile.status],
+//                   ["entropy", hoveredTile.entropy?.toFixed(3)],
+//                 ].map(([k,v]) => <Row key={k} label={k} value={v}
+//                   color={hoveredTile.status==="live" ? "#4ade80" : "#f87171"} />)}
+//               </div>
+//             </>
+//           )}
+
+//           {/* legend */}
+//           <div style={{ marginTop:"auto", paddingTop:16,
+//                         borderTop:"1px solid #1e293b" }}>
+//             {Object.entries(CLASS_CFG).map(([c, cfg]) => (
+//               <div key={c} style={{ display:"flex", alignItems:"center",
+//                                     gap:7, marginBottom:4 }}>
+//                 <div style={{ width:10, height:10, borderRadius:2,
+//                               border:`2px solid ${cfg.border}`,
+//                               background: "transparent" }} />
+//                 <span style={{ fontSize:10, color:"#475569" }}>
+//                   {cfg.label} · live (order {cfg.order})
+//                 </span>
 //               </div>
 //             ))}
+//             <div style={{ display:"flex", alignItems:"center", gap:7, marginTop:6 }}>
+//               <div style={{ width:10, height:10, borderRadius:2, background:"#fbbf24" }} />
+//               <span style={{ fontSize:10, color:"#475569" }}>hilbert query result</span>
+//             </div>
 //           </div>
 //         </div>
 //       </div>
@@ -297,321 +553,540 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 const API = "http://localhost:5000";
+const MAX_DEPTH = 5;
 
-const CLASS_COLORS = {
-  0: { live: "rgba(30,120,210,0.18)",  collapsed: "rgba(30,120,210,0.82)",  border: "#1e78d2", label: "water",      order: 2 },
-  1: { live: "rgba(60,180,80,0.18)",   collapsed: "rgba(60,180,80,0.82)",   border: "#3cb450", label: "transition", order: 3 },
-  2: { live: "rgba(220,60,60,0.18)",   collapsed: "rgba(220,60,60,0.82)",   border: "#dc3c3c", label: "urban",      order: 4 },
+const CLASS_CFG = {
+  0: { border: "#1e78d2", label: "water",      hilbert: "#60a5fa" },
+  1: { border: "#3cb450", label: "transition", hilbert: "#4ade80" },
+  2: { border: "#dc3c3c", label: "urban",      hilbert: "#f87171" },
 };
 
+// ── draw Hilbert curve path inside a tile ─────────────────────────
+function drawHilbertPath(ctx, codes, x0, y0, tw, th, color, depth) {
+  if (!codes || codes.length < 2) return;
+  const sorted = [...codes].sort((a, b) => a.code - b.code);
+  const centers = sorted.map(c => {
+    const bx = c.bbox[0], by = c.bbox[1], bx1 = c.bbox[2], by1 = c.bbox[3];
+    return [(bx + bx1) / 2, (by + by1) / 2];
+  });
+
+  ctx.strokeStyle = color;
+  ctx.lineWidth   = Math.max(0.4, 1.5 - depth * 0.2);
+  ctx.globalAlpha = 0.7;
+  ctx.beginPath();
+  ctx.moveTo(centers[0][0], centers[0][1]);
+  for (let i = 1; i < centers.length; i++) ctx.lineTo(centers[i][0], centers[i][1]);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+
+  // node dots at finest zoom
+  if (depth >= 3 && tw > 60) {
+    ctx.fillStyle = color;
+    for (const [cx, cy] of centers) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+}
+
+// ── SpeedupBar ────────────────────────────────────────────────────
+function SpeedupBar({ hms, nms, speedup }) {
+  const frac = Math.min(hms / (nms || 1), 1);
+  const fmt  = ms => ms < 0.5 ? `${(ms*1000).toFixed(0)}µs` : `${ms.toFixed(2)}ms`;
+  return (
+    <div>
+      {[["hilbert", frac,   "#4ade80", hms],
+        ["naive",   1,      "#f87171", nms]].map(([lbl, w, col, ms]) => (
+        <div key={lbl} style={{display:"flex",alignItems:"center",gap:6,marginBottom:4}}>
+          <span style={{width:44,fontSize:10,color:col,textAlign:"right"}}>{lbl}</span>
+          <div style={{flex:1,background:"#1e293b",borderRadius:3,height:12,overflow:"hidden"}}>
+            <div style={{width:`${w*100}%`,height:"100%",background:col,borderRadius:3,
+                         transition:"width 0.5s ease",display:"flex",alignItems:"center",
+                         justifyContent:"flex-end",paddingRight:3}}>
+              <span style={{fontSize:8,color:"#000",fontWeight:700}}>{fmt(ms)}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+      <div style={{textAlign:"center",padding:"6px 0",background:"#0f172a",
+                   borderRadius:5,border:"1px solid #1e293b",marginTop:6}}>
+        <span style={{fontSize:20,fontWeight:700,
+                      color: speedup >= 1 ? "#fbbf24" : "#94a3b8"}}>{speedup.toFixed(1)}×</span>
+        <span style={{fontSize:10,color:"#475569",marginLeft:5}}>
+          {speedup >= 1 ? "faster" : "slower (dense region)"}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ── Breadcrumb ────────────────────────────────────────────────────
+function Breadcrumb({ history, onJump }) {
+  if (!history.length) return null;
+  return (
+    <div style={{display:"flex",alignItems:"center",gap:4,flexWrap:"wrap",
+                 fontSize:10,color:"#475569",marginBottom:8}}>
+      <span onClick={() => onJump(-1)}
+            style={{cursor:"pointer",color:"#93c5fd",textDecoration:"underline"}}>
+        root
+      </span>
+      {history.map((h, i) => (
+        <span key={i} style={{display:"flex",alignItems:"center",gap:4}}>
+          <span style={{color:"#334155"}}>›</span>
+          <span onClick={() => onJump(i)}
+                style={{cursor:"pointer",
+                        color: i === history.length-1 ? "#fbbf24" : "#93c5fd",
+                        textDecoration: i < history.length-1 ? "underline" : "none",
+                        fontWeight: i === history.length-1 ? 600 : 400}}>
+            d{i+1} ({Math.round(h.cx)},{Math.round(h.cy)})
+          </span>
+        </span>
+      ))}
+    </div>
+  );
+}
+
+// ── Main ──────────────────────────────────────────────────────────
 export default function HilbertViewer() {
-  const [zoom, setZoom]           = useState(2);
-  const [lodData, setLodData]     = useState(null);
-  const [segData, setSegData]     = useState(null);
-  const [stats, setStats]         = useState(null);
-  const [bgImage, setBgImage]     = useState(null);   // MUST be declared before the draw useEffect
-  const [loading, setLoading]     = useState(false);
-  const [error, setError]         = useState(null);
-  const [hoveredTile, setHovered] = useState(null);
+  const [segData,  setSegData]  = useState(null);
+  const [stats,    setStats]    = useState(null);
+  const [bgImage,  setBgImage]  = useState(null);
+  const [lodData,  setLodData]  = useState(null);      // full-image LOD (base view)
+  const [zoomData, setZoomData] = useState(null);      // /zoom_lod result
+  const [query,    setQuery]    = useState(null);      // /query benchmark result
+  const [history,  setHistory]  = useState([]);        // [{cx,cy,depth}]
+  const [depth,    setDepth]    = useState(0);
+  const [viewport, setViewport] = useState(null);      // current pixel bbox
+  const [loading,  setLoading]  = useState(false);
+  const [error,    setError]    = useState(null);
+  const [hovered,  setHovered]  = useState(null);
   const canvasRef = useRef(null);
 
-  // load segmentation metadata + index stats once
+  // ── load metadata ──────────────────────────────────────────────
   useEffect(() => {
-    fetch(`${API}/segmentation`)
-      .then(r => r.json()).then(setSegData)
-      .catch(() => setError("Cannot reach tile server on :5000"));
-    fetch(`${API}/index_stats`)
-      .then(r => r.json()).then(setStats)
-      .catch(() => {});
+    fetch(`${API}/segmentation`).then(r=>r.json()).then(setSegData)
+      .catch(()=>setError("Cannot reach server on :5000"));
+    fetch(`${API}/index_stats`).then(r=>r.json()).then(setStats).catch(()=>{});
+    fetch(`${API}/lod?zoom=0`).then(r=>r.json()).then(setLodData).catch(()=>{});
   }, []);
 
-  // load background satellite image once
   useEffect(() => {
-    const img = new Image();
+    const img = new window.Image();
     img.crossOrigin = "anonymous";
-    img.onload  = () => setBgImage(img);
-    img.onerror = () => console.warn("Could not load /image — add the /image endpoint to tile_server.py");
+    img.onload = () => setBgImage(img);
     img.src = `${API}/image`;
   }, []);
 
-  // fetch LOD data whenever zoom changes
-  const fetchLod = useCallback((z) => {
-    setLoading(true);
-    fetch(`${API}/lod?zoom=${z}`)
-      .then(r => r.json())
-      .then(d => { setLodData(d); setLoading(false); setError(null); })
-      .catch(() => { setError("LOD fetch failed"); setLoading(false); });
-  }, []);
-  useEffect(() => { fetchLod(zoom); }, [zoom, fetchLod]);
+  // ── coord helpers ──────────────────────────────────────────────
+  const getScaleOffset = useCallback(() => {
+    if (!segData || !canvasRef.current) return null;
+    const c = canvasRef.current;
+    const [iw, ih] = segData.image_size;
+    const scale = Math.min(c.width / iw, c.height / ih);
+    return { scale, offX:(c.width - iw*scale)/2, offY:(c.height - ih*scale)/2, imgW:iw, imgH:ih };
+  }, [segData]);
 
-  // draw canvas — bgImage is in deps so it redraws once image loads
+  const toCanvas = (ix, iy, so) => [so.offX + ix*so.scale, so.offY + iy*so.scale];
+  const toImage  = (cx, cy, so) => [(cx - so.offX)/so.scale, (cy - so.offY)/so.scale];
+
+  // ── draw ──────────────────────────────────────────────────────
   useEffect(() => {
-    if (!lodData || !segData || !canvasRef.current) return;
+    if (!canvasRef.current || !segData) return;
     const canvas = canvasRef.current;
-    const ctx    = canvas.getContext("2d");
-    const [imgW, imgH] = segData.image_size;
-
-    const scale = Math.min(canvas.width / imgW, canvas.height / imgH);
-    const drawW = imgW * scale;
-    const drawH = imgH * scale;
-    const offX  = (canvas.width  - drawW) / 2;
-    const offY  = (canvas.height - drawH) / 2;
+    const ctx = canvas.getContext("2d");
+    const so  = getScaleOffset();
+    if (!so) return;
+    const { scale, offX, offY } = so;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#0a0f1a";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // 1. satellite image as background
-    if (bgImage) {
-      ctx.drawImage(bgImage, offX, offY, drawW, drawH);
-    }
+    if (bgImage) ctx.drawImage(bgImage, offX, offY, so.imgW*scale, so.imgH*scale);
 
-    // 2. tile overlays
-    for (const tile of lodData.tiles) {
-      const { region_class, status, mean_color, hilbert_order, pixel_bbox } = tile;
-      if (!pixel_bbox) continue;
+    // Which tiles to draw?
+    const tiles = zoomData ? zoomData.tiles : (lodData?.tiles ?? []);
+    const inZoom = !!zoomData;
 
-      const [px0, py0, px1, py1] = pixel_bbox;
-      const x0 = offX + px0 * scale;
-      const y0 = offY + py0 * scale;
-      const tw  = (px1 - px0) * scale;
-      const th  = (py1 - py0) * scale;
-      const cfg = CLASS_COLORS[region_class] || CLASS_COLORS[2];
+    for (const tile of tiles) {
+      const cfg   = CLASS_CFG[tile.region_class] ?? CLASS_CFG[2];
+      const bb    = inZoom ? tile.clip_bbox : tile.pixel_bbox;
+      if (!bb) continue;
 
-      if (status === "collapsed") {
-        const [r, g, b] = mean_color;
-        ctx.fillStyle = `rgba(${Math.round(r)},${Math.round(g)},${Math.round(b)},0.85)`;
-        ctx.fillRect(x0, y0, tw, th);
-        ctx.fillStyle = "rgba(0,0,0,0.22)";
-        ctx.fillRect(x0, y0, tw, th);
+      const [px0,py0,px1,py1] = bb;
+      const x0 = offX + px0*scale, y0 = offY + py0*scale;
+      const tw  = (px1-px0)*scale,  th  = (py1-py0)*scale;
+
+      if (tile.status === "collapsed") {
+        const [r,g,b] = tile.mean_color;
+        ctx.fillStyle = `rgba(${Math.round(r)},${Math.round(g)},${Math.round(b)},0.82)`;
+        ctx.fillRect(x0,y0,tw,th);
       } else {
-        // light tint — image shows through
-        ctx.fillStyle = cfg.live;
-        ctx.fillRect(x0, y0, tw, th);
+        // base tint
+        ctx.fillStyle = `${cfg.border}22`;
+        ctx.fillRect(x0,y0,tw,th);
 
-        // sub-tile grid lines
-        if (hilbert_order >= 3) {
-          const subGrid = Math.pow(2, hilbert_order);
-          const sw = tw / subGrid;
-          const sh = th / subGrid;
-          ctx.strokeStyle = `${cfg.border}40`;
-          ctx.lineWidth = 0.3;
-          for (let sy = 0; sy <= subGrid; sy++) {
-            ctx.beginPath(); ctx.moveTo(x0, y0 + sy * sh); ctx.lineTo(x0 + tw, y0 + sy * sh); ctx.stroke();
+        // sub-tile grid
+        const vg = inZoom ? tile.vis_grid : Math.pow(2, tile.hilbert_order ?? 2);
+        if (vg > 1) {
+          ctx.strokeStyle = `${cfg.border}30`;
+          ctx.lineWidth   = 0.25;
+          for (let s = 1; s < vg; s++) {
+            const lx = x0 + s*(tw/vg), ly = y0 + s*(th/vg);
+            ctx.beginPath(); ctx.moveTo(lx, y0); ctx.lineTo(lx, y0+th); ctx.stroke();
+            ctx.beginPath(); ctx.moveTo(x0, ly); ctx.lineTo(x0+tw, ly); ctx.stroke();
           }
-          for (let sx = 0; sx <= subGrid; sx++) {
-            ctx.beginPath(); ctx.moveTo(x0 + sx * sw, y0); ctx.lineTo(x0 + sx * sw, y0 + th); ctx.stroke();
-          }
+        }
+
+        // Hilbert curve path (only in zoomed mode)
+        if (inZoom && tile.visible_codes?.length >= 2) {
+          const scaled = tile.visible_codes.map(c => ({
+            ...c,
+            bbox: c.bbox.map((v,i) => i%2===0 ? offX+v*scale : offY+v*scale)
+          }));
+          drawHilbertPath(ctx, scaled, x0, y0, tw, th, cfg.hilbert, depth);
         }
       }
 
-      // tile border
       ctx.strokeStyle = cfg.border;
-      ctx.lineWidth   = status === "collapsed" ? 2 : 0.9;
-      ctx.strokeRect(x0 + 0.5, y0 + 0.5, tw - 1, th - 1);
+      ctx.lineWidth   = tile.status==="collapsed" ? 1.5 : 0.7;
+      ctx.strokeRect(x0+0.5, y0+0.5, tw-1, th-1);
 
-      // order label
-      if (tw > 24) {
-        ctx.fillStyle = status === "collapsed" ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.8)";
-        ctx.font = `bold ${Math.min(10, tw / 5)}px monospace`;
-        ctx.fillText(`o${hilbert_order}`, x0 + 4, y0 + 13);
+      if (tw > 20) {
+        ctx.fillStyle = "rgba(255,255,255,0.75)";
+        ctx.font = `bold ${Math.min(9,tw/5)}px monospace`;
+        const ord = inZoom ? tile.visible_order : tile.hilbert_order;
+        ctx.fillText(`o${ord}`, x0+3, y0+11);
       }
     }
 
-    // 3. hover highlight
-    if (hoveredTile?.pixel_bbox) {
-      const [px0, py0, px1, py1] = hoveredTile.pixel_bbox;
-      ctx.strokeStyle = "#ffffff";
-      ctx.lineWidth   = 2.5;
-      ctx.strokeRect(offX + px0 * scale, offY + py0 * scale, (px1-px0)*scale, (py1-py0)*scale);
+    // Viewport rect
+    if (viewport) {
+      const [vx0,vy0,vx1,vy1] = viewport;
+      const qx = offX+vx0*scale, qy = offY+vy0*scale;
+      const qw = (vx1-vx0)*scale, qh = (vy1-vy0)*scale;
+      // dim outside
+      ctx.fillStyle = "rgba(0,0,0,0.42)";
+      ctx.fillRect(offX, offY, qx-offX, so.imgH*scale);
+      ctx.fillRect(qx+qw, offY, so.imgW*scale-(qx-offX)-qw, so.imgH*scale);
+      ctx.fillRect(qx, offY, qw, qy-offY);
+      ctx.fillRect(qx, qy+qh, qw, so.imgH*scale-(qy-offY)-qh);
+      ctx.strokeStyle = "#fbbf24";
+      ctx.lineWidth   = 2;
+      ctx.setLineDash([5,3]);
+      ctx.strokeRect(qx,qy,qw,qh);
+      ctx.setLineDash([]);
     }
-  }, [lodData, segData, hoveredTile, bgImage]);  // bgImage here is critical
+
+    // Hover
+    if (hovered?.pixel_bbox) {
+      const [px0,py0,px1,py1] = hovered.pixel_bbox;
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(offX+px0*scale, offY+py0*scale, (px1-px0)*scale, (py1-py0)*scale);
+    }
+
+  }, [lodData, zoomData, segData, bgImage, hovered, viewport, depth, getScaleOffset]);
+
+  // ── click → zoom in ───────────────────────────────────────────
+  const handleClick = useCallback((e) => {
+    const so = getScaleOffset();
+    if (!so) return;
+    const canvas = canvasRef.current;
+    const rect   = canvas.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const my = (e.clientY - rect.top)  * (canvas.height / rect.height);
+    const [ix, iy] = toImage(mx, my, so);
+    if (ix < 0 || ix > so.imgW || iy < 0 || iy > so.imgH) return;
+
+    const newDepth = depth + 1;
+    if (newDepth > MAX_DEPTH) return;
+
+    setLoading(true);
+    const newHistory = [...history, { cx: ix, cy: iy, depth: newDepth }];
+
+    // Fire /zoom_lod and /query in parallel
+    Promise.all([
+      fetch(`${API}/zoom_lod?cx=${ix.toFixed(1)}&cy=${iy.toFixed(1)}&depth=${newDepth}`).then(r=>r.json()),
+      fetch(`${API}/query?cx=${ix.toFixed(1)}&cy=${iy.toFixed(1)}&zoom=${newDepth}`).then(r=>r.json()),
+    ]).then(([zd, qd]) => {
+      setZoomData(zd);
+      setViewport(zd.viewport);
+      setQuery(qd);
+      setDepth(newDepth);
+      setHistory(newHistory);
+      setLoading(false);
+      setError(null);
+    }).catch(() => { setError("Request failed"); setLoading(false); });
+  }, [depth, history, getScaleOffset]);
+
+  // ── jump to history point ─────────────────────────────────────
+  const handleJump = useCallback((idx) => {
+    if (idx === -1) {
+      // back to root
+      setDepth(0); setHistory([]); setZoomData(null);
+      setViewport(null); setQuery(null);
+      return;
+    }
+    const h = history[idx];
+    const newHistory = history.slice(0, idx + 1);
+    setLoading(true);
+    Promise.all([
+      fetch(`${API}/zoom_lod?cx=${h.cx.toFixed(1)}&cy=${h.cy.toFixed(1)}&depth=${h.depth}`).then(r=>r.json()),
+      fetch(`${API}/query?cx=${h.cx.toFixed(1)}&cy=${h.cy.toFixed(1)}&zoom=${h.depth}`).then(r=>r.json()),
+    ]).then(([zd, qd]) => {
+      setZoomData(zd); setViewport(zd.viewport); setQuery(qd);
+      setDepth(h.depth); setHistory(newHistory); setLoading(false);
+    }).catch(()=>setLoading(false));
+  }, [history]);
 
   const handleMouseMove = useCallback((e) => {
     if (!lodData || !segData || !canvasRef.current) return;
-    const canvas = canvasRef.current;
-    const rect   = canvas.getBoundingClientRect();
-    const mx = (e.clientX - rect.left) * (canvas.width  / rect.width);
-    const my = (e.clientY - rect.top)  * (canvas.height / rect.height);
-    const [imgW, imgH] = segData.image_size;
-    const scale = Math.min(canvas.width / imgW, canvas.height / imgH);
-    const offX  = (canvas.width  - imgW * scale) / 2;
-    const offY  = (canvas.height - imgH * scale) / 2;
-    const ix = (mx - offX) / scale;
-    const iy = (my - offY) / scale;
-    const found = lodData.tiles.find(t => {
-      if (!t.pixel_bbox) return false;
-      const [x0, y0, x1, y1] = t.pixel_bbox;
-      return ix >= x0 && ix < x1 && iy >= y0 && iy < y1;
-    });
-    setHovered(found || null);
-  }, [lodData, segData]);
+    const so = getScaleOffset(); if (!so) return;
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mx = (e.clientX-rect.left)*(canvasRef.current.width/rect.width);
+    const my = (e.clientY-rect.top)*(canvasRef.current.height/rect.height);
+    const [ix,iy] = toImage(mx,my,so);
+    const src = zoomData?.tiles ?? lodData.tiles;
+    setHovered(src.find(t => {
+      const b = t.pixel_bbox; if (!b) return false;
+      return ix>=b[0]&&ix<b[2]&&iy>=b[1]&&iy<b[3];
+    }) || null);
+  }, [lodData, zoomData, segData, getScaleOffset]);
 
-  const liveCount   = lodData?.lod_stats?.live      ?? 0;
-  const collCount   = lodData?.lod_stats?.collapsed  ?? 0;
-  const total       = lodData?.lod_stats?.total      ?? 1;
-  const classCounts = lodData
-    ? { 0:{live:0,collapsed:0}, 1:{live:0,collapsed:0}, 2:{live:0,collapsed:0} }
-    : null;
-  if (lodData) for (const t of lodData.tiles) classCounts[t.region_class][t.status]++;
+  const liveCount = (zoomData ?? lodData)?.tiles?.filter(t=>t.status==="live").length ?? 0;
+  const collCount = (zoomData ?? lodData)?.tiles?.filter(t=>t.status==="collapsed").length ?? 0;
 
   return (
-    <div style={{ background: "#0a0f1a", minHeight: "100vh", color: "#e2e8f0",
-                  fontFamily: "'JetBrains Mono','Fira Code',monospace" }}>
+    <div style={{background:"#0a0f1a",minHeight:"100vh",color:"#e2e8f0",
+                 fontFamily:"'JetBrains Mono','Fira Code',monospace"}}>
 
-      <div style={{ borderBottom: "1px solid #1e293b", padding: "12px 24px",
-                    display: "flex", alignItems: "center", gap: 16 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ width: 8, height: 8, borderRadius: "50%",
-                        background: error ? "#f87171" : "#4ade80",
-                        boxShadow: `0 0 6px ${error ? "#f87171" : "#4ade80"}` }} />
-          <span style={{ fontSize: 13, color: "#94a3b8", letterSpacing: "0.05em" }}>
-            ADAPTIVE HILBERT LOD VIEWER
-          </span>
-        </div>
-        <div style={{ marginLeft: "auto", display: "flex", gap: 16, fontSize: 12, color: "#475569" }}>
-          {!bgImage && <span style={{ color: "#f59e0b" }}>⟳ loading image…</span>}
-          {stats && <>
-            <span>{stats.total_sub_tiles?.toLocaleString()} sub-tiles</span>
-            <span>{stats.base_tiles} base tiles</span>
-          </>}
-        </div>
+      {/* header */}
+      <div style={{borderBottom:"1px solid #1e293b",padding:"9px 18px",
+                   display:"flex",alignItems:"center",gap:12}}>
+        <div style={{width:7,height:7,borderRadius:"50%",
+                     background:error?"#f87171":"#4ade80",
+                     boxShadow:`0 0 5px ${error?"#f87171":"#4ade80"}`}} />
+        <span style={{fontSize:11,color:"#94a3b8",letterSpacing:"0.08em"}}>
+          ADAPTIVE HILBERT LOD VIEWER
+        </span>
+        <span style={{fontSize:10,color:"#334155"}}>
+          {depth===0 ? "click to zoom in" : `depth ${depth} — click to go deeper`}
+        </span>
+        {depth > 0 && (
+          <button onClick={()=>handleJump(-1)}
+            style={{marginLeft:8,padding:"2px 10px",background:"#1e293b",
+                    border:"1px solid #334155",borderRadius:4,color:"#93c5fd",
+                    fontSize:10,cursor:"pointer"}}>
+            ⟲ reset
+          </button>
+        )}
+        {loading && <span style={{marginLeft:"auto",fontSize:10,color:"#fbbf24"}}>⟳ loading…</span>}
+        {stats && !loading && (
+          <div style={{marginLeft:"auto",display:"flex",gap:12,fontSize:10,color:"#475569"}}>
+            <span>{stats.total_sub_tiles?.toLocaleString()} tiles</span>
+            <span>{stats.base_tiles} base</span>
+          </div>
+        )}
       </div>
 
       {error && (
-        <div style={{ margin: "12px 24px", padding: "10px 16px", background: "#1e0a0a",
-                      border: "1px solid #7f1d1d", borderRadius: 6, fontSize: 13, color: "#fca5a5" }}>
+        <div style={{margin:"8px 18px",padding:"7px 12px",background:"#1e0a0a",
+                     border:"1px solid #7f1d1d",borderRadius:5,fontSize:11,color:"#fca5a5"}}>
           {error}
         </div>
       )}
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", height: "calc(100vh - 57px)" }}>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 280px",
+                   height:"calc(100vh - 50px)"}}>
 
-        <div style={{ position: "relative", padding: 16 }}>
-          <canvas ref={canvasRef} width={800} height={720}
+        {/* canvas */}
+        <div style={{position:"relative",padding:12}}>
+          <canvas ref={canvasRef} width={820} height={740}
+            onClick={handleClick}
             onMouseMove={handleMouseMove}
-            onMouseLeave={() => setHovered(null)}
-            style={{ width: "100%", height: "100%", display: "block",
-                     cursor: "crosshair", borderRadius: 6, border: "1px solid #1e293b" }} />
-          {loading && (
-            <div style={{ position: "absolute", top: 24, left: 24,
-                          background: "rgba(10,15,26,0.85)", padding: "6px 12px",
-                          borderRadius: 4, fontSize: 12, color: "#94a3b8", border: "1px solid #1e293b" }}>
-              fetching LOD…
+            onMouseLeave={()=>setHovered(null)}
+            style={{width:"100%",height:"100%",display:"block",
+                    cursor: depth>=MAX_DEPTH ? "default" : loading ? "wait" : "zoom-in",
+                    borderRadius:6,border:"1px solid #1e293b"}} />
+          {viewport && (
+            <div style={{position:"absolute",bottom:20,left:20,
+                         background:"rgba(10,15,26,0.9)",padding:"4px 10px",
+                         borderRadius:4,fontSize:10,color:"#fbbf24",
+                         border:"1px solid #fbbf2440"}}>
+              viewport · depth {depth} · {zoomData?.tile_count} tiles visible
             </div>
           )}
         </div>
 
-        <div style={{ borderLeft: "1px solid #1e293b", padding: "20px 16px",
-                      display: "flex", flexDirection: "column", gap: 20, overflowY: "auto" }}>
+        {/* sidebar */}
+        <div style={{borderLeft:"1px solid #1e293b",padding:"14px 13px",
+                     display:"flex",flexDirection:"column",gap:0,overflowY:"auto"}}>
 
-          <div>
-            <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.1em", marginBottom: 10 }}>ZOOM LEVEL</div>
-            <input type="range" min={0} max={4} step={1} value={zoom}
-              onChange={e => setZoom(Number(e.target.value))}
-              style={{ width: "100%", accentColor: "#378add" }} />
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#475569", marginTop: 4 }}>
-              {[0,1,2,3,4].map(z => (
-                <span key={z} style={{ color: z===zoom ? "#93c5fd" : "#475569", fontWeight: z===zoom ? 500 : 400 }}>{z}</span>
-              ))}
-            </div>
-            <div style={{ marginTop: 10, padding: "8px 12px", background: "#0f172a",
-                          borderRadius: 6, border: "1px solid #1e293b", fontSize: 13 }}>
-              <span style={{ color: "#475569" }}>zoom = </span>
-              <span style={{ color: "#93c5fd", fontWeight: 500 }}>{zoom}</span>
-              <span style={{ color: "#475569", marginLeft: 12 }}>
-                {zoom === 0 ? "most collapsed" : zoom === 4 ? "finest detail" : ""}
-              </span>
-            </div>
-          </div>
-
-          <div>
-            <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.1em", marginBottom: 10 }}>LOD STATUS</div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
-              {[
-                { label: "live",      count: liveCount, color: "#4ade80", bg: "#052e16" },
-                { label: "collapsed", count: collCount, color: "#f87171", bg: "#2d0707" },
-              ].map(s => (
-                <div key={s.label} style={{ background: s.bg, border: `1px solid ${s.color}33`,
-                                            borderRadius: 6, padding: 10, textAlign: "center" }}>
-                  <div style={{ fontSize: 22, fontWeight: 500, color: s.color }}>{s.count}</div>
-                  <div style={{ fontSize: 11, color: "#475569", marginTop: 2 }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
-            <div style={{ marginTop: 8, height: 6, borderRadius: 3, background: "#1e293b", overflow: "hidden" }}>
-              <div style={{ height: "100%", background: "#4ade80", borderRadius: 3,
-                            width: `${total ? (liveCount/total)*100 : 0}%`, transition: "width 0.4s ease" }} />
-            </div>
-            <div style={{ fontSize: 11, color: "#475569", marginTop: 4 }}>
-              {total ? Math.round((liveCount/total)*100) : 0}% live
-            </div>
-          </div>
-
-          <div>
-            <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.1em", marginBottom: 10 }}>BY REGION CLASS</div>
-            {classCounts && Object.entries(CLASS_COLORS).map(([cls, cfg]) => {
-              const c = classCounts[cls];
-              return (
-                <div key={cls} style={{ marginBottom: 10, padding: "10px 12px", background: "#0f172a",
-                                        borderRadius: 6, borderLeft: `3px solid ${cfg.border}` }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                    <span style={{ fontSize: 12, color: cfg.border, fontWeight: 500 }}>{cfg.label}</span>
-                    <span style={{ fontSize: 11, color: "#475569" }}>order {cfg.order} · {Math.pow(2,cfg.order)}×{Math.pow(2,cfg.order)}</span>
-                  </div>
-                  <div style={{ display: "flex", gap: 8, fontSize: 12 }}>
-                    <span style={{ color: "#4ade80" }}>{c.live} live</span>
-                    <span style={{ color: "#475569" }}>/</span>
-                    <span style={{ color: "#f87171" }}>{c.collapsed} collapsed</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {hoveredTile && (
-            <div>
-              <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.1em", marginBottom: 10 }}>HOVERED TILE</div>
-              <div style={{ background: "#0f172a", border: "1px solid #1e293b", borderRadius: 6, padding: 12, fontSize: 12 }}>
-                {[
-                  ["pos",           `(${hoveredTile.base_tx}, ${hoveredTile.base_ty})`],
-                  ["class",         hoveredTile.class_name],
-                  ["hilbert order", hoveredTile.hilbert_order],
-                  ["sub-tiles",     hoveredTile.sub_tile_count],
-                  ["entropy",       hoveredTile.entropy?.toFixed(3)],
-                  ["status",        hoveredTile.status],
-                ].map(([k, v]) => (
-                  <div key={k} style={{ display: "flex", justifyContent: "space-between",
-                                        padding: "3px 0", borderBottom: "1px solid #1e293b" }}>
-                    <span style={{ color: "#475569" }}>{k}</span>
-                    <span style={{ color: hoveredTile.status==="live" ? "#4ade80" : "#f87171" }}>{v}</span>
-                  </div>
-                ))}
-                <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 4 }}>
-                  <span style={{ fontSize: 11, color: "#475569" }}>mean color</span>
-                  <div style={{ marginLeft: "auto", width: 24, height: 16, borderRadius: 3,
-                                background: hoveredTile.mean_color
-                                  ? `rgb(${hoveredTile.mean_color.map(Math.round).join(",")})`
-                                  : "#333" }} />
-                </div>
+          {/* breadcrumb */}
+          {history.length > 0 && (
+            <>
+              <div style={{fontSize:10,color:"#475569",letterSpacing:"0.1em",marginBottom:6}}>
+                ZOOM HISTORY
               </div>
-            </div>
+              <Breadcrumb history={history} onJump={handleJump} />
+            </>
           )}
 
-          <div style={{ marginTop: "auto" }}>
-            <div style={{ fontSize: 11, color: "#475569", letterSpacing: "0.1em", marginBottom: 8 }}>LEGEND</div>
-            {Object.entries(CLASS_COLORS).map(([cls, cfg]) => (
-              <div key={cls} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
-                <div style={{ width: 12, height: 12, borderRadius: 2, border: `2px solid ${cfg.border}`, background: "transparent" }} />
-                <span style={{ fontSize: 11, color: "#64748b" }}>{cfg.label} live — image visible</span>
+          {/* depth indicator */}
+          <div style={{fontSize:10,color:"#475569",letterSpacing:"0.1em",marginBottom:6,
+                       marginTop: history.length ? 10 : 0}}>
+            DEPTH
+          </div>
+          <div style={{display:"flex",gap:4,marginBottom:10}}>
+            {Array.from({length:MAX_DEPTH+1},(_,i)=>(
+              <div key={i} style={{flex:1,height:6,borderRadius:3,
+                                   background: i<=depth ? "#fbbf24" : "#1e293b",
+                                   transition:"background 0.3s"}} />
+            ))}
+          </div>
+          <div style={{padding:"5px 9px",background:"#0f172a",borderRadius:4,
+                       border:"1px solid #1e293b",fontSize:11,marginBottom:2}}>
+            <span style={{color:"#475569"}}>depth </span>
+            <span style={{color:"#fbbf24",fontWeight:600}}>{depth}</span>
+            <span style={{color:"#334155",marginLeft:8,fontSize:10}}>
+              {["full image  (click to zoom)","÷2","÷4","÷8","÷16","÷32"][depth]}
+            </span>
+          </div>
+          <div style={{fontSize:10,color:"#334155",marginBottom:10,textAlign:"right"}}>
+            hilbert order shown: base + {depth} per tile
+          </div>
+
+          {/* lod */}
+          <div style={{fontSize:10,color:"#475569",letterSpacing:"0.1em",marginBottom:6}}>
+            LOD STATUS
+          </div>
+          <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5,marginBottom:8}}>
+            {[{l:"live",c:liveCount,col:"#4ade80",bg:"#052e16"},
+              {l:"collapsed",c:collCount,col:"#f87171",bg:"#2d0707"}].map(s=>(
+              <div key={s.l} style={{background:s.bg,border:`1px solid ${s.col}33`,
+                                     borderRadius:5,padding:"7px 5px",textAlign:"center"}}>
+                <div style={{fontSize:18,fontWeight:600,color:s.col}}>{s.c}</div>
+                <div style={{fontSize:9,color:"#475569",marginTop:1}}>{s.l}</div>
               </div>
             ))}
-            {Object.entries(CLASS_COLORS).map(([cls, cfg]) => (
-              <div key={`c${cls}`} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 5 }}>
-                <div style={{ width: 12, height: 12, borderRadius: 2, background: cfg.border }} />
-                <span style={{ fontSize: 11, color: "#64748b" }}>{cfg.label} collapsed — avg color</span>
+          </div>
+
+          {/* by class */}
+          <div style={{fontSize:10,color:"#475569",letterSpacing:"0.1em",marginBottom:6}}>
+            BY CLASS
+          </div>
+          {(zoomData ?? lodData)?.tiles && (() => {
+            const src = (zoomData ?? lodData).tiles;
+            const cc  = {0:{live:0,coll:0},1:{live:0,coll:0},2:{live:0,coll:0}};
+            for (const t of src) { const b=cc[t.region_class]; t.status==="live"?b.live++:b.coll++; }
+            return Object.entries(CLASS_CFG).map(([c,cfg])=>(
+              <div key={c} style={{marginBottom:5,padding:"7px 9px",background:"#0f172a",
+                                   borderRadius:4,borderLeft:`3px solid ${cfg.border}`}}>
+                <div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}>
+                  <span style={{fontSize:10,color:cfg.border,fontWeight:600}}>{cfg.label}</span>
+                  <span style={{fontSize:9,color:"#334155"}}>
+                    o{[2,3,4][c]}+{depth} shown
+                  </span>
+                </div>
+                <div style={{display:"flex",gap:6,fontSize:10}}>
+                  <span style={{color:"#4ade80"}}>{cc[c].live} live</span>
+                  <span style={{color:"#334155"}}>/</span>
+                  <span style={{color:"#f87171"}}>{cc[c].coll} coll.</span>
+                </div>
+              </div>
+            ));
+          })()}
+
+          {/* benchmark */}
+          {query && (
+            <>
+              <div style={{fontSize:10,color:"#475569",letterSpacing:"0.1em",
+                           marginBottom:6,marginTop:10}}>
+                BENCHMARK — DEPTH {depth}
+              </div>
+              <div style={{background:"#0f172a",border:"1px solid #1e293b",
+                           borderRadius:6,padding:"11px 11px 8px"}}>
+                {[["viewport",`${Math.round(query.viewport_bbox[2]-query.viewport_bbox[0])}×${Math.round(query.viewport_bbox[3]-query.viewport_bbox[1])}px`],
+                  ["hilbert found",query.hilbert_result.count],
+                  ["naive found",query.naive_result.count],
+                ].map(([k,v])=>(
+                  <div key={k} style={{display:"flex",justifyContent:"space-between",
+                                       padding:"2px 0",borderBottom:"1px solid #1e293b",
+                                       fontSize:11}}>
+                    <span style={{color:"#475569"}}>{k}</span>
+                    <span style={{color:"#94a3b8"}}>{v}</span>
+                  </div>
+                ))}
+                <div style={{marginTop:8}}>
+                  <SpeedupBar
+                    hms={query.hilbert_result.time_ms}
+                    nms={query.naive_result.time_ms}
+                    speedup={query.speedup} />
+                </div>
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:5,marginTop:8}}>
+                  {[
+                    {v:query.tiles_saved.toLocaleString(), l:"entries skipped"},
+                    {v:`${query.pct_skipped}%`, l:"index skipped"},
+                  ].map(s=>(
+                    <div key={s.l} style={{background:"#0a0f1a",border:"1px solid #1e293b",
+                                           borderRadius:5,padding:"6px 8px",textAlign:"center"}}>
+                      <div style={{fontSize:15,fontWeight:700,
+                                   color: query.speedup>=1 ? "#fbbf24":"#94a3b8"}}>{s.v}</div>
+                      <div style={{fontSize:9,color:"#475569",marginTop:2}}>{s.l}</div>
+                    </div>
+                  ))}
+                </div>
+                {query.speedup < 1 && (
+                  <div style={{marginTop:8,padding:"5px 8px",background:"#1c1205",
+                               border:"1px solid #78350f",borderRadius:4,
+                               fontSize:10,color:"#fcd34d"}}>
+                    dense region — viewport covers most of one class.
+                    hilbert overhead exceeds savings here.
+                  </div>
+                )}
+              </div>
+            </>
+          )}
+
+          {/* hovered */}
+          {hovered && (
+            <>
+              <div style={{fontSize:10,color:"#475569",letterSpacing:"0.1em",
+                           marginBottom:6,marginTop:10}}>
+                HOVERED
+              </div>
+              <div style={{background:"#0f172a",border:"1px solid #1e293b",
+                           borderRadius:5,padding:"9px 10px",fontSize:10}}>
+                {[["class",  hovered.class_name],
+                  ["order",  `base o${hovered.base_order??hovered.hilbert_order} → showing o${hovered.visible_order??hovered.hilbert_order}`],
+                  ["entropy",hovered.entropy?.toFixed(3)],
+                  ["status", hovered.status],
+                ].map(([k,v])=>(
+                  <div key={k} style={{display:"flex",justifyContent:"space-between",
+                                       padding:"2px 0",borderBottom:"1px solid #1e293b"}}>
+                    <span style={{color:"#475569"}}>{k}</span>
+                    <span style={{color:hovered.status==="live"?"#4ade80":"#f87171"}}>{v}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {/* legend */}
+          <div style={{marginTop:"auto",paddingTop:12,borderTop:"1px solid #1e293b"}}>
+            {Object.entries(CLASS_CFG).map(([c,cfg])=>(
+              <div key={c} style={{display:"flex",alignItems:"center",gap:6,marginBottom:3}}>
+                <div style={{width:8,height:8,borderRadius:2,background:cfg.hilbert}}/>
+                <span style={{fontSize:9,color:"#475569"}}>
+                  {cfg.label} · hilbert curve
+                </span>
               </div>
             ))}
+            <div style={{fontSize:9,color:"#334155",marginTop:6}}>
+              curve density increases with each zoom level
+            </div>
           </div>
 
         </div>
