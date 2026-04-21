@@ -431,16 +431,12 @@ def _load_index(filename, seg):
     for rec in index:
         base_lookup[(rec["base_tx"], rec["base_ty"])].append(rec)
 
-    tile_meta = {(t["tile_x"], t["tile_y"]): t for t in seg["tiles"]}
+    base_keys = {}
+    for k in base_lookup:
+        base_lookup[k].sort(key=lambda r: r["hilbert_code"])
+        base_keys[k] = [r["hilbert_code"] for r in base_lookup[k]]
 
-    # Per-(class,order) sorted arrays for O(log N) bisect range scan.
-    from collections import defaultdict as _dd
-    coi = _dd(list)
-    for rec in index:
-        coi[(rec["region_class"], rec["hilbert_order"])].append(rec)
-    for k in coi:
-        coi[k].sort(key=lambda r: r["hilbert_code"])
-    cok = {k: [r["hilbert_code"] for r in v] for k, v in coi.items()}
+    tile_meta = {(t["tile_x"], t["tile_y"]): t for t in seg["tiles"]}
 
     sorted_index = sorted(index, key=lambda r: (
         r["region_class"], r["hilbert_order"], r["hilbert_code"]
@@ -461,11 +457,10 @@ def _load_index(filename, seg):
              f"(R-tree: {len(rt_id_map)} entries)")
     return {
         "index": index,
-        "base_lookup": base_lookup,
+        "base_lookup": dict(base_lookup),
+        "base_keys": base_keys,
         "tile_meta": tile_meta,
         "sorted_index": sorted_index,
-        "class_order_index": dict(coi),
-        "class_order_keys": cok,
         "base_rtree": rt,
         "rtree_id_map": rt_id_map,
     }
@@ -527,84 +522,93 @@ def _hilbert_range_scan(index_data, vp, zoom):
     Step 2: merge overlapping ranges per (class, order) key
     Step 3: bisect into sorted per-(class,order) array  (O(log N + K))
     """
-    CLASS_ORDER_INDEX = index_data.get("class_order_index", {})
     BASE_LOOKUP       = index_data.get("base_lookup", {})
+    BASE_KEYS         = index_data.get("base_keys", {})
     TILE_META         = index_data.get("tile_meta", {})
-    CLASS_ORDER_KEYS  = index_data.get("class_order_keys", {})
     base_rtree        = index_data.get("base_rtree")
     rtree_id_map      = index_data.get("rtree_id_map", {})
 
-    if not CLASS_ORDER_INDEX:
-        return [], 0
-
     # Step 0: R-tree query → candidate (tx, ty) pairs that overlap viewport
-    # Falls back to linear scan if R-tree was not built (e.g. empty index).
     if base_rtree is not None and rtree_id_map:
         candidate_keys = [rtree_id_map[rid]
                           for rid in base_rtree.intersection((vp[0], vp[1], vp[2], vp[3]))]
     else:
         candidate_keys = list(BASE_LOOKUP.keys())
 
-    # Step 1: collect Hilbert code ranges per (class, order)
-    ranges: dict = defaultdict(list)
+    results  = []
+    examined = 0
 
+    # Step 1: For each candidate tile, project viewport mathematically and bisect locally
     for (btx, bty) in candidate_keys:
-        recs = BASE_LOOKUP.get((btx, bty))
-        if not recs:
+        tm = TILE_META.get((btx, bty))
+        if not tm:
             continue
 
-        # Find sub-tiles whose centre falls inside the viewport
-        in_vp = []
-        for r in recs:
-            bb = r.get("abs_bbox", r.get("pixel_bbox", []))
-            if len(bb) < 4:
-                continue
-            cx_ = (bb[0] + bb[2]) / 2
-            cy_ = (bb[1] + bb[3]) / 2
-            if vp[0] <= cx_ <= vp[2] and vp[1] <= cy_ <= vp[3]:
-                in_vp.append(r)
+        order = tm["order"]
+        sub_grid = 2 ** order
+        x0, y0, x1, y1 = tm["pixel_bbox"]
 
-        if not in_vp:
+        arr  = BASE_LOOKUP.get((btx, bty), [])
+        keys = BASE_KEYS.get((btx, bty), [])
+        if not arr: continue
+
+        # Local viewport boundaries relative to base tile
+        lx0 = max(0, vp[0] - x0)
+        ly0 = max(0, vp[1] - y0)
+        lx1 = min(x1 - x0, vp[2] - x0)
+        ly1 = min(y1 - y0, vp[3] - y0)
+
+        if lx0 >= lx1 or ly0 >= ly1:
             continue
-        cls   = in_vp[0]["region_class"]
-        order = in_vp[0]["hilbert_order"]
-        h_min = min(r["hilbert_code"] for r in in_vp)
-        h_max = max(r["hilbert_code"] for r in in_vp)
-        ranges[(cls, order)].append((h_min, h_max))
 
-    if not ranges:
-        return [], 0
+        sub_w = (x1 - x0) // sub_grid
+        sub_h = (y1 - y0) // sub_grid
 
-    # Step 2: merge overlapping ranges per key
-    def merge_ranges(rl):
-        rl = sorted(rl)
-        merged = [rl[0]]
-        for lo, hi in rl[1:]:
-            if lo <= merged[-1][1] + 1:
-                merged[-1] = (merged[-1][0], max(merged[-1][1], hi))
+        sx_min = max(0, min(sub_grid - 1, int(lx0 / max(1, sub_w))))
+        sy_min = max(0, min(sub_grid - 1, int(ly0 / max(1, sub_h))))
+        sx_max = max(0, min(sub_grid - 1, int(lx1 / max(1, sub_w))))
+        sy_max = max(0, min(sub_grid - 1, int(ly1 / max(1, sub_h))))
+
+        h_lut = HILBERT_CACHE.get(order, {})
+        codes = []
+        for sy in range(sy_min, sy_max + 1):
+            for sx in range(sx_min, sx_max + 1):
+                # Only include cell if its centre is in viewport (matching the naive logic)
+                cx_ = x0 + (sx + 0.5) * sub_w
+                cy_ = y0 + (sy + 0.5) * sub_h
+                if vp[0] <= cx_ <= vp[2] and vp[1] <= cy_ <= vp[3]:
+                    code = h_lut.get((sx, sy), -1)
+                    if code != -1:
+                        codes.append(code)
+
+        if not codes:
+            continue
+
+        # Group contiguous codes into precise ranges
+        codes.sort()
+        ranges = []
+        start_c = codes[0]
+        end_c = codes[0]
+        for c in codes[1:]:
+            if c == end_c + 1:
+                end_c = c
             else:
-                merged.append((lo, hi))
-        return merged
+                ranges.append((start_c, end_c))
+                start_c = c
+                end_c = c
+        ranges.append((start_c, end_c))
 
-    # Step 3: bisect into per-(class,order) sorted arrays
-    results:  list = []
-    examined: int  = 0
-
-    for (cls, order), raw_ranges in ranges.items():
-        arr  = CLASS_ORDER_INDEX.get((cls, order), [])
-        keys = CLASS_ORDER_KEYS.get((cls, order), [])
-        if not arr:
-            continue
-
-        for h_min, h_max in merge_ranges(raw_ranges):
+        # Bisect these exact ranges within the base tile's local records
+        for h_min, h_max in ranges:
             lo = bisect.bisect_left(keys,  h_min)
             hi = bisect.bisect_right(keys, h_max)
             examined += hi - lo
 
-            for r in arr[lo:hi]:
+            for i in range(lo, hi):
+                r = arr[i]
                 bb = r.get("abs_bbox", r.get("pixel_bbox", []))
-                if len(bb) < 4:
-                    continue
+                if len(bb) < 4: continue
+                
                 cx_ = (bb[0] + bb[2]) / 2
                 cy_ = (bb[1] + bb[3]) / 2
                 if vp[0] <= cx_ <= vp[2] and vp[1] <= cy_ <= vp[3]:
