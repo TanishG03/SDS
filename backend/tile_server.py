@@ -391,6 +391,16 @@ from flask import Flask, jsonify, request, send_file, abort
 from flask_cors import CORS
 import numpy as np
 from PIL import Image
+from rtree import index as rtree_mod
+from adaptive_hilbert_indexer import xy_to_hilbert
+
+# ── Pre-computed Hilbert lookup table (order 2-7) ─────────────────
+# Avoids recomputing xy_to_hilbert() inside hot loops.
+HILBERT_CACHE: dict = {}
+for _ord in range(2, 8):
+    _g = 2 ** _ord
+    HILBERT_CACHE[_ord] = {(_x, _y): xy_to_hilbert(_x, _y, _ord)
+                           for _x in range(_g) for _y in range(_g)}
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s  %(message)s")
 log = logging.getLogger("TileServer")
@@ -435,14 +445,29 @@ def _load_index(filename, seg):
     sorted_index = sorted(index, key=lambda r: (
         r["region_class"], r["hilbert_order"], r["hilbert_code"]
     ))
-    log.info(f"Loaded {len(index)} features across {len(base_lookup)} base tiles from {filename}")
+
+    # ── R-tree index over base tile bboxes ──────────────────────────
+    # Allows O(log B + K) viewport intersection instead of O(B) scan.
+    rt = rtree_mod.Index()
+    rt_id_map: dict = {}          # integer id → (tx, ty)
+    for i, ((tx, ty), _) in enumerate(base_lookup.items()):
+        tm = tile_meta.get((tx, ty))
+        if tm:
+            x0, y0, x1, y1 = tm["pixel_bbox"]
+            rt.insert(i, (x0, y0, x1, y1))
+            rt_id_map[i] = (tx, ty)
+
+    log.info(f"Loaded {len(index)} features across {len(base_lookup)} base tiles from {filename} "
+             f"(R-tree: {len(rt_id_map)} entries)")
     return {
         "index": index,
         "base_lookup": base_lookup,
         "tile_meta": tile_meta,
         "sorted_index": sorted_index,
         "class_order_index": dict(coi),
-        "class_order_keys": cok
+        "class_order_keys": cok,
+        "base_rtree": rt,
+        "rtree_id_map": rt_id_map,
     }
 
 try:
@@ -495,39 +520,52 @@ def _tile_in_viewport(tile_bbox, vp):
 # ── Hilbert range scan ────────────────────────────────────────────
 def _hilbert_range_scan(index_data, vp, zoom):
     """
-    Correct O(log N + K) Hilbert range scan using bisect.
+    O(log B + log N + K) Hilbert range scan.
+
+    Step 0: R-tree intersection → only candidate base tiles (O(log B + K_b))
+    Step 1: collect Hilbert code ranges from matching sub-tiles (O(K_b * S))
+    Step 2: merge overlapping ranges per (class, order) key
+    Step 3: bisect into sorted per-(class,order) array  (O(log N + K))
     """
     CLASS_ORDER_INDEX = index_data.get("class_order_index", {})
-    BASE_LOOKUP = index_data.get("base_lookup", {})
-    TILE_META = index_data.get("tile_meta", {})
-    CLASS_ORDER_KEYS = index_data.get("class_order_keys", {})
+    BASE_LOOKUP       = index_data.get("base_lookup", {})
+    TILE_META         = index_data.get("tile_meta", {})
+    CLASS_ORDER_KEYS  = index_data.get("class_order_keys", {})
+    base_rtree        = index_data.get("base_rtree")
+    rtree_id_map      = index_data.get("rtree_id_map", {})
 
     if not CLASS_ORDER_INDEX:
         return [], 0
 
-    # Step 1: collect ranges per (class, order)
-    from collections import defaultdict
-    ranges = defaultdict(list)   # (cls, order) -> [(h_min, h_max), ...]
+    # Step 0: R-tree query → candidate (tx, ty) pairs that overlap viewport
+    # Falls back to linear scan if R-tree was not built (e.g. empty index).
+    if base_rtree is not None and rtree_id_map:
+        candidate_keys = [rtree_id_map[rid]
+                          for rid in base_rtree.intersection((vp[0], vp[1], vp[2], vp[3]))]
+    else:
+        candidate_keys = list(BASE_LOOKUP.keys())
 
-    for (btx, bty), recs in BASE_LOOKUP.items():
-        if not recs: continue
-        # Check base tile bbox against viewport
-        tm = TILE_META.get((btx, bty))
-        if not tm: continue
-        if not _tile_in_viewport(tm["pixel_bbox"], vp):
+    # Step 1: collect Hilbert code ranges per (class, order)
+    ranges: dict = defaultdict(list)
+
+    for (btx, bty) in candidate_keys:
+        recs = BASE_LOOKUP.get((btx, bty))
+        if not recs:
             continue
 
-        # Find sub-tiles whose centre is inside the viewport
+        # Find sub-tiles whose centre falls inside the viewport
         in_vp = []
         for r in recs:
             bb = r.get("abs_bbox", r.get("pixel_bbox", []))
-            if len(bb) < 4: continue
+            if len(bb) < 4:
+                continue
             cx_ = (bb[0] + bb[2]) / 2
             cy_ = (bb[1] + bb[3]) / 2
             if vp[0] <= cx_ <= vp[2] and vp[1] <= cy_ <= vp[3]:
                 in_vp.append(r)
 
-        if not in_vp: continue
+        if not in_vp:
+            continue
         cls   = in_vp[0]["region_class"]
         order = in_vp[0]["hilbert_order"]
         h_min = min(r["hilbert_code"] for r in in_vp)
@@ -548,24 +586,25 @@ def _hilbert_range_scan(index_data, vp, zoom):
                 merged.append((lo, hi))
         return merged
 
-    # Step 3: bisect into per-(class,order) arrays
-    results  = []
-    examined = 0
+    # Step 3: bisect into per-(class,order) sorted arrays
+    results:  list = []
+    examined: int  = 0
 
     for (cls, order), raw_ranges in ranges.items():
         arr  = CLASS_ORDER_INDEX.get((cls, order), [])
         keys = CLASS_ORDER_KEYS.get((cls, order), [])
-        if not arr: continue
+        if not arr:
+            continue
 
         for h_min, h_max in merge_ranges(raw_ranges):
             lo = bisect.bisect_left(keys,  h_min)
             hi = bisect.bisect_right(keys, h_max)
-            segment = arr[lo:hi]
-            examined += (hi - lo)
+            examined += hi - lo
 
-            for r in segment:
+            for r in arr[lo:hi]:
                 bb = r.get("abs_bbox", r.get("pixel_bbox", []))
-                if len(bb) < 4: continue
+                if len(bb) < 4:
+                    continue
                 cx_ = (bb[0] + bb[2]) / 2
                 cy_ = (bb[1] + bb[3]) / 2
                 if vp[0] <= cx_ <= vp[2] and vp[1] <= cy_ <= vp[3]:
@@ -801,11 +840,26 @@ def zoom_lod():
     if not seg: return jsonify({"depth": depth, "viewport": vp, "tiles": [], "tile_count": 0})
 
     index_data = INDEX_DATA.get(dataset, {})
-    for tile in seg["tiles"]:
+
+    # ── Use R-tree to find only tiles that intersect the viewport ───
+    # Falls back to iterating seg["tiles"] linearly if no R-tree.
+    seg_rtree   = index_data.get("base_rtree")
+    seg_id_map  = index_data.get("rtree_id_map", {})
+    tile_meta   = index_data.get("tile_meta", {})
+
+    if seg_rtree is not None and seg_id_map:
+        # R-tree gives us only the overlapping (tx, ty) pairs directly.
+        candidate_tkeys = set(seg_id_map[rid]
+                              for rid in seg_rtree.intersection((vp[0], vp[1], vp[2], vp[3])))
+        candidate_tiles = [t for t in seg["tiles"]
+                           if (t["tile_x"], t["tile_y"]) in candidate_tkeys]
+    else:
+        # Fallback: linear scan with manual bbox check
+        candidate_tiles = [t for t in seg["tiles"] if _tile_in_viewport(t["pixel_bbox"], vp)]
+
+    for tile in candidate_tiles:
         tx, ty = tile["tile_x"], tile["tile_y"]
         bb     = tile["pixel_bbox"]
-        if not _tile_in_viewport(bb, vp):
-            continue
 
         cls     = tile["class"]
         order   = tile["order"]
@@ -814,29 +868,35 @@ def zoom_lod():
                    if recs else [128, 128, 128])
 
         # At this depth, what Hilbert sub-grid do we show?
-        vis_order  = visible_order(order, depth)
-        vis_grid   = 2 ** vis_order
+        vis_order = visible_order(order, depth)
+        vis_grid  = 2 ** vis_order
 
         # Clip pixel_bbox to viewport
         cx0 = max(bb[0], vp[0]); cy0 = max(bb[1], vp[1])
         cx1 = min(bb[2], vp[2]); cy1 = min(bb[3], vp[3])
 
-        # Which sub-tile hilbert codes fall in the visible clip?
+        # Which sub-tile Hilbert codes fall in the visible clip?
+        # Uses pre-computed HILBERT_CACHE — no recomputation per request.
         tile_w = bb[2] - bb[0]; tile_h = bb[3] - bb[1]
         sw = tile_w / vis_grid;  sh = tile_h / vis_grid
+        h_lut = HILBERT_CACHE.get(vis_order, {})
 
         visible_codes = []
         for sy in range(vis_grid):
+            sub_y0 = bb[1] + sy * sh
+            sub_y1 = sub_y0 + sh
+            if sub_y0 >= cy1 or sub_y1 <= cy0:
+                continue                          # entire row outside viewport
             for sx in range(vis_grid):
-                sub_x0 = bb[0] + sx * sw;  sub_y0 = bb[1] + sy * sh
-                sub_x1 = sub_x0 + sw;      sub_y1 = sub_y0 + sh
-                if sub_x0 < cx1 and sub_x1 > cx0 and sub_y0 < cy1 and sub_y1 > cy0:
-                    from adaptive_hilbert_indexer import xy_to_hilbert
-                    visible_codes.append({
-                        "code": xy_to_hilbert(sx, sy, vis_order),
-                        "sx": sx, "sy": sy,
-                        "bbox": [sub_x0, sub_y0, sub_x1, sub_y1]
-                    })
+                sub_x0 = bb[0] + sx * sw
+                sub_x1 = sub_x0 + sw
+                if sub_x0 >= cx1 or sub_x1 <= cx0:
+                    continue                      # this cell outside viewport
+                visible_codes.append({
+                    "code": h_lut.get((sx, sy), xy_to_hilbert(sx, sy, vis_order)),
+                    "sx": sx, "sy": sy,
+                    "bbox": [sub_x0, sub_y0, sub_x1, sub_y1]
+                })
 
         collapsed = _collapsed(order, depth)
 
